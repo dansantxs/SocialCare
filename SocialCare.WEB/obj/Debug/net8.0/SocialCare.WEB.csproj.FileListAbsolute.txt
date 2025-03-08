@@ -289,3 +289,4 @@ C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\runtimes\
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\obj\Debug\net8.0\SocialCare.WEB.sourcelink.json

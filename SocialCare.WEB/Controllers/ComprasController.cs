@@ -80,4 +80,32 @@ public class ComprasController : Controller
 
         return RedirectToAction("Index");
     }
+
+    public IActionResult Details(int id)
+    {
+        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
+        var itensCompra = oItensComprasService.oRepositoryItensCompra.SelecionarPorCompraId(id);
+
+        var model = new ComprasViewModel
+        {
+            DataCompra = compra.DataCompra,
+            Itens = itensCompra.Select(ic => new ItensCompraViewModel
+            {
+                IdProduto = ic.IdProduto,
+                Quantidade = ic.Quantidade,
+                PrecoUnitario = ic.PrecoUnitario
+            }).ToList()
+        };
+
+        foreach (var item in model.Itens)
+        {
+            var produto = oprodutosService.oRepositoryProdutos.SelecionarPK(item.IdProduto);
+            if (produto != null)
+            {
+                item.NomeProduto = produto.Nome;
+            }
+        }
+
+        return View(model);
+    }
 }

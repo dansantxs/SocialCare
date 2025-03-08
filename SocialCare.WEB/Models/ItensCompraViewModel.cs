@@ -9,9 +9,8 @@ namespace EmprestimoLivros.WEB.Models
     public class ItensCompraViewModel
     {
         public int IdProduto { get; set; }
-
+        public string? NomeProduto { get; set; }
         public int Quantidade { get; set; }
-
         public decimal PrecoUnitario { get; set; }
     }
 }

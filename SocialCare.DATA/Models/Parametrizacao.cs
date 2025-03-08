@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SocialCare.DATA.Models;
 
-[Keyless]
-public partial class VwPessoasFisicas
+public partial class Parametrizacao
 {
+    [Key]
     [Column("id")]
     public int Id { get; set; }
 
@@ -19,6 +19,18 @@ public partial class VwPessoasFisicas
     [StringLength(255)]
     [Unicode(false)]
     public string Nome { get; set; }
+
+    [Required]
+    [Column("razao_social")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string RazaoSocial { get; set; }
+
+    [Required]
+    [Column("cnpj")]
+    [StringLength(18)]
+    [Unicode(false)]
+    public string Cnpj { get; set; }
 
     [Required]
     [Column("cidade")]
@@ -49,23 +61,18 @@ public partial class VwPessoasFisicas
     [Unicode(false)]
     public string Email { get; set; }
 
+    [Column("site")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string Site { get; set; }
+
     [Column("telefone")]
     [StringLength(20)]
     [Unicode(false)]
     public string Telefone { get; set; }
 
-    [Required]
-    [Column("tipo")]
-    [StringLength(1)]
+    [Column("logo")]
+    [StringLength(255)]
     [Unicode(false)]
-    public string Tipo { get; set; }
-
-    [Required]
-    [Column("cpf")]
-    [StringLength(11)]
-    [Unicode(false)]
-    public string Cpf { get; set; }
-
-    [Column("data_nascimento")]
-    public DateOnly DataNascimento { get; set; }
+    public string Logo { get; set; }
 }

@@ -23,6 +23,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Parametrizacao]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Pessoas]",
          "ObjectType": 0
       },
@@ -37,18 +41,6 @@
       {
          "Name": "[dbo].[Produtos]",
          "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[VW_Compras]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[dbo].[VW_Pessoas_Fisicas]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[dbo].[VW_Pessoas_Juridicas]",
-         "ObjectType": 3
       }
    ],
    "UiHint": null,

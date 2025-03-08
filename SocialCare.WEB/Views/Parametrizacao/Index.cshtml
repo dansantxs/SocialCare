@@ -1,13 +1,13 @@
-﻿@model IEnumerable<SocialCare.DATA.Models.Pessoas>
+﻿@model IEnumerable<SocialCare.DATA.Models.Parametrizacao>
 
 @{
-    ViewData["Title"] = "Pessoas";
+    ViewData["Title"] = "Parametrização";
 }
 
-<h1>Pessoas</h1>
+<h1>Parametrização</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Nova Pessoa</a>
+    <a asp-action="Create" class="btn btn-primary">Nova Parametrização</a>
 </p>
 <table id="myTable" class="table">
     <thead>
@@ -16,10 +16,13 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.RazaoSocial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Telefone)
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
             </th>
             <th></th>
         </tr>
@@ -31,10 +34,13 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.RazaoSocial)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
+                @Html.DisplayFor(modelItem => item.Cnpj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
             </td>
             <td>
                 <a asp-action="Edit" class="btn btn-success mr-1" asp-route-id="@item.Id">Alterar</a>
@@ -50,13 +56,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="DeleteModalLabel">Excluir pessoa</h5>
+                                <h5 class="modal-title" id="DeleteModalLabel">Excluir produto</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Deseja realmente excluir a pessoa @item.Nome ?
+                                Deseja realmente excluir o produto @item.Nome ?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
@@ -67,7 +73,7 @@
                 </div>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
 

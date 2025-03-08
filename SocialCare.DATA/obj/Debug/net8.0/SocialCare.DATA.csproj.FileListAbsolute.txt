@@ -10,3 +10,4 @@ C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net8.0\refint\S
 C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net8.0\SocialCare.DATA.pdb
 C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net8.0\ref\SocialCare.DATA.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net8.0\SocialCare.DATA.csproj.AssemblyReference.cache
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net8.0\SocialCare.DATA.sourcelink.json

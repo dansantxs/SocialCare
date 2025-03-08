@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace SocialCare.DATA.Repositories
 {
-    namespace SocialCare.DATA.Repositories
+    public class RepositoryParametrizacao : RepositoryBase<Parametrizacao>, IRepositoryParametrizacao
     {
-        public class RepositoryVwCompras : RepositoryBase<VwCompras>, IRepositoryVwCompras
+        public RepositoryParametrizacao(bool SaveChanges = true) : base(SaveChanges)
         {
-            public RepositoryVwCompras(bool SaveChanges = true) : base(SaveChanges)
-            {
-
-            }
         }
     }
 }

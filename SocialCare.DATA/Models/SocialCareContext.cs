@@ -21,6 +21,8 @@ public partial class SocialCareContext : DbContext
 
     public virtual DbSet<ItensCompra> ItensCompra { get; set; }
 
+    public virtual DbSet<Parametrizacao> Parametrizacao { get; set; }
+
     public virtual DbSet<Pessoas> Pessoas { get; set; }
 
     public virtual DbSet<PessoasFisicas> PessoasFisicas { get; set; }
@@ -28,12 +30,6 @@ public partial class SocialCareContext : DbContext
     public virtual DbSet<PessoasJuridicas> PessoasJuridicas { get; set; }
 
     public virtual DbSet<Produtos> Produtos { get; set; }
-
-    public virtual DbSet<VwCompras> VwCompras { get; set; }
-
-    public virtual DbSet<VwPessoasFisicas> VwPessoasFisicas { get; set; }
-
-    public virtual DbSet<VwPessoasJuridicas> VwPessoasJuridicas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -52,6 +48,13 @@ public partial class SocialCareContext : DbContext
             entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.ItensCompra)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ItensCompra_Produtos");
+        });
+
+        modelBuilder.Entity<Parametrizacao>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Parametr__3213E83FD22AF04A");
+
+            entity.Property(e => e.Cnpj).IsFixedLength();
         });
 
         modelBuilder.Entity<Pessoas>(entity =>
@@ -79,27 +82,6 @@ public partial class SocialCareContext : DbContext
             entity.Property(e => e.Cnpj).IsFixedLength();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.PessoasJuridicas).HasConstraintName("fk_pessoas_juridicas");
-        });
-
-        modelBuilder.Entity<VwCompras>(entity =>
-        {
-            entity.ToView("VW_Compras");
-        });
-
-        modelBuilder.Entity<VwPessoasFisicas>(entity =>
-        {
-            entity.ToView("VW_Pessoas_Fisicas");
-
-            entity.Property(e => e.Cpf).IsFixedLength();
-            entity.Property(e => e.Tipo).IsFixedLength();
-        });
-
-        modelBuilder.Entity<VwPessoasJuridicas>(entity =>
-        {
-            entity.ToView("VW_Pessoas_Juridicas");
-
-            entity.Property(e => e.Cnpj).IsFixedLength();
-            entity.Property(e => e.Tipo).IsFixedLength();
         });
 
         OnModelCreatingPartial(modelBuilder);

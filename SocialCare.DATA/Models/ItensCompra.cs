@@ -36,9 +36,4 @@ public partial class ItensCompra
     [ForeignKey("IdProduto")]
     [InverseProperty("ItensCompra")]
     public virtual Produtos IdProdutoNavigation { get; set; }
-
-    public static implicit operator List<object>(ItensCompra v)
-    {
-        throw new NotImplementedException();
-    }
 }

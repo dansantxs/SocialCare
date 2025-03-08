@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialCare.DATA.Interfaces
 {
-    interface IRepositoryVwCompras : IRepositoryModel<VwCompras>
+    public interface IRepositoryParametrizacao : IRepositoryModel<Parametrizacao>
     {
     }
 }

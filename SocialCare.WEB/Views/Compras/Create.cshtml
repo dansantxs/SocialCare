@@ -1,0 +1,115 @@
+﻿@using EmprestimoLivros.WEB.Models
+@model ComprasViewModel
+
+@{
+    ViewData["Title"] = "Nova Compra";
+}
+
+<h1>Nova Compra</h1>
+
+<h4>Preencha os campos abaixo para incluir uma nova compra</h4>
+<hr />
+<div>
+    <a asp-action="Index" class="btn btn-primary">Voltar</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Create" id="formCompra">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="DataCompra" class="control-label"></label>
+                <input asp-for="DataCompra" class="form-control" type="date" />
+                <span asp-validation-for="DataCompra" class="text-danger"></span>
+            </div>
+            <br />
+            <h4>Adicionar Itens da Compra</h4>
+            <div id="itensCompra">
+                <div class="form-group">
+                    <label asp-for="Itens[0].IdProduto" class="control-label"></label>
+                    <select asp-for="Itens[0].IdProduto" class="form-control" asp-items="@(new SelectList(ViewBag.Produtos, "Id", "Nome"))" onchange="carregarPreco(this.value, 0)"></select>
+                    <span asp-validation-for="Itens[0].IdProduto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Itens[0].Quantidade" class="control-label"></label>
+                    <input asp-for="Itens[0].Quantidade" class="form-control" type="number" />
+                    <span asp-validation-for="Itens[0].Quantidade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Itens[0].PrecoUnitario" class="control-label"></label>
+                    <input asp-for="Itens[0].PrecoUnitario" class="form-control" type="decimal"/>
+                    <span asp-validation-for="Itens[0].PrecoUnitario" class="text-danger"></span>
+                </div>
+            </div>
+
+            <br />
+            <button type="button" id="addItem" class="btn btn-secondary">Adicionar Item</button>
+            <br />
+
+            <br />
+            <h4>Itens Adicionados</h4>
+            <ul id="listaItens" class="list-group mb-3"></ul>
+
+            <input type="hidden" id="itensJson" name="ItensJson" />
+
+            <div class="form-group">
+                <input type="submit" value="Salvar Compra" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var itens = [];
+
+        document.getElementById("addItem").addEventListener("click", function () {
+            var produtoSelect = document.querySelector("select[name='Itens[0].IdProduto']");
+            var quantidadeInput = document.querySelector("input[name='Itens[0].Quantidade']");
+            var precoInput = document.querySelector("input[name='Itens[0].PrecoUnitario']");
+
+            var produtoId = produtoSelect.value;
+            var produtoNome = produtoSelect.options[produtoSelect.selectedIndex].text;
+            var quantidade = quantidadeInput.value;
+            var precoUnitario = precoInput.value;
+
+            if (produtoId && quantidade && precoUnitario) {
+                itens.push({
+                    IdProduto: produtoId,
+                    Nome: produtoNome,
+                    Quantidade: quantidade,
+                    PrecoUnitario: precoUnitario
+                });
+
+                var listaItens = document.getElementById("listaItens");
+                var listItem = document.createElement("li");
+                listItem.className = "list-group-item";
+                listItem.textContent = `${produtoNome} - Quantidade: ${quantidade} - Preço Unitário: R$ ${precoUnitario}`;
+
+                var removeButton = document.createElement("button");
+                removeButton.className = "btn btn-danger btn-sm float-right";
+                removeButton.textContent = "Remover";
+                removeButton.onclick = function () {
+                    listaItens.removeChild(listItem);
+                    itens = itens.filter(i => i.IdProduto !== produtoId);
+                };
+
+                listItem.appendChild(removeButton);
+                listaItens.appendChild(listItem);
+
+                produtoSelect.value = "";
+                quantidadeInput.value = 0;
+                precoInput.value = 0;
+
+                produtoSelect.focus();
+            } else {
+                alert("Por favor, preencha todos os campos antes de adicionar um item.");
+            }
+        });
+
+        document.getElementById("formCompra").addEventListener("submit", function () {
+            document.getElementById("itensJson").value = JSON.stringify(itens);
+        });
+    </script>
+}

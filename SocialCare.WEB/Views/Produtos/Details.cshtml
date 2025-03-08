@@ -1,0 +1,31 @@
+﻿@model SocialCare.DATA.Models.Produtos
+
+@{
+    ViewData["Title"] = "Detalhes Produto";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Detalhes do Produto</h4>
+    <hr />
+    <div>
+        <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model?.Id">Alterar</a>
+        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+    </div>
+    <br />
+    <dl class="row">
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.Nome)</label>
+            <input disabled class="form-control" value=" @Html.DisplayFor(model => model.Nome)" />
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.Preco)</label>
+            <input disabled class="form-control" value=" @Html.DisplayFor(model => model.Preco)" />
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.Estoque)</label>
+            <input disabled class="form-control" value=" @Html.DisplayFor(model => model.Estoque)" />
+        </div>
+    </dl>
+</div>

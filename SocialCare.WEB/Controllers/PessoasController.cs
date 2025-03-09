@@ -78,5 +78,43 @@ namespace SocialCare.WEB.Controllers
 
             return View(model);
         }
+
+        public IActionResult Details(int id)
+        {
+            var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(id);
+
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            if (pessoa.Tipo == "F")
+            {
+                pessoa.PessoasFisicas = oPessoasFisicasService.oRepositoryPessoasFisicas.SelecionarPK(pessoa.Id);
+            }
+            else if (pessoa.Tipo == "J")
+            {
+                pessoa.PessoasJuridicas = oPessoasJuridicasService.oRepositoryPessoasJuridicas.SelecionarPK(pessoa.Id);
+            }
+
+            var model = new PessoasViewModel
+            {
+                Id = pessoa.Id,
+                Nome = pessoa.Nome,
+                Cidade = pessoa.Cidade,
+                Bairro = pessoa.Bairro,
+                Endereco = pessoa.Endereco,
+                Numero = pessoa.Numero,
+                Email = pessoa.Email,
+                Telefone = pessoa.Telefone,
+                Tipo = pessoa.Tipo,
+                Cpf = pessoa.PessoasFisicas?.Cpf,
+                DataNascimento = pessoa.PessoasFisicas?.DataNascimento,
+                Cnpj = pessoa.PessoasJuridicas?.Cnpj,
+                RazaoSocial = pessoa.PessoasJuridicas?.RazaoSocial
+            };
+
+            return View(model);
+        }
     }
 }

@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\models\\pessoasviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\models\\pessoasviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\models\\pessoasfisicas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\models\\pessoasfisicas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\models\\pessoasviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\models\\pessoasviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\pessoas\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\pessoas\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,49 +22,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PessoasController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAiwF4AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T08:47:48.3Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Pessoas\\Details.cshtml",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\Pessoas\\Details.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Pessoas\\Details.cshtml",
+              "RelativeToolTip": "SocialCare.WEB\\Views\\Pessoas\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-09T09:31:47.55Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PessoasFisicas.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Models\\PessoasFisicas.cs",
-              "RelativeDocumentMoniker": "SocialCare.DATA\\Models\\PessoasFisicas.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Models\\PessoasFisicas.cs",
-              "RelativeToolTip": "SocialCare.DATA\\Models\\PessoasFisicas.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T08:52:43.406Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PessoasController.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Controllers\\PessoasController.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs*",
-              "RelativeToolTip": "SocialCare.WEB\\Controllers\\PessoasController.cs*",
-              "ViewState": "AgIAACgAAAAAAAAAAADwvzkAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T08:47:48.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "PessoasViewModel.cs",
               "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\PessoasViewModel.cs",
               "RelativeDocumentMoniker": "SocialCare.WEB\\Models\\PessoasViewModel.cs",
               "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\PessoasViewModel.cs",
               "RelativeToolTip": "SocialCare.WEB\\Models\\PessoasViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T08:47:25.344Z",
+              "WhenOpened": "2025-03-09T09:34:31.096Z",
               "EditorCaption": ""
             }
           ]

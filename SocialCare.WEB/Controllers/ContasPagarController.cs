@@ -127,5 +127,11 @@ namespace SocialCare.WEB.Controllers
             ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
             return View(model);
         }
+
+        public IActionResult Delete(int id)
+        {
+            oContasPagarService.oRepositoryContasPagar.Excluir(id);
+            return RedirectToAction("Index");
+        }
     }
 }

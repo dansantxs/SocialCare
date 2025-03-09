@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SocialCare.DATA.Models;
 
-public partial class Compras
+public partial class ContasPagar
 {
     [Key]
     [Column("id")]
@@ -17,16 +17,22 @@ public partial class Compras
     [Column("idPessoa")]
     public int IdPessoa { get; set; }
 
-    [Column("dataCompra", TypeName = "datetime")]
-    public DateTime DataCompra { get; set; }
+    [Column("idCompra")]
+    public int? IdCompra { get; set; }
 
-    [Column("total", TypeName = "decimal(10, 2)")]
-    public decimal Total { get; set; }
+    [Column("data", TypeName = "datetime")]
+    public DateTime Data { get; set; }
+
+    [Column("valor", TypeName = "decimal(10, 2)")]
+    public decimal Valor { get; set; }
+
+    [Column("dataVencimento", TypeName = "datetime")]
+    public DateTime DataVencimento { get; set; }
+
+    [Column("dataPagamento", TypeName = "datetime")]
+    public DateTime? DataPagamento { get; set; }
 
     [ForeignKey("IdPessoa")]
-    [InverseProperty("Compras")]
+    [InverseProperty("ContasPagar")]
     public virtual Pessoas IdPessoaNavigation { get; set; }
-
-    [InverseProperty("IdCompraNavigation")]
-    public virtual ICollection<ItensCompra> ItensCompra { get; set; } = new List<ItensCompra>();
 }

@@ -60,6 +60,12 @@ public partial class Pessoas
     [Unicode(false)]
     public string Tipo { get; set; }
 
+    [InverseProperty("IdPessoaNavigation")]
+    public virtual ICollection<Compras> Compras { get; set; } = new List<Compras>();
+
+    [InverseProperty("IdPessoaNavigation")]
+    public virtual ICollection<ContasPagar> ContasPagar { get; set; } = new List<ContasPagar>();
+
     [InverseProperty("IdNavigation")]
     public virtual PessoasFisicas PessoasFisicas { get; set; }
 

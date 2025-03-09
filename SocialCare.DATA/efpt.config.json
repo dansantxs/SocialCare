@@ -19,6 +19,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[ContasPagar]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ItensCompra]",
          "ObjectType": 0
       },

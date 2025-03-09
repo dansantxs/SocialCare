@@ -19,6 +19,8 @@ public partial class SocialCareContext : DbContext
 
     public virtual DbSet<Compras> Compras { get; set; }
 
+    public virtual DbSet<ContasPagar> ContasPagar { get; set; }
+
     public virtual DbSet<ItensCompra> ItensCompra { get; set; }
 
     public virtual DbSet<Parametrizacao> Parametrizacao { get; set; }
@@ -37,6 +39,20 @@ public partial class SocialCareContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Compras>(entity =>
+        {
+            entity.HasOne(d => d.IdPessoaNavigation).WithMany(p => p.Compras)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Compras_Pessoas");
+        });
+
+        modelBuilder.Entity<ContasPagar>(entity =>
+        {
+            entity.HasOne(d => d.IdPessoaNavigation).WithMany(p => p.ContasPagar)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ContasPagar_Pessoas");
+        });
+
         modelBuilder.Entity<ItensCompra>(entity =>
         {
             entity.Property(e => e.Subtotal).HasComputedColumnSql("([quantidade]*[precoUnitario])", false);
@@ -52,7 +68,7 @@ public partial class SocialCareContext : DbContext
 
         modelBuilder.Entity<Parametrizacao>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Parametr__3213E83FD22AF04A");
+            entity.HasKey(e => e.Id).HasName("PK__Parametr__3213E83FE95C446A");
 
             entity.Property(e => e.Cnpj).IsFixedLength();
         });

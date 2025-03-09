@@ -86,4 +86,32 @@ public class ComprasController : Controller
 
         return View(model);
     }
+
+    public IActionResult Details(int id)
+    {
+        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
+        var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(compra.IdPessoa);
+
+        var itensCompra = oItensComprasService.oRepositoryItensCompra.SelecionarTodos()
+            .Where(i => i.IdCompra == compra.Id)
+            .ToList();
+
+        var detalhesViewModel = new ComprasViewModel
+        {
+            Id = compra.Id,
+            IdPessoa = compra.IdPessoa,
+            NomePessoa = pessoa?.Nome,
+            DataCompra = compra.DataCompra,
+            Total = compra.Total,
+            Itens = itensCompra.Select(i => new ItensCompraViewModel
+            {
+                IdProduto = i.IdProduto,
+                Quantidade = i.Quantidade,
+                PrecoUnitario = i.PrecoUnitario,
+                NomeProduto = oprodutosService.oRepositoryProdutos.SelecionarPK(i.IdProduto)?.Nome
+            }).ToList()
+        };
+
+        return View(detalhesViewModel);
+    }
 }

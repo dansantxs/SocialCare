@@ -5,11 +5,14 @@
 }
 
 <h1>Detalhes da Compra</h1>
-
+<hr />
 <div>
-    <h4>Data da Compra: @Model.DataCompra.ToShortDateString()</h4>
-    <hr />
-    <h4>Itens da Compra</h4>
+    <h4>Compra ID: @Model.Id</h4>
+    <p><strong>Data da Compra:</strong> @Model.DataCompra.ToString("dd/MM/yyyy")</p>
+    <p><strong>Pessoa:</strong> @Model.NomePessoa</p>
+    <p><strong>Total:</strong> @Model.Total</p>
+
+    <h3>Itens da Compra</h3>
     <table class="table">
         <thead>
             <tr>
@@ -25,12 +28,13 @@
                 <tr>
                     <td>@item.NomeProduto</td>
                     <td>@item.Quantidade</td>
-                    <td>@item.PrecoUnitario.ToString("C")</td>
+                    <td>@item.PrecoUnitario</td>
                     <td>@(item.PrecoUnitario * item.Quantidade)</td>
                 </tr>
             }
         </tbody>
     </table>
+
     <div>
         <a asp-action="Index" class="btn btn-primary">Voltar</a>
     </div>

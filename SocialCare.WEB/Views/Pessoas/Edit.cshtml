@@ -1,0 +1,118 @@
+﻿@model PessoasViewModel
+
+@{
+    ViewData["Title"] = "Editar Pessoa";
+}
+
+<h1>Editar Pessoa</h1>
+
+<h4>Atualize os campos abaixo para editar a pessoa</h4>
+<hr />
+<div>
+    <a asp-action="Index" class="btn btn-primary">Voltar</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cidade" class="control-label"></label>
+                <input asp-for="Cidade" class="form-control" />
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bairro" class="control-label"></label>
+                <input asp-for="Bairro" class="form-control" />
+                <span asp-validation-for="Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco" class="control-label"></label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <select asp-for="Tipo" class="form-control" onchange="toggleFields(this.value)">
+                    <option value="">Selecione o tipo</option>
+                    <option value="F" selected="@(Model.Tipo == "F")">Pessoa Física</option>
+                    <option value="J" selected="@(Model.Tipo == "J")">Pessoa Jurídica</option>
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+
+            <div id="pessoaFisicaFields" style="display:@(Model.Tipo == "F" ? "block" : "none")">
+                <div class="form-group">
+                    <label asp-for="Cpf" class="control-label"></label>
+                    <input asp-for="Cpf" class="form-control" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataNascimento" class="control-label"></label>
+                    <input asp-for="DataNascimento" type="date" class="form-control" />
+                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div id="pessoaJuridicaFields" style="display:@(Model.Tipo == "J" ? "block" : "none")">
+                <div class="form-group">
+                    <label asp-for="Cnpj" class="control-label"></label>
+                    <input asp-for="Cnpj" class="form-control" />
+                    <span asp-validation-for="Cnpj" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RazaoSocial" class="control-label"></label>
+                    <input asp-for="RazaoSocial" class="form-control" />
+                    <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Atualizar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function toggleFields(tipo) {
+            if (tipo === "F") {
+                document.getElementById("pessoaFisicaFields").style.display = "block";
+                document.getElementById("pessoaJuridicaFields").style.display = "none";
+            } else if (tipo === "J") {
+                document.getElementById("pessoaFisicaFields").style.display = "none";
+                document.getElementById("pessoaJuridicaFields").style.display = "block";
+            } else {
+                document.getElementById("pessoaFisicaFields").style.display = "none";
+                document.getElementById("pessoaJuridicaFields").style.display = "none";
+            }
+        }
+    </script>
+}

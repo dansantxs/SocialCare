@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\pessoas\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\pessoas\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\pessoas\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\pessoas\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\pessoas\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\pessoas\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\parametrizacao\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\parametrizacao\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\produtos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -30,19 +42,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "PessoasController.cs",
               "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
               "RelativeDocumentMoniker": "SocialCare.WEB\\Controllers\\PessoasController.cs",
               "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
               "RelativeToolTip": "SocialCare.WEB\\Controllers\\PessoasController.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAiwIAAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAqwMUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T08:47:48.3Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Pessoas\\Edit.cshtml",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\Pessoas\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Pessoas\\Edit.cshtml*",
+              "RelativeToolTip": "SocialCare.WEB\\Views\\Pessoas\\Edit.cshtml*",
+              "ViewState": "AgIAACgAAAAAAAAAAAASwDwAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-09T11:06:47.849Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -57,7 +83,19 @@
               "ViewState": "AgIAABMAAAAAAAAAAAAgwCYAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-09T09:50:31.921Z",
-              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Pessoas\\Create.cshtml",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\Pessoas\\Create.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Pessoas\\Create.cshtml",
+              "RelativeToolTip": "SocialCare.WEB\\Views\\Pessoas\\Create.cshtml",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAcwHQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-09T11:12:19.141Z",
               "EditorCaption": ""
             },
             {
@@ -66,7 +104,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Parametrizacao\\Create.cshtml",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\Parametrizacao\\Create.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Parametrizacao\\Create.cshtml",
+              "RelativeToolTip": "SocialCare.WEB\\Views\\Parametrizacao\\Create.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAcwEcAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-09T11:02:04.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "ProdutosController.cs",
               "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controllers\\ProdutosController.cs",
               "RelativeDocumentMoniker": "SocialCare.WEB\\Controllers\\ProdutosController.cs",
@@ -74,12 +125,11 @@
               "RelativeToolTip": "SocialCare.WEB\\Controllers\\ProdutosController.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAgwDEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T09:53:35.822Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-09T09:53:35.822Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\Produtos\\Index.cshtml",
               "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\Produtos\\Index.cshtml",
@@ -87,12 +137,11 @@
               "RelativeToolTip": "SocialCare.WEB\\Views\\Produtos\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-09T09:57:55.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-09T09:57:55.136Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "PessoasViewModel.cs",
               "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\PessoasViewModel.cs",
               "RelativeDocumentMoniker": "SocialCare.WEB\\Models\\PessoasViewModel.cs",
@@ -100,8 +149,7 @@
               "RelativeToolTip": "SocialCare.WEB\\Models\\PessoasViewModel.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAA1wAoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T09:34:31.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-09T09:34:31.096Z"
             }
           ]
         }

@@ -1,62 +1,58 @@
 ﻿@model SocialCare.WEB.Models.ContasPagarViewModel
 
 @{
-    ViewData["Title"] = "Nova Conta a Pagar";
+    ViewData["Title"] = "Alterar Conta a Pagar";
 }
 
-<h1>Nova Conta a Pagar</h1>
+<h1>Alterar dados da Conta a Pagar</h1>
 
-<h4>Preencha os campos abaixo para incluir uma nova conta a pagar</h4>
+<h4>Altere os dados abaixo</h4>
 <hr />
 <div>
-    <a asp-action="Index" class="btn btn-primary">Voltar</a>
+    <a class="btn btn-primary" asp-action="Index">Voltar</a>
 </div>
 <br />
 <div class="row">
     <div class="col-md">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <div hidden class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+            </div>
             <div class="form-group">
                 <label asp-for="IdPessoa" class="control-label"></label>
                 <select asp-for="IdPessoa" class="form-control" asp-items="@(new SelectList(ViewBag.Pessoas, "Id", "Nome"))"></select>
                 <span asp-validation-for="IdPessoa" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="Data" class="control-label"></label>
                 <input asp-for="Data" class="form-control" type="date" />
                 <span asp-validation-for="Data" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="Valor" class="control-label"></label>
                 <input asp-for="Valor" class="form-control" />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="DataVencimento" class="control-label"></label>
                 <input asp-for="DataVencimento" class="form-control" type="date" />
                 <span asp-validation-for="DataVencimento" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="DataPagamento" class="control-label"></label>
                 <input asp-for="DataPagamento" class="form-control" type="date" data-val="false" />
                 <span asp-validation-for="DataPagamento" class="text-danger"></span>
             </div>
-
             <br />
             <div class="form-group">
-                <input type="submit" value="Incluir" class="btn btn-success" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

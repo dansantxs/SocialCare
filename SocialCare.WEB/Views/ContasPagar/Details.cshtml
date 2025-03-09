@@ -1,0 +1,39 @@
+﻿@model SocialCare.WEB.Models.ContasPagarViewModel
+
+@{
+    ViewData["Title"] = "Detalhes da Conta a Pagar";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Detalhes da Conta a Pagar</h4>
+    <hr />
+    <div>
+        <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model?.Id">Alterar</a>
+        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+    </div>
+    <br />
+    <dl class="row">
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.NomePessoa)</label>
+            <input disabled class="form-control" value="@Html.DisplayFor(model => model.NomePessoa)" />
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.Data)</label>
+            <input disabled class="form-control" value="@Html.DisplayFor(model => model.Data)" />
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.Valor)</label>
+            <input disabled class="form-control" value="@Html.DisplayFor(model => model.Valor)" />
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.DataVencimento)</label>
+            <input disabled class="form-control" value="@Html.DisplayFor(model => model.DataVencimento)" />
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(model => model.DataPagamento)</label>
+            <input disabled class="form-control" value="@Html.DisplayFor(model => model.DataPagamento)" />
+        </div>
+    </dl>
+</div>

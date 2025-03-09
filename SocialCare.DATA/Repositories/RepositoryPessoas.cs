@@ -12,7 +12,6 @@ namespace SocialCare.DATA.Repositories
     {
         public RepositoryPessoas(bool SaveChanges = true) : base(SaveChanges)
         {
-
         }
     }
 }

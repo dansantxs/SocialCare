@@ -9,12 +9,23 @@ public class ComprasController : Controller
 {
     private ComprasService oComprasService = new ComprasService();
     private ItensCompraService oItensComprasService = new ItensCompraService();
+    private PessoasService oPessoasService = new PessoasService();
     private ProdutosService oprodutosService = new ProdutosService();
 
     public IActionResult Index()
     {
-        List<Compras> oListCompras = oComprasService.oRepositoryCompras.SelecionarTodos();
-        return View(oListCompras);
+        var compra = oComprasService.oRepositoryCompras.SelecionarTodos();
+
+        var viewModel = compra.Select(cp => new ComprasViewModel
+        {
+            Id = cp.Id,
+            IdPessoa = cp.IdPessoa,
+            NomePessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(cp.IdPessoa).Nome,
+            DataCompra = cp.DataCompra,
+            Total = cp.Total
+        }).ToList();
+
+        return View(viewModel);
     }
 
     public IActionResult Create()

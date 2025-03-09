@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using SocialCare.DATA.Models;
 using SocialCare.DATA.Services;
 using SocialCare.WEB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class ComprasController : Controller
 {
@@ -30,47 +31,40 @@ public class ComprasController : Controller
 
     public IActionResult Create()
     {
-        var produtos = oprodutosService.oRepositoryProdutos.SelecionarTodos()
-            .OrderBy(p => p.Nome) 
-            .ToList();
+        var pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+        var produtos = oprodutosService.oRepositoryProdutos.SelecionarTodos();
 
+        ViewBag.Pessoas = pessoas;
         ViewBag.Produtos = produtos;
 
-        var model = new ComprasViewModel
-        {
-            DataCompra = DateTime.Today,
-            Itens = new List<ItensCompraViewModel> { new ItensCompraViewModel() }
-        };
-
-        return View(model);
+        return View();
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(ComprasViewModel model, string itensJson)
+    public IActionResult Create(ComprasViewModel model)
     {
         if (ModelState.IsValid)
         {
-            var itens = JsonConvert.DeserializeObject<List<ItensCompraViewModel>>(itensJson);
+            var compra = new Compras
+            {
+                IdPessoa = model.IdPessoa.Value,
+                DataCompra = model.DataCompra,
+                Total = 0
+            };
 
-            var itensAgrupados = itens.GroupBy(i => i.IdProduto)
+            var groupedItems = model.Itens
+                .GroupBy(i => i.IdProduto)
                 .Select(g => new ItensCompraViewModel
                 {
                     IdProduto = g.Key,
                     Quantidade = g.Sum(i => i.Quantidade),
-                    PrecoUnitario = g.First().PrecoUnitario
-                })
-                .ToList();
+                    PrecoUnitario = g.First().PrecoUnitario 
+                }).ToList();
 
-            var compra = new Compras
-            {
-                DataCompra = model.DataCompra,
-                Total = itensAgrupados.Sum(i => i.PrecoUnitario * i.Quantidade)
-            };
-
+            compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
             oComprasService.oRepositoryCompras.Incluir(compra);
 
-            foreach (var item in itensAgrupados)
+            foreach (var item in groupedItems)
             {
                 var itensCompra = new ItensCompra
                 {
@@ -84,38 +78,11 @@ public class ComprasController : Controller
                 oItensComprasService.oRepositoryItensCompra.Incluir(itensCompra);
             }
 
-            oComprasService.oRepositoryCompras.SaveChanges();
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
-        return RedirectToAction("Index");
-    }
-
-    public IActionResult Details(int id)
-    {
-        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
-        var itensCompra = oItensComprasService.oRepositoryItensCompra.SelecionarPorCompraId(id);
-
-        var model = new ComprasViewModel
-        {
-            DataCompra = compra.DataCompra,
-            Itens = itensCompra.Select(ic => new ItensCompraViewModel
-            {
-                IdProduto = ic.IdProduto,
-                Quantidade = ic.Quantidade,
-                PrecoUnitario = ic.PrecoUnitario
-            }).ToList()
-        };
-
-        foreach (var item in model.Itens)
-        {
-            var produto = oprodutosService.oRepositoryProdutos.SelecionarPK(item.IdProduto);
-            if (produto != null)
-            {
-                item.NomeProduto = produto.Nome;
-            }
-        }
+        ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+        ViewBag.Produtos = oprodutosService.oRepositoryProdutos.SelecionarTodos();
 
         return View(model);
     }

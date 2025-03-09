@@ -12,7 +12,7 @@ namespace SocialCare.WEB.Models
         public int? IdPessoa { get; set; }
         public string? NomePessoa { get; set; }
         public DateTime DataCompra { get; set; }
-        public decimal Total { get; set; }
+        public decimal? Total { get; set; }
         public List<ItensCompraViewModel> Itens { get; set; } = new List<ItensCompraViewModel>();
     }
 }

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\SocialCare.DATA\SocialCare.DATA.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Pessoas\" />
-  </ItemGroup>
-
 </Project>

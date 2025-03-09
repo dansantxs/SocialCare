@@ -82,12 +82,6 @@ namespace SocialCare.WEB.Controllers
         public IActionResult Details(int id)
         {
             var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(id);
-
-            if (pessoa == null)
-            {
-                return NotFound();
-            }
-
             if (pessoa.Tipo == "F")
             {
                 pessoa.PessoasFisicas = oPessoasFisicasService.oRepositoryPessoasFisicas.SelecionarPK(pessoa.Id);
@@ -115,6 +109,27 @@ namespace SocialCare.WEB.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(id);
+            if (pessoa != null)
+            {
+                if (pessoa.Tipo == "F")
+                {
+                    oPessoasFisicasService.oRepositoryPessoasFisicas.Excluir(pessoa.Id);
+                }
+                else if (pessoa.Tipo == "J")
+                {
+                    oPessoasJuridicasService.oRepositoryPessoasJuridicas.Excluir(pessoa.Id);
+                }
+
+                oPessoasService.oRepositoryPessoas.Excluir(id);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

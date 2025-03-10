@@ -114,4 +114,105 @@ public class ComprasController : Controller
 
         return View(detalhesViewModel);
     }
+
+    public IActionResult Edit(int id)
+    {
+        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
+        var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(compra.IdPessoa);
+        var itensCompra = oItensComprasService.oRepositoryItensCompra.SelecionarTodos()
+            .Where(i => i.IdCompra == compra.Id)
+            .ToList();
+
+        var editViewModel = new ComprasViewModel
+        {
+            Id = compra.Id,
+            IdPessoa = compra.IdPessoa,
+            NomePessoa = pessoa?.Nome,
+            DataCompra = compra.DataCompra,
+            Total = compra.Total,
+            Itens = itensCompra.Select(i => new ItensCompraViewModel
+            {
+                IdProduto = i.IdProduto,
+                Quantidade = i.Quantidade,
+                PrecoUnitario = i.PrecoUnitario,
+                NomeProduto = oprodutosService.oRepositoryProdutos.SelecionarPK(i.IdProduto)?.Nome
+            }).ToList()
+        };
+
+        ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+        ViewBag.Produtos = oprodutosService.oRepositoryProdutos.SelecionarTodos();
+
+        return View(editViewModel);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(ComprasViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var compra = oComprasService.oRepositoryCompras.SelecionarPK(model.Id);
+            compra.IdPessoa = model.IdPessoa.Value;
+            compra.DataCompra = model.DataCompra;
+
+            var groupedItems = model.Itens
+                .GroupBy(i => i.IdProduto)
+                .Select(g => new ItensCompraViewModel
+                {
+                    IdProduto = g.Key,
+                    Quantidade = g.Sum(i => i.Quantidade),
+                    PrecoUnitario = g.First().PrecoUnitario
+                }).ToList();
+
+            compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
+            oComprasService.oRepositoryCompras.Alterar(compra);
+
+            var itensAntigos = oItensComprasService.oRepositoryItensCompra.SelecionarTodos()
+                .Where(i => i.IdCompra == compra.Id)
+                .ToList();
+
+            foreach (var item in itensAntigos)
+            {
+                oItensComprasService.oRepositoryItensCompra.Excluir(item);
+            }
+
+            foreach (var item in groupedItems)
+            {
+                var itensCompra = new ItensCompra
+                {
+                    IdCompra = compra.Id,
+                    IdProduto = item.IdProduto,
+                    Quantidade = item.Quantidade,
+                    PrecoUnitario = item.PrecoUnitario,
+                    Subtotal = item.PrecoUnitario * item.Quantidade
+                };
+
+                oItensComprasService.oRepositoryItensCompra.Incluir(itensCompra);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+        ViewBag.Produtos = oprodutosService.oRepositoryProdutos.SelecionarTodos();
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(int id)
+    {
+        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
+        var itensCompra = oItensComprasService.oRepositoryItensCompra.SelecionarTodos()
+            .Where(i => i.IdCompra == compra.Id)
+            .ToList();
+
+        foreach (var item in itensCompra)
+        {
+            oItensComprasService.oRepositoryItensCompra.Excluir(item);
+        }
+
+        oComprasService.oRepositoryCompras.Excluir(compra);
+
+        return RedirectToAction("Index");
+    }
 }

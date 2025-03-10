@@ -1,0 +1,89 @@
+﻿@model SocialCare.WEB.Models.ComprasViewModel
+
+@{
+    ViewData["Title"] = "Editar Compra";
+}
+
+<h1>Editar Compra</h1>
+<h4>Preencha os campos abaixo para editar a compra</h4>
+<hr />
+<div>
+    <a asp-action="Index" class="btn btn-primary">Voltar</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="DataCompra" class="control-label"></label>
+                <input asp-for="DataCompra" class="form-control" type="date" required />
+                <span asp-validation-for="DataCompra" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdPessoa" class="control-label"></label>
+                <select asp-for="IdPessoa" class="form-control" asp-items="@(new SelectList(ViewBag.Pessoas, "Id", "Nome", Model.IdPessoa))" required>
+                    <option value="">Selecione uma pessoa</option>
+                </select>
+                <span asp-validation-for="IdPessoa" class="text-danger"></span>
+            </div>
+
+            <h3>Produtos</h3>
+            <div id="produtosContainer">
+                @for (int i = 0; i < Model.Itens.Count; i++)
+                {
+                    <div class="produto-item form-group">
+                        <select class="produto-select form-control" name="Itens[@i].IdProduto" asp-for="Itens[@i].IdProduto" asp-items="@(new SelectList(ViewBag.Produtos, "Id", "Nome", Model.Itens[i].IdProduto))" required>
+                            <option value="">Selecione um produto</option>
+                        </select>
+                        <input type="number" name="Itens[@i].Quantidade" class="form-control" placeholder="Quantidade" value="@Model.Itens[i].Quantidade" required />
+                        <input type="number" name="Itens[@i].PrecoUnitario" class="form-control" placeholder="Preço Unitário" value="@Model.Itens[i].PrecoUnitario" step="0.01" required />
+                        <button type="button" class="remove-product btn btn-danger">Remover</button>
+                    </div>
+                }
+            </div>
+            <button type="button" id="addProduct" class="btn btn-secondary">Adicionar Produto</button>
+
+            <br /><br />
+            <div class="form-group">
+                <input type="submit" value="Salvar Venda" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let productIndex = @Model.Itens.Count;
+
+        document.getElementById('addProduct').addEventListener('click', function () {
+            const container = document.getElementById('produtosContainer');
+            const newProductItem = document.createElement('div');
+            newProductItem.classList.add('produto-item', 'form-group');
+            newProductItem.innerHTML = `
+                <select class="produto-select form-control" name="Itens[${productIndex}].IdProduto" required>
+                    <option value="">Selecione um produto</option>
+                    @foreach (var produto in ViewBag.Produtos)
+                    {
+                        <option value="@produto.Id">@produto.Nome</option>
+                    }
+                </select>
+                <input type="number" name="Itens[${productIndex}].Quantidade" class="form-control" placeholder="Quantidade" required />
+                <input type="number" name="Itens[${productIndex}].PrecoUnitario" class="form-control" placeholder="Preço Unitário" step="0.01" required />
+                <button type="button" class="remove-product btn btn-danger">Remover</button>
+            `;
+            container.appendChild(newProductItem);
+            productIndex++;
+        });
+
+        document.getElementById('produtosContainer').addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-product')) {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+}

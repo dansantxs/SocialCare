@@ -9,7 +9,7 @@ namespace SocialCare.WEB.Controllers
 
         public ComprasController()
         {
-            oComprasFacade = new ComprasFacade();
+            oComprasFacade = ComprasFacade.Instance;
         }
 
         public IActionResult Index()

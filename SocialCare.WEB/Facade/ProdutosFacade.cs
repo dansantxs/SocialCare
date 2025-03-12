@@ -3,12 +3,16 @@ using SocialCare.DATA.Services;
 
 public class ProdutosFacade
 {
+    private static readonly Lazy<ProdutosFacade> instance = new Lazy<ProdutosFacade>(() => new ProdutosFacade());
+
     private readonly ProdutosService oProdutosService;
 
-    public ProdutosFacade()
+    private ProdutosFacade()
     {
         oProdutosService = new ProdutosService();
     }
+
+    public static ProdutosFacade Instance => instance.Value;
 
     public List<Produtos> ObterTodosProdutos()
     {

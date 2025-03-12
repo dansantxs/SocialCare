@@ -9,7 +9,7 @@ namespace SocialCare.WEB.Controllers
 
         public ParametrizacaoController()
         {
-            oParametrizacaoFacade = new ParametrizacaoFacade();
+            oParametrizacaoFacade = ParametrizacaoFacade.Instance;
         }
 
         public IActionResult Index()

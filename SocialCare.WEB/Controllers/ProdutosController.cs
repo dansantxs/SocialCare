@@ -9,7 +9,7 @@ namespace SocialCare.WEB.Controllers
 
         public ProdutosController()
         {
-            oProdutosFacade = new ProdutosFacade();
+            oProdutosFacade = ProdutosFacade.Instance;
         }
 
         public IActionResult Index()

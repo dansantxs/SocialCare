@@ -9,7 +9,7 @@ namespace SocialCare.WEB.Controllers
 
         public PessoasController()
         {
-            _pessoasFacade = new PessoasFacade();
+            _pessoasFacade = PessoasFacade.Instance;
         }
 
         public IActionResult Index()

@@ -4,18 +4,22 @@ using SocialCare.WEB.Models;
 
 public class ComprasFacade
 {
+    private static readonly Lazy<ComprasFacade> instance = new Lazy<ComprasFacade>(() => new ComprasFacade());
+
     private readonly ComprasService oComprasService;
     private readonly ItensCompraService oItensCompraService;
     private readonly PessoasService oPessoasService;
     private readonly ProdutosService oProdutosService;
 
-    public ComprasFacade()
+    private ComprasFacade()
     {
         oComprasService = new ComprasService();
         oItensCompraService = new ItensCompraService();
         oPessoasService = new PessoasService();
         oProdutosService = new ProdutosService();
     }
+
+    public static ComprasFacade Instance => instance.Value;
 
     public List<ComprasViewModel> ObterTodasCompras()
     {

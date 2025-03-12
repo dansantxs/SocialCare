@@ -4,16 +4,20 @@ using SocialCare.WEB.Models;
 
 public class PessoasFacade
 {
+    private static readonly Lazy<PessoasFacade> instance = new Lazy<PessoasFacade>(() => new PessoasFacade());
+
     private readonly PessoasService oPessoasService;
     private readonly PessoasFisicasService oPessoasFisicasService;
     private readonly PessoasJuridicasService oPessoasJuridicasService;
 
-    public PessoasFacade()
+    private PessoasFacade()
     {
         oPessoasService = new PessoasService();
         oPessoasFisicasService = new PessoasFisicasService();
         oPessoasJuridicasService = new PessoasJuridicasService();
     }
+
+    public static PessoasFacade Instance => instance.Value;
 
     public List<Pessoas> ObterTodasPessoas()
     {

@@ -9,7 +9,7 @@ namespace SocialCare.WEB.Controllers
 
         public ContasPagarController()
         {
-            oContasPagarFacade = new ContasPagarFacade();
+            oContasPagarFacade = ContasPagarFacade.Instance;
         }
 
         public IActionResult Index()

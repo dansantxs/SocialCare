@@ -3,12 +3,16 @@ using SocialCare.DATA.Services;
 
 public class ParametrizacaoFacade
 {
+    private static readonly Lazy<ParametrizacaoFacade> instance = new Lazy<ParametrizacaoFacade>(() => new ParametrizacaoFacade());
+
     private readonly ParametrizacaoService oParametrizacaoService;
 
-    public ParametrizacaoFacade()
+    private ParametrizacaoFacade()
     {
         oParametrizacaoService = new ParametrizacaoService();
     }
+
+    public static ParametrizacaoFacade Instance => instance.Value;
 
     public List<Parametrizacao> ObterTodasParametrizacoes()
     {

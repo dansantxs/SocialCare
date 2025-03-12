@@ -1,31 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialCare.DATA.Models;
-using SocialCare.DATA.Services;
 using SocialCare.WEB.Models;
 
 namespace SocialCare.WEB.Controllers
 {
     public class PessoasController : Controller
     {
-        private PessoasService oPessoasService = new PessoasService();
-        private PessoasFisicasService oPessoasFisicasService = new PessoasFisicasService();
-        private PessoasJuridicasService oPessoasJuridicasService = new PessoasJuridicasService();
+        private readonly PessoasFacade _pessoasFacade;
+
+        public PessoasController()
+        {
+            _pessoasFacade = new PessoasFacade();
+        }
+
         public IActionResult Index()
         {
-            var oListPessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
-
-            foreach (var pessoa in oListPessoas)
-            {
-                if (pessoa.Tipo == "F")
-                {
-                    pessoa.PessoasFisicas = oPessoasFisicasService.oRepositoryPessoasFisicas.SelecionarPK(pessoa.Id);
-                }
-                else if (pessoa.Tipo == "J")
-                {
-                    pessoa.PessoasJuridicas = oPessoasJuridicasService.oRepositoryPessoasJuridicas.SelecionarPK(pessoa.Id);
-                }
-            }
-
+            var oListPessoas = _pessoasFacade.ObterTodasPessoas();
             return View(oListPessoas);
         }
 
@@ -40,39 +29,7 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var pessoa = new Pessoas
-                {
-                    Nome = model.Nome,
-                    Cidade = model.Cidade,
-                    Bairro = model.Bairro,
-                    Endereco = model.Endereco,
-                    Numero = model.Numero,
-                    Email = model.Email,
-                    Telefone = model.Telefone,
-                    Tipo = model.Tipo
-                };
-
-                if (model.Tipo == "F")
-                {
-                    var pessoaFisica = new PessoasFisicas
-                    {
-                        Cpf = model.Cpf,
-                        DataNascimento = model.DataNascimento.Value,
-                        IdNavigation = pessoa
-                    };
-                    oPessoasFisicasService.oRepositoryPessoasFisicas.Incluir(pessoaFisica);
-                }
-                else if (model.Tipo == "J")
-                {
-                    var pessoaJuridica = new PessoasJuridicas
-                    {
-                        Cnpj = model.Cnpj,
-                        RazaoSocial = model.RazaoSocial,
-                        IdNavigation = pessoa
-                    };
-                    oPessoasJuridicasService.oRepositoryPessoasJuridicas.Incluir(pessoaJuridica);
-                }
-
+                _pessoasFacade.CriarPessoa(model);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -81,14 +38,10 @@ namespace SocialCare.WEB.Controllers
 
         public IActionResult Details(int id)
         {
-            var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(id);
-            if (pessoa.Tipo == "F")
+            var pessoa = _pessoasFacade.ObterPessoaPorId(id);
+            if (pessoa == null)
             {
-                pessoa.PessoasFisicas = oPessoasFisicasService.oRepositoryPessoasFisicas.SelecionarPK(pessoa.Id);
-            }
-            else if (pessoa.Tipo == "J")
-            {
-                pessoa.PessoasJuridicas = oPessoasJuridicasService.oRepositoryPessoasJuridicas.SelecionarPK(pessoa.Id);
+                return NotFound();
             }
 
             var model = new PessoasViewModel
@@ -113,19 +66,10 @@ namespace SocialCare.WEB.Controllers
 
         public IActionResult Edit(int id)
         {
-            var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(id);
+            var pessoa = _pessoasFacade.ObterPessoaPorId(id);
             if (pessoa == null)
             {
                 return NotFound();
-            }
-
-            if (pessoa.Tipo == "F")
-            {
-                pessoa.PessoasFisicas = oPessoasFisicasService.oRepositoryPessoasFisicas.SelecionarPK(pessoa.Id);
-            }
-            else if (pessoa.Tipo == "J")
-            {
-                pessoa.PessoasJuridicas = oPessoasJuridicasService.oRepositoryPessoasJuridicas.SelecionarPK(pessoa.Id);
             }
 
             var model = new PessoasViewModel
@@ -154,43 +98,7 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(model.Id);
-                if (pessoa == null)
-                {
-                    return NotFound();
-                }
-
-                pessoa.Nome = model.Nome;
-                pessoa.Cidade = model.Cidade;
-                pessoa.Bairro = model.Bairro;
-                pessoa.Endereco = model.Endereco;
-                pessoa.Numero = model.Numero;
-                pessoa.Email = model.Email;
-                pessoa.Telefone = model.Telefone;
-                pessoa.Tipo = model.Tipo;
-
-                if (model.Tipo == "F")
-                {
-                    var pessoaFisica = oPessoasFisicasService.oRepositoryPessoasFisicas.SelecionarPK(model.Id);
-                    if (pessoaFisica != null)
-                    {
-                        pessoaFisica.Cpf = model.Cpf;
-                        pessoaFisica.DataNascimento = model.DataNascimento.Value;
-                        oPessoasFisicasService.oRepositoryPessoasFisicas.Alterar(pessoaFisica);
-                    }
-                }
-                else if (model.Tipo == "J")
-                {
-                    var pessoaJuridica = oPessoasJuridicasService.oRepositoryPessoasJuridicas.SelecionarPK(model.Id);
-                    if (pessoaJuridica != null)
-                    {
-                        pessoaJuridica.Cnpj = model.Cnpj;
-                        pessoaJuridica.RazaoSocial = model.RazaoSocial;
-                        oPessoasJuridicasService.oRepositoryPessoasJuridicas.Alterar(pessoaJuridica);
-                    }
-                }
-
-                oPessoasService.oRepositoryPessoas.Alterar(pessoa);
+                _pessoasFacade.EditarPessoa(model);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -200,21 +108,7 @@ namespace SocialCare.WEB.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(id);
-            if (pessoa != null)
-            {
-                if (pessoa.Tipo == "F")
-                {
-                    oPessoasFisicasService.oRepositoryPessoasFisicas.Excluir(pessoa.Id);
-                }
-                else if (pessoa.Tipo == "J")
-                {
-                    oPessoasJuridicasService.oRepositoryPessoasJuridicas.Excluir(pessoa.Id);
-                }
-
-                oPessoasService.oRepositoryPessoas.Excluir(id);
-            }
-
+            _pessoasFacade.ExcluirPessoa(id);
             return RedirectToAction("Index");
         }
     }

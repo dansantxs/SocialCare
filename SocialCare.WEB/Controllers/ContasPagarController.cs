@@ -1,38 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialCare.DATA.Models;
-using SocialCare.DATA.Services;
 using SocialCare.WEB.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SocialCare.WEB.Controllers
 {
     public class ContasPagarController : Controller
     {
-        private ContasPagarService oContasPagarService = new ContasPagarService();
-        private PessoasService oPessoasService = new PessoasService();
+        private readonly ContasPagarFacade oContasPagarFacade;
+
+        public ContasPagarController()
+        {
+            oContasPagarFacade = new ContasPagarFacade();
+        }
 
         public IActionResult Index()
         {
-            var contasPagar = oContasPagarService.oRepositoryContasPagar.SelecionarTodos();
-
-            var viewModel = contasPagar.Select(cp => new ContasPagarViewModel
-            {
-                Id = cp.Id,
-                IdPessoa = cp.IdPessoa,
-                NomePessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(cp.IdPessoa).Nome,
-                Data = cp.Data,
-                Valor = cp.Valor,
-                DataVencimento = cp.DataVencimento,
-                DataPagamento = cp.DataPagamento
-            }).ToList();
-
+            var viewModel = oContasPagarFacade.ObterTodasContasPagar();
             return View(viewModel);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
             return View();
         }
 
@@ -42,65 +30,34 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var contaPagar = new ContasPagar
-                {
-                    IdPessoa = model.IdPessoa,
-                    Data = model.Data,
-                    Valor = model.Valor,
-                    DataVencimento = model.DataVencimento,
-                    DataPagamento = model.DataPagamento
-                };
-
-                oContasPagarService.oRepositoryContasPagar.Incluir(contaPagar);
+                oContasPagarFacade.CriarContaPagar(model);
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
             return View(model);
         }
 
         public IActionResult Details(int id)
         {
-            var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPK(id);
-
-            if (contaPagar == null)
+            var viewModel = oContasPagarFacade.ObterContaPagarPorId(id);
+            if (viewModel == null)
             {
                 return NotFound();
             }
-
-            var viewModel = new ContasPagarViewModel
-            {
-                Id = contaPagar.Id,
-                IdPessoa = contaPagar.IdPessoa,
-                NomePessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(contaPagar.IdPessoa).Nome,
-                Data = contaPagar.Data,
-                Valor = contaPagar.Valor,
-                DataVencimento = contaPagar.DataVencimento,
-                DataPagamento = contaPagar.DataPagamento
-            };
 
             return View(viewModel);
         }
 
         public IActionResult Edit(int id)
         {
-            var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPK(id);
-            if (contaPagar == null)
+            var viewModel = oContasPagarFacade.ObterContaPagarPorId(id);
+            if (viewModel == null)
             {
                 return NotFound();
             }
 
-            var viewModel = new ContasPagarViewModel
-            {
-                Id = contaPagar.Id,
-                IdPessoa = contaPagar.IdPessoa,
-                Data = contaPagar.Data,
-                Valor = contaPagar.Valor,
-                DataVencimento = contaPagar.DataVencimento,
-                DataPagamento = contaPagar.DataPagamento
-            };
-
-            ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
             return View(viewModel);
         }
 
@@ -110,27 +67,18 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var contaPagar = new ContasPagar
-                {
-                    Id = model.Id,
-                    IdPessoa = model.IdPessoa,
-                    Data = model.Data,
-                    Valor = model.Valor,
-                    DataVencimento = model.DataVencimento,
-                    DataPagamento = model.DataPagamento
-                };
-
-                oContasPagarService.oRepositoryContasPagar.Alterar(contaPagar);
+                oContasPagarFacade.EditarContaPagar(model);
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Pessoas = oPessoasService.oRepositoryPessoas.SelecionarTodos();
+            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
             return View(model);
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            oContasPagarService.oRepositoryContasPagar.Excluir(id);
+            oContasPagarFacade.ExcluirContaPagar(id);
             return RedirectToAction("Index");
         }
     }

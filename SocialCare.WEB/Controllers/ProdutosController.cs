@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.DATA.Models;
-using SocialCare.DATA.Services;
 
 namespace SocialCare.WEB.Controllers
 {
     public class ProdutosController : Controller
     {
-        private ProdutosService oProdutosService = new ProdutosService();
+        private readonly ProdutosFacade oProdutosFacade;
+
+        public ProdutosController()
+        {
+            oProdutosFacade = new ProdutosFacade();
+        }
+
         public IActionResult Index()
         {
-            List<Produtos> oListProdutos = oProdutosService.oRepositoryProdutos.SelecionarTodos();
+            var oListProdutos = oProdutosFacade.ObterTodosProdutos();
             return View(oListProdutos);
         }
 
@@ -26,36 +31,32 @@ namespace SocialCare.WEB.Controllers
                 return View();
             }
 
-            oProdutosService.oRepositoryProdutos.Incluir(model);
-
+            oProdutosFacade.CriarProdutos(model);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            Produtos oProduto = oProdutosService.oRepositoryProdutos.SelecionarPK(id);
+            var oProduto = oProdutosFacade.ObterProdutosPorId(id);
             return View(oProduto);
         }
 
         public IActionResult Edit(int id)
         {
-            Produtos oProduto = oProdutosService.oRepositoryProdutos.SelecionarPK(id);
+            var oProduto = oProdutosFacade.ObterProdutosPorId(id);
             return View(oProduto);
         }
 
         [HttpPost]
         public IActionResult Edit(Produtos model)
         {
-            Produtos oProduto = oProdutosService.oRepositoryProdutos.Alterar(model);
-
-            int id = oProduto.Id;
-
-            return RedirectToAction("Details", new { id });
+            oProdutosFacade.EditarProdutos(model);
+            return RedirectToAction("Details", new { id = model.Id });
         }
 
         public IActionResult Delete(int id)
         {
-            oProdutosService.oRepositoryProdutos.Excluir(id);
+            oProdutosFacade.ExcluirProdutos(id);
             return RedirectToAction("Index");
         }
     }

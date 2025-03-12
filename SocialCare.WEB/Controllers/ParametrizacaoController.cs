@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.DATA.Models;
-using SocialCare.DATA.Services;
 
 namespace SocialCare.WEB.Controllers
 {
     public class ParametrizacaoController : Controller
     {
-        private ParametrizacaoService oParametrizacaoService = new ParametrizacaoService();
+        private readonly ParametrizacaoFacade oParametrizacaoFacade;
+
+        public ParametrizacaoController()
+        {
+            oParametrizacaoFacade = new ParametrizacaoFacade();
+        }
+
         public IActionResult Index()
         {
-            List<Parametrizacao> oListParametrizacao = oParametrizacaoService.oRepositoryParametrizacao.SelecionarTodos();
+            var oListParametrizacao = oParametrizacaoFacade.ObterTodasParametrizacoes();
             return View(oListParametrizacao);
         }
 
@@ -26,36 +31,32 @@ namespace SocialCare.WEB.Controllers
                 return View();
             }
 
-            oParametrizacaoService.oRepositoryParametrizacao.Incluir(model);
-
+            oParametrizacaoFacade.CriarParametrizacao(model);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            Parametrizacao oProduto = oParametrizacaoService.oRepositoryParametrizacao.SelecionarPK(id);
+            var oProduto = oParametrizacaoFacade.ObterParametrizacaoPorId(id);
             return View(oProduto);
         }
 
         public IActionResult Edit(int id)
         {
-            Parametrizacao oProduto = oParametrizacaoService.oRepositoryParametrizacao.SelecionarPK(id);
+            var oProduto = oParametrizacaoFacade.ObterParametrizacaoPorId(id);
             return View(oProduto);
         }
 
         [HttpPost]
         public IActionResult Edit(Parametrizacao model)
         {
-            Parametrizacao oProduto = oParametrizacaoService.oRepositoryParametrizacao.Alterar(model);
-
-            int id = oProduto.Id;
-
-            return RedirectToAction("Details", new { id });
+            oParametrizacaoFacade.EditarParametrizacao(model);
+            return RedirectToAction("Details", new { id = model.Id });
         }
 
         public IActionResult Delete(int id)
         {
-            oParametrizacaoService.oRepositoryParametrizacao.Excluir(id);
+            oParametrizacaoFacade.ExcluirParametrizacao(id);
             return RedirectToAction("Index");
         }
     }

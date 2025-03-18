@@ -44,6 +44,16 @@ namespace SocialCare.DATA.Repositories
 
         public T Alterar(T objeto)
         {
+            var entry = _Contexto.Entry(objeto);
+            if (entry.State == EntityState.Detached)
+            {
+                var existingEntity = _Contexto.Set<T>().Find(entry.Property("Id").CurrentValue);
+                if (existingEntity != null)
+                {
+                    _Contexto.Entry(existingEntity).State = EntityState.Detached;
+                }
+            }
+
             _Contexto.Entry(objeto).State = EntityState.Modified;
 
             if (_SaveChanges)

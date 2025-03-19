@@ -1,14 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\",
+  "WorkspaceRootPath": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\facade\\comprasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\aluno\\documents\\github\\socialcare\\socialcare.web\\facade\\contaspagarfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\facade\\contaspagarfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\aluno\\documents\\github\\socialcare\\socialcare.web\\facade\\comprasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\facade\\comprasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\repositories\\repositorycontaspagar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\repositories\\repositorycontaspagar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\aluno\\documents\\github\\socialcare\\socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controllers\\pessoascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\aluno\\documents\\github\\socialcare\\socialcare.web\\models\\contaspagarviewmodel .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\models\\contaspagarviewmodel .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\aluno\\documents\\github\\socialcare\\socialcare.web\\controllers\\comprascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controllers\\comprascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,35 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ContasPagarFacade.cs",
+              "DocumentMoniker": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
+              "ToolTip": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAQwDoAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-19T21:55:04.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ContasPagarViewModel .cs",
+              "DocumentMoniker": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Models\\ContasPagarViewModel .cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Models\\ContasPagarViewModel .cs",
+              "ToolTip": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Models\\ContasPagarViewModel .cs",
+              "RelativeToolTip": "SocialCare.WEB\\Models\\ContasPagarViewModel .cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-19T21:52:26.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PessoasController.cs",
+              "DocumentMoniker": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "ToolTip": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Controllers\\PessoasController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-19T21:43:41.033Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RepositoryContasPagar.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Repositories\\RepositoryContasPagar.cs",
-              "RelativeDocumentMoniker": "SocialCare.DATA\\Repositories\\RepositoryContasPagar.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Repositories\\RepositoryContasPagar.cs",
-              "RelativeToolTip": "SocialCare.DATA\\Repositories\\RepositoryContasPagar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABcAAAAAAAAAA==",
+              "Title": "ComprasFacade.cs",
+              "DocumentMoniker": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Facade\\ComprasFacade.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Facade\\ComprasFacade.cs",
+              "ToolTip": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Facade\\ComprasFacade.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Facade\\ComprasFacade.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T07:31:02.449Z"
+              "WhenOpened": "2025-03-19T21:43:16.936Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ComprasFacade.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAwJcAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "ComprasController.cs",
+              "DocumentMoniker": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Controllers\\ComprasController.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Controllers\\ComprasController.cs",
+              "ToolTip": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.WEB\\Controllers\\ComprasController.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Controllers\\ComprasController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T07:16:20.566Z",
+              "WhenOpened": "2025-03-19T21:43:11.152Z",
               "EditorCaption": ""
             }
           ]

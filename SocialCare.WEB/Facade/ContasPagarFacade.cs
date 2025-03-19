@@ -7,12 +7,12 @@ public class ContasPagarFacade
     private static readonly Lazy<ContasPagarFacade> instance = new Lazy<ContasPagarFacade>(() => new ContasPagarFacade());
 
     private readonly ContasPagarService oContasPagarService;
-    private readonly PessoasService oPessoasService;
+    private readonly PessoasFacade oPessoasFacade;
 
     private ContasPagarFacade()
     {
         oContasPagarService = new ContasPagarService();
-        oPessoasService = new PessoasService();
+        oPessoasFacade = PessoasFacade.Instance;
     }
 
     public static ContasPagarFacade Instance => instance.Value;
@@ -24,7 +24,7 @@ public class ContasPagarFacade
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(cp.IdPessoa).Nome,
+            NomePessoa = oPessoasFacade.ObterPessoaPorId(cp.IdPessoa).Nome,
             Data = cp.Data,
             Valor = cp.Valor,
             DataVencimento = cp.DataVencimento,
@@ -40,7 +40,23 @@ public class ContasPagarFacade
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(contaPagar.IdPessoa).Nome,
+            NomePessoa = oPessoasFacade.ObterPessoaPorId(contaPagar.IdPessoa).Nome,
+            Data = contaPagar.Data,
+            Valor = contaPagar.Valor,
+            DataVencimento = contaPagar.DataVencimento,
+            DataPagamento = contaPagar.DataPagamento
+        };
+    }
+
+    public ContasPagarViewModel ObterContaPagarPorCompraId(int id)
+    {
+        var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPorCompraId(id);
+
+        return new ContasPagarViewModel
+        {
+            Id = contaPagar.Id,
+            IdPessoa = contaPagar.IdPessoa,
+            NomePessoa = oPessoasFacade.ObterPessoaPorId(contaPagar.IdPessoa).Nome,
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -84,6 +100,6 @@ public class ContasPagarFacade
 
     public List<Pessoas> ObterPessoas()
     {
-        return oPessoasService.oRepositoryPessoas.SelecionarTodos();
+        return oPessoasFacade.ObterTodasPessoas();
     }
 }

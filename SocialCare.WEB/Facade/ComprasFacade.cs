@@ -8,17 +8,17 @@ public class ComprasFacade
 
     private readonly ComprasService oComprasService;
     private readonly ItensCompraService oItensCompraService;
-    private readonly PessoasService oPessoasService;
-    private readonly ProdutosService oProdutosService;
-    private readonly ContasPagarService oContasPagarService;
+    private readonly PessoasFacade oPessoasFacade;
+    private readonly ProdutosFacade oProdutosFacade;
+    private readonly ContasPagarFacade oContasPagarFacade;
 
     private ComprasFacade()
     {
         oComprasService = new ComprasService();
         oItensCompraService = new ItensCompraService();
-        oPessoasService = new PessoasService();
-        oProdutosService = new ProdutosService();
-        oContasPagarService = new ContasPagarService();
+        oPessoasFacade = PessoasFacade.Instance;
+        oProdutosFacade = ProdutosFacade.Instance;
+        oContasPagarFacade = ContasPagarFacade.Instance;
     }
 
     public static ComprasFacade Instance => instance.Value;
@@ -30,7 +30,7 @@ public class ComprasFacade
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(cp.IdPessoa).Nome,
+            NomePessoa = oPessoasFacade.ObterPessoaPorId(cp.IdPessoa)?.Nome,
             DataCompra = cp.DataCompra,
             Total = cp.Total
         }).ToList();
@@ -39,7 +39,7 @@ public class ComprasFacade
     public ComprasViewModel ObterCompraPorId(int id)
     {
         var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
-        var pessoa = oPessoasService.oRepositoryPessoas.SelecionarPK(compra.IdPessoa);
+        var pessoa = oPessoasFacade.ObterPessoaPorId(compra.IdPessoa);
         var itensCompra = oItensCompraService.oRepositoryItensCompra.SelecionarTodos()
             .Where(i => i.IdCompra == compra.Id)
             .ToList();
@@ -56,7 +56,7 @@ public class ComprasFacade
                 IdProduto = i.IdProduto,
                 Quantidade = i.Quantidade,
                 PrecoUnitario = i.PrecoUnitario,
-                NomeProduto = oProdutosService.oRepositoryProdutos.SelecionarPK(i.IdProduto)?.Nome
+                NomeProduto = oProdutosFacade.ObterProdutosPorId(i.IdProduto)?.Nome
             }).ToList()
         };
     }
@@ -96,7 +96,7 @@ public class ComprasFacade
             oItensCompraService.oRepositoryItensCompra.Incluir(itensCompra);
         }
 
-        var contaPagar = new ContasPagar
+        var contaPagar = new ContasPagarViewModel
         {
             IdPessoa = compra.IdPessoa,
             IdCompra = compra.Id,
@@ -105,7 +105,7 @@ public class ComprasFacade
             DataVencimento = DateTime.Now.AddDays(30)
         };
 
-        oContasPagarService.oRepositoryContasPagar.Incluir(contaPagar);
+        oContasPagarFacade.CriarContaPagar(contaPagar);
     }
 
     public void EditarCompra(ComprasViewModel model)
@@ -149,11 +149,11 @@ public class ComprasFacade
             oItensCompraService.oRepositoryItensCompra.Incluir(itensCompra);
         }
 
-        var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPorCompraId(compra.Id);
+        var contaPagar = oContasPagarFacade.ObterContaPagarPorCompraId(compra.Id);
         if (contaPagar != null)
         {
             contaPagar.Valor = compra.Total;
-            oContasPagarService.oRepositoryContasPagar.Alterar(contaPagar);
+            oContasPagarFacade.EditarContaPagar(contaPagar);
         }
     }
 
@@ -169,10 +169,10 @@ public class ComprasFacade
             oItensCompraService.oRepositoryItensCompra.Excluir(item);
         }
 
-        var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPorCompraId(compra.Id);
+        var contaPagar = oContasPagarFacade.ObterContaPagarPorCompraId(compra.Id);
         if (contaPagar != null)
         {
-            oContasPagarService.oRepositoryContasPagar.Excluir(contaPagar);
+            oContasPagarFacade.ExcluirContaPagar(contaPagar.Id);
         }
 
         oComprasService.oRepositoryCompras.Excluir(compra);
@@ -180,11 +180,11 @@ public class ComprasFacade
 
     public List<Pessoas> ObterPessoas()
     {
-        return oPessoasService.oRepositoryPessoas.SelecionarTodos();
+        return oPessoasFacade.ObterTodasPessoas();
     }
 
     public List<Produtos> ObterProdutos()
     {
-        return oProdutosService.oRepositoryProdutos.SelecionarTodos();
+        return oProdutosFacade.ObterTodosProdutos();
     }
 }

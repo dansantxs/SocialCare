@@ -10,6 +10,7 @@ public class ComprasFacade
     private readonly ItensCompraService oItensCompraService;
     private readonly PessoasService oPessoasService;
     private readonly ProdutosService oProdutosService;
+    private readonly ContasPagarService oContasPagarService;
 
     private ComprasFacade()
     {
@@ -17,6 +18,7 @@ public class ComprasFacade
         oItensCompraService = new ItensCompraService();
         oPessoasService = new PessoasService();
         oProdutosService = new ProdutosService();
+        oContasPagarService = new ContasPagarService();
     }
 
     public static ComprasFacade Instance => instance.Value;
@@ -93,6 +95,17 @@ public class ComprasFacade
 
             oItensCompraService.oRepositoryItensCompra.Incluir(itensCompra);
         }
+
+        var contaPagar = new ContasPagar
+        {
+            IdPessoa = compra.IdPessoa,
+            IdCompra = compra.Id,
+            Data = DateTime.Now,
+            Valor = compra.Total,
+            DataVencimento = DateTime.Now.AddDays(30)
+        };
+
+        oContasPagarService.oRepositoryContasPagar.Incluir(contaPagar);
     }
 
     public void EditarCompra(ComprasViewModel model)
@@ -135,6 +148,13 @@ public class ComprasFacade
 
             oItensCompraService.oRepositoryItensCompra.Incluir(itensCompra);
         }
+
+        var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPorCompraId(compra.Id);
+        if (contaPagar != null)
+        {
+            contaPagar.Valor = compra.Total;
+            oContasPagarService.oRepositoryContasPagar.Alterar(contaPagar);
+        }
     }
 
     public void ExcluirCompra(int id)
@@ -147,6 +167,12 @@ public class ComprasFacade
         foreach (var item in itensCompra)
         {
             oItensCompraService.oRepositoryItensCompra.Excluir(item);
+        }
+
+        var contaPagar = oContasPagarService.oRepositoryContasPagar.SelecionarPorCompraId(compra.Id);
+        if (contaPagar != null)
+        {
+            oContasPagarService.oRepositoryContasPagar.Excluir(contaPagar);
         }
 
         oComprasService.oRepositoryCompras.Excluir(compra);

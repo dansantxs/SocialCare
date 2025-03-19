@@ -14,5 +14,10 @@ namespace SocialCare.DATA.Repositories
         {
 
         }
+
+        public ContasPagar SelecionarPorCompraId(int id)
+        {
+            return _Contexto.ContasPagar.FirstOrDefault(cp => cp.IdCompra == id);
+        }
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj": {}
+    "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj": {
+    "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj",
+        "projectUniqueName": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj",
         "projectName": "SocialCare.DATA",
-        "projectPath": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj",
-        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Documents\\GitHub\\SocialCare\\SocialCare.DATA\\obj\\",
+        "projectPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\SocialCare.DATA.csproj",
+        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -55,7 +56,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.12, )"
+              "version": "[9.0.3, )"
             }
           },
           "imports": [
@@ -74,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -69,6 +69,7 @@ public class ContasPagarFacade
         var contaPagar = new ContasPagar
         {
             IdPessoa = model.IdPessoa,
+            IdCompra = model.IdCompra,
             Data = model.Data,
             Valor = model.Valor,
             DataVencimento = model.DataVencimento,
@@ -84,6 +85,7 @@ public class ContasPagarFacade
         {
             Id = model.Id,
             IdPessoa = model.IdPessoa,
+            IdCompra = model.IdCompra,
             Data = model.Data,
             Valor = model.Valor,
             DataVencimento = model.DataVencimento,

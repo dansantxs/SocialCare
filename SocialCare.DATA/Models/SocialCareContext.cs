@@ -23,8 +23,6 @@ public partial class SocialCareContext : DbContext
 
     public virtual DbSet<ItensCompra> ItensCompra { get; set; }
 
-    public virtual DbSet<Parametrizacao> Parametrizacao { get; set; }
-
     public virtual DbSet<Pessoas> Pessoas { get; set; }
 
     public virtual DbSet<PessoasFisicas> PessoasFisicas { get; set; }
@@ -64,13 +62,6 @@ public partial class SocialCareContext : DbContext
             entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.ItensCompra)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ItensCompra_Produtos");
-        });
-
-        modelBuilder.Entity<Parametrizacao>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Parametr__3213E83FE95C446A");
-
-            entity.Property(e => e.Cnpj).IsFixedLength();
         });
 
         modelBuilder.Entity<Pessoas>(entity =>

@@ -9,7 +9,7 @@ namespace SocialCare.DATA.Interfaces
     public interface IRepositoryModel<T> where T : class
     {
         List<T> SelecionarTodos();
-        T SelecionarPK(params object[] variavel);
+        T SelecionarPorId(params object[] variavel);
         T Incluir(T objeto);
         T Alterar(T objeto);
         void Excluir(T objeto);

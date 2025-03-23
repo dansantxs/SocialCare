@@ -1,41 +1,41 @@
 ﻿using SocialCare.DATA.Models;
-using SocialCare.DATA.Services;
+using SocialCare.DATA.Repositories;
 
 public class ProdutosFacade
 {
     private static readonly Lazy<ProdutosFacade> instance = new Lazy<ProdutosFacade>(() => new ProdutosFacade());
 
-    private readonly ProdutosService oProdutosService;
+    private RepositoryProdutos oRepositoryProdutos { get; set; }
 
     private ProdutosFacade()
     {
-        oProdutosService = new ProdutosService();
+        oRepositoryProdutos = new RepositoryProdutos();
     }
 
     public static ProdutosFacade Instance => instance.Value;
 
     public List<Produtos> ObterTodosProdutos()
     {
-        return oProdutosService.oRepositoryProdutos.SelecionarTodos();
+        return oRepositoryProdutos.SelecionarTodos();
     }
 
     public Produtos ObterProdutosPorId(int id)
     {
-        return oProdutosService.oRepositoryProdutos.SelecionarPK(id);
+        return oRepositoryProdutos.SelecionarPorId(id);
     }
 
     public void CriarProdutos(Produtos model)
     {
-        oProdutosService.oRepositoryProdutos.Incluir(model);
+        oRepositoryProdutos.Incluir(model);
     }
 
     public void EditarProdutos(Produtos model)
     {
-        oProdutosService.oRepositoryProdutos.Alterar(model);
+        oRepositoryProdutos.Alterar(model);
     }
 
     public void ExcluirProdutos(int id)
     {
-        oProdutosService.oRepositoryProdutos.Excluir(id);
+        oRepositoryProdutos.Excluir(id);
     }
 }

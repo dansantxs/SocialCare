@@ -25,7 +25,7 @@ namespace SocialCare.DATA.Repositories
             return _Contexto.Set<T>().ToList();
         }
 
-        public T SelecionarPK(params object[] variavel)
+        public T SelecionarPorId(params object[] variavel)
         {
             return _Contexto.Set<T>().Find(variavel);
         }
@@ -76,7 +76,7 @@ namespace SocialCare.DATA.Repositories
 
         public void Excluir(params object[] variavel)
         {
-            var obj = SelecionarPK(variavel);
+            var obj = SelecionarPorId(variavel);
             Excluir(obj);
         }
 

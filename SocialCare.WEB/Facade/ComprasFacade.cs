@@ -1,36 +1,36 @@
 ﻿using SocialCare.DATA.Models;
-using SocialCare.DATA.Services;
+using SocialCare.DATA.Repositories;
 using SocialCare.WEB.Models;
 
 public class ComprasFacade
 {
     private static readonly Lazy<ComprasFacade> instance = new Lazy<ComprasFacade>(() => new ComprasFacade());
 
-    private readonly ComprasService oComprasService;
-    private readonly ItensCompraService oItensCompraService;
-    private readonly PessoasFacade oPessoasFacade;
-    private readonly ProdutosFacade oProdutosFacade;
-    private readonly ContasPagarFacade oContasPagarFacade;
+    private RepositoryCompras oRepositoryCompras { get; set; }
+    private RepositoryItensCompra oRepositoryItensCompra { get; set; }
+    private RepositoryPessoas oRepositoryPessoas { get; set; }
+    private RepositoryProdutos oRepositoryProdutos { get; set; }
+    private RepositoryContasPagar oRepositoryContasPagar { get; set; }
 
     private ComprasFacade()
     {
-        oComprasService = new ComprasService();
-        oItensCompraService = new ItensCompraService();
-        oPessoasFacade = PessoasFacade.Instance;
-        oProdutosFacade = ProdutosFacade.Instance;
-        oContasPagarFacade = ContasPagarFacade.Instance;
+        oRepositoryCompras = new RepositoryCompras();
+        oRepositoryItensCompra = new RepositoryItensCompra();
+        oRepositoryPessoas = new RepositoryPessoas();
+        oRepositoryProdutos = new RepositoryProdutos();
+        oRepositoryContasPagar = new RepositoryContasPagar();
     }
 
     public static ComprasFacade Instance => instance.Value;
 
     public List<ComprasViewModel> ObterTodasCompras()
     {
-        var compras = oComprasService.oRepositoryCompras.SelecionarTodos();
+        var compras = oRepositoryCompras.SelecionarTodos();
         return compras.Select(cp => new ComprasViewModel
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasFacade.ObterPessoaPorId(cp.IdPessoa)?.Nome,
+            NomePessoa = oRepositoryPessoas.SelecionarPorId(cp.IdPessoa)?.Nome,
             DataCompra = cp.DataCompra,
             Total = cp.Total
         }).ToList();
@@ -38,9 +38,9 @@ public class ComprasFacade
 
     public ComprasViewModel ObterCompraPorId(int id)
     {
-        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
-        var pessoa = oPessoasFacade.ObterPessoaPorId(compra.IdPessoa);
-        var itensCompra = oItensCompraService.oRepositoryItensCompra.SelecionarTodos()
+        var compra = oRepositoryCompras.SelecionarPorId(id);
+        var pessoa = oRepositoryPessoas.SelecionarPorId(compra.IdPessoa);
+        var itensCompra = oRepositoryItensCompra.SelecionarTodos()
             .Where(i => i.IdCompra == compra.Id)
             .ToList();
 
@@ -56,7 +56,7 @@ public class ComprasFacade
                 IdProduto = i.IdProduto,
                 Quantidade = i.Quantidade,
                 PrecoUnitario = i.PrecoUnitario,
-                NomeProduto = oProdutosFacade.ObterProdutosPorId(i.IdProduto)?.Nome
+                NomeProduto = oRepositoryProdutos.SelecionarPorId(i.IdProduto)?.Nome
             }).ToList()
         };
     }
@@ -80,7 +80,7 @@ public class ComprasFacade
             }).ToList();
 
         compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
-        oComprasService.oRepositoryCompras.Incluir(compra);
+        oRepositoryCompras.Incluir(compra);
 
         foreach (var item in groupedItems)
         {
@@ -93,10 +93,10 @@ public class ComprasFacade
                 Subtotal = item.PrecoUnitario * item.Quantidade
             };
 
-            oItensCompraService.oRepositoryItensCompra.Incluir(itensCompra);
+            oRepositoryItensCompra.Incluir(itensCompra);
         }
 
-        var contaPagar = new ContasPagarViewModel
+        var contaPagar = new ContasPagar
         {
             IdPessoa = compra.IdPessoa,
             IdCompra = compra.Id,
@@ -105,12 +105,12 @@ public class ComprasFacade
             DataVencimento = DateTime.Now.AddDays(30)
         };
 
-        oContasPagarFacade.CriarContaPagar(contaPagar);
+        oRepositoryContasPagar.Incluir(contaPagar);
     }
 
     public void EditarCompra(ComprasViewModel model)
     {
-        var compra = oComprasService.oRepositoryCompras.SelecionarPK(model.Id);
+        var compra = oRepositoryCompras.SelecionarPorId(model.Id);
         compra.IdPessoa = model.IdPessoa.Value;
         compra.DataCompra = model.DataCompra;
 
@@ -124,15 +124,15 @@ public class ComprasFacade
             }).ToList();
 
         compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
-        oComprasService.oRepositoryCompras.Alterar(compra);
+        oRepositoryCompras.Alterar(compra);
 
-        var itensAntigos = oItensCompraService.oRepositoryItensCompra.SelecionarTodos()
+        var itensAntigos = oRepositoryItensCompra.SelecionarTodos()
             .Where(i => i.IdCompra == compra.Id)
             .ToList();
 
         foreach (var item in itensAntigos)
         {
-            oItensCompraService.oRepositoryItensCompra.Excluir(item);
+            oRepositoryItensCompra.Excluir(item);
         }
 
         foreach (var item in groupedItems)
@@ -146,45 +146,45 @@ public class ComprasFacade
                 Subtotal = item.PrecoUnitario * item.Quantidade
             };
 
-            oItensCompraService.oRepositoryItensCompra.Incluir(itensCompra);
+            oRepositoryItensCompra.Incluir(itensCompra);
         }
 
-        var contaPagar = oContasPagarFacade.ObterContaPagarPorCompraId(compra.Id);
+        var contaPagar = oRepositoryContasPagar.SelecionarPorIdCompra(compra.Id);
         if (contaPagar != null)
         {
             contaPagar.Valor = compra.Total;
-            oContasPagarFacade.EditarContaPagar(contaPagar);
+            oRepositoryContasPagar.Alterar(contaPagar);
         }
     }
 
     public void ExcluirCompra(int id)
     {
-        var compra = oComprasService.oRepositoryCompras.SelecionarPK(id);
-        var itensCompra = oItensCompraService.oRepositoryItensCompra.SelecionarTodos()
+        var compra = oRepositoryCompras.SelecionarPorId(id);
+        var itensCompra = oRepositoryItensCompra.SelecionarTodos()
             .Where(i => i.IdCompra == compra.Id)
             .ToList();
 
         foreach (var item in itensCompra)
         {
-            oItensCompraService.oRepositoryItensCompra.Excluir(item);
+            oRepositoryItensCompra.Excluir(item);
         }
 
-        var contaPagar = oContasPagarFacade.ObterContaPagarPorCompraId(compra.Id);
+        var contaPagar = oRepositoryContasPagar.SelecionarPorIdCompra(compra.Id);
         if (contaPagar != null)
         {
-            oContasPagarFacade.ExcluirContaPagar(contaPagar.Id);
+            oRepositoryContasPagar.Excluir(contaPagar.Id);
         }
 
-        oComprasService.oRepositoryCompras.Excluir(compra);
+        oRepositoryCompras.Excluir(compra);
     }
 
     public List<Pessoas> ObterPessoas()
     {
-        return oPessoasFacade.ObterTodasPessoas();
+        return oRepositoryPessoas.SelecionarTodos();
     }
 
     public List<Produtos> ObterProdutos()
     {
-        return oProdutosFacade.ObterTodosProdutos();
+        return oRepositoryProdutos.SelecionarTodos();
     }
 }

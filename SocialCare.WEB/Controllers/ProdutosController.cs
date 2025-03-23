@@ -5,11 +5,11 @@ namespace SocialCare.WEB.Controllers
 {
     public class ProdutosController : Controller
     {
-        private readonly ProdutosFacade oProdutosFacade;
+        private readonly ProdutosControl oProdutosFacade;
 
         public ProdutosController()
         {
-            oProdutosFacade = ProdutosFacade.Instance;
+            oProdutosFacade = ProdutosControl.Instance;
         }
 
         public IActionResult Index()

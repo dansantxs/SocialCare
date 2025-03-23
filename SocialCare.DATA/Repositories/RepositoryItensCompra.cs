@@ -1,22 +1,37 @@
-﻿using SocialCare.DATA.Interfaces;
-using SocialCare.DATA.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SocialCare.DATA.Models;
+using Microsoft.Data.SqlClient;
+using SocialCare.DATA.Interfaces;
+using System.Data;
 
 namespace SocialCare.DATA.Repositories
 {
     public class RepositoryItensCompra : RepositoryBase<ItensCompra>, IRepositoryItensCompra
     {
-        public RepositoryItensCompra(bool SaveChanges = true) : base(SaveChanges)
+        public RepositoryItensCompra(string connectionString) : base(connectionString)
         {
         }
 
-        public List<ItensCompra> SelecionarPorCompraId(int id)
+        public override ItensCompra Incluir(ItensCompra objeto)
         {
-            return _Contexto.ItensCompra.Where(ic => ic.IdCompra == id).ToList();
+            throw new NotImplementedException();
+        }
+
+        public override ItensCompra Alterar(ItensCompra objeto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Excluir(ItensCompra objeto)
+        {
+        }
+
+        public override void Excluir(params object[] variavel)
+        {
+        }
+
+        protected override ItensCompra MapToEntity(IDataRecord record)
+        {
+            throw new NotImplementedException();
         }
     }
 }

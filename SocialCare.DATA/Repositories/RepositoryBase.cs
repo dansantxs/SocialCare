@@ -1,93 +1,70 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
 using SocialCare.DATA.Interfaces;
-using SocialCare.DATA.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace SocialCare.DATA.Repositories
 {
-    public class RepositoryBase<T> : IRepositoryModel<T>, IDisposable where T : class
+    public abstract class RepositoryBase<T> : IRepositoryModel<T>, IDisposable where T : class
     {
-        protected SocialCareContext _Contexto;
-        public bool _SaveChanges = true;
+        protected readonly string _connectionString;
 
-        public RepositoryBase(bool saveChanges = true)
+        protected RepositoryBase(string connectionString)
         {
-            _SaveChanges = saveChanges;
-            _Contexto = new SocialCareContext();
+            _connectionString = connectionString;
         }
 
         public List<T> SelecionarTodos()
         {
-            return _Contexto.Set<T>().ToList();
+            var result = new List<T>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT * FROM " + typeof(T).Name, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var entity = MapToEntity(reader);
+                            result.Add(entity);
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
         public T SelecionarPorId(params object[] variavel)
         {
-            return _Contexto.Set<T>().Find(variavel);
-        }
-
-        public T Incluir(T objeto)
-        {
-            _Contexto.Set<T>().Add(objeto);
-
-            if (_SaveChanges)
+            T entity = null;
+            using (var connection = new SqlConnection(_connectionString))
             {
-                _Contexto.SaveChanges();
-            }
-
-            return objeto;
-        }
-
-        public T Alterar(T objeto)
-        {
-            var entry = _Contexto.Entry(objeto);
-            if (entry.State == EntityState.Detached)
-            {
-                var existingEntity = _Contexto.Set<T>().Find(entry.Property("Id").CurrentValue);
-                if (existingEntity != null)
+                connection.Open();
+                using (var command = new SqlCommand("SELECT * FROM " + typeof(T).Name + " WHERE Id = @Id", connection))
                 {
-                    _Contexto.Entry(existingEntity).State = EntityState.Detached;
+                    command.Parameters.AddWithValue("@Id", variavel[0]);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            entity = MapToEntity(reader);
+                        }
+                    }
                 }
             }
-
-            _Contexto.Entry(objeto).State = EntityState.Modified;
-
-            if (_SaveChanges)
-            {
-                _Contexto.SaveChanges();
-            }
-
-            return objeto;
+            return entity;
         }
 
-        public void Excluir(T objeto)
-        {
-            _Contexto.Set<T>().Remove(objeto);
-
-            if (_SaveChanges)
-            {
-                _Contexto.SaveChanges();
-            }
-        }
-
-        public void Excluir(params object[] variavel)
-        {
-            var obj = SelecionarPorId(variavel);
-            Excluir(obj);
-        }
-
-        public void SaveChanges()
-        {
-            _Contexto.SaveChanges();
-        }
+        public abstract T Incluir(T objeto);
+        public abstract T Alterar(T objeto);
+        public abstract void Excluir(T objeto);
+        public abstract void Excluir(params object[] variavel);
 
         public void Dispose()
         {
-            _Contexto.Dispose();
+            // Dispose resources if needed
         }
+
+        protected abstract T MapToEntity(IDataRecord record);
     }
 }

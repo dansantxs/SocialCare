@@ -14,6 +14,5 @@ namespace SocialCare.DATA.Interfaces
         T Alterar(T objeto);
         void Excluir(T objeto);
         void Excluir(params object[] variavel);
-        void SaveChanges();
     }
 }

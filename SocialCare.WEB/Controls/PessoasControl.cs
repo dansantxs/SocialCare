@@ -2,21 +2,21 @@
 using SocialCare.DATA.Repositories;
 using SocialCare.WEB.Models;
 
-public class PessoasFacade
+public class PessoasControl
 {
-    private static readonly Lazy<PessoasFacade> instance = new Lazy<PessoasFacade>(() => new PessoasFacade());
+    private static readonly Lazy<PessoasControl> instance = new Lazy<PessoasControl>(() => new PessoasControl());
     private RepositoryPessoas oRepositoryPessoas { get; set; }
     private RepositoryPessoasFisicas oRepositoryPessoasFisicas { get; set; }
     private RepositoryPessoasJuridicas oRepositoryPessoasJuridicas { get; set; }
 
-    private PessoasFacade()
+    private PessoasControl()
     {
-        oRepositoryPessoas = new RepositoryPessoas();
-        oRepositoryPessoasFisicas = new RepositoryPessoasFisicas();
-        oRepositoryPessoasJuridicas = new RepositoryPessoasJuridicas();
+        oRepositoryPessoas = new RepositoryPessoas("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
+        oRepositoryPessoasFisicas = new RepositoryPessoasFisicas("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
+        oRepositoryPessoasJuridicas = new RepositoryPessoasJuridicas("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
     }
 
-    public static PessoasFacade Instance => instance.Value;
+    public static PessoasControl Instance => instance.Value;
 
     public List<Pessoas> ObterTodasPessoas()
     {

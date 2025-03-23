@@ -1,18 +1,37 @@
-﻿using SocialCare.DATA.Interfaces;
-using SocialCare.DATA.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SocialCare.DATA.Models;
+using Microsoft.Data.SqlClient;
+using SocialCare.DATA.Interfaces;
+using System.Data;
 
 namespace SocialCare.DATA.Repositories
 {
     public class RepositoryPessoasFisicas : RepositoryBase<PessoasFisicas>, IRepositoryPessoasFisicas
     {
-        public RepositoryPessoasFisicas(bool SaveChanges = true) : base(SaveChanges)
+        public RepositoryPessoasFisicas(string connectionString) : base(connectionString)
         {
+        }
 
+        public override PessoasFisicas Incluir(PessoasFisicas objeto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override PessoasFisicas Alterar(PessoasFisicas objeto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Excluir(PessoasFisicas objeto)
+        {
+        }
+
+        public override void Excluir(params object[] variavel)
+        {
+        }
+
+        protected override PessoasFisicas MapToEntity(IDataRecord record)
+        {
+            throw new NotImplementedException();
         }
     }
 }

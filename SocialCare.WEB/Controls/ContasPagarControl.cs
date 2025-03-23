@@ -2,20 +2,20 @@
 using SocialCare.DATA.Repositories;
 using SocialCare.WEB.Models;
 
-public class ContasPagarFacade
+public class ContasPagarControl
 {
-    private static readonly Lazy<ContasPagarFacade> instance = new Lazy<ContasPagarFacade>(() => new ContasPagarFacade());
+    private static readonly Lazy<ContasPagarControl> instance = new Lazy<ContasPagarControl>(() => new ContasPagarControl());
 
     private RepositoryContasPagar oRepositoryContasPagar { get; set; }
     private RepositoryPessoas oRepositoryPessoas { get; set; }
 
-    private ContasPagarFacade()
+    private ContasPagarControl()
     {
-        oRepositoryContasPagar = new RepositoryContasPagar();
-        oRepositoryPessoas = new RepositoryPessoas();
+        oRepositoryContasPagar = new RepositoryContasPagar("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
+        oRepositoryPessoas = new RepositoryPessoas("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
     }
 
-    public static ContasPagarFacade Instance => instance.Value;
+    public static ContasPagarControl Instance => instance.Value;
 
     public List<ContasPagarViewModel> ObterTodasContasPagar()
     {

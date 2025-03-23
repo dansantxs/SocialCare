@@ -2,9 +2,9 @@
 using SocialCare.DATA.Repositories;
 using SocialCare.WEB.Models;
 
-public class ComprasControl
+public class ComprasFacade
 {
-    private static readonly Lazy<ComprasControl> instance = new Lazy<ComprasControl>(() => new ComprasControl());
+    private static readonly Lazy<ComprasFacade> instance = new Lazy<ComprasFacade>(() => new ComprasFacade());
 
     private RepositoryCompras oRepositoryCompras { get; set; }
     private RepositoryItensCompra oRepositoryItensCompra { get; set; }
@@ -12,16 +12,16 @@ public class ComprasControl
     private RepositoryProdutos oRepositoryProdutos { get; set; }
     private RepositoryContasPagar oRepositoryContasPagar { get; set; }
 
-    private ComprasControl()
+    private ComprasFacade()
     {
-        oRepositoryCompras = new RepositoryCompras("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
-        oRepositoryItensCompra = new RepositoryItensCompra("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
-        oRepositoryPessoas = new RepositoryPessoas("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
-        oRepositoryProdutos = new RepositoryProdutos("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
-        oRepositoryContasPagar = new RepositoryContasPagar("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
+        oRepositoryCompras = new RepositoryCompras();
+        oRepositoryItensCompra = new RepositoryItensCompra();
+        oRepositoryPessoas = new RepositoryPessoas();
+        oRepositoryProdutos = new RepositoryProdutos();
+        oRepositoryContasPagar = new RepositoryContasPagar();
     }
 
-    public static ComprasControl Instance => instance.Value;
+    public static ComprasFacade Instance => instance.Value;
 
     public List<ComprasViewModel> ObterTodasCompras()
     {

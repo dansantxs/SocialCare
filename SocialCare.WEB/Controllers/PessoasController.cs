@@ -5,11 +5,11 @@ namespace SocialCare.WEB.Controllers
 {
     public class PessoasController : Controller
     {
-        private readonly PessoasControl _pessoasFacade;
+        private readonly PessoasFacade _pessoasFacade;
 
         public PessoasController()
         {
-            _pessoasFacade = PessoasControl.Instance;
+            _pessoasFacade = PessoasFacade.Instance;
         }
 
         public IActionResult Index()

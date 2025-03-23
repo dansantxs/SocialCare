@@ -1,42 +1,18 @@
-﻿using SocialCare.DATA.Models;
-using Microsoft.Data.SqlClient;
-using SocialCare.DATA.Interfaces;
-using System.Data;
+﻿using SocialCare.DATA.Interfaces;
+using SocialCare.DATA.Models;
 
 namespace SocialCare.DATA.Repositories
 {
     public class RepositoryContasPagar : RepositoryBase<ContasPagar>, IRepositoryContasPagar
     {
-        public RepositoryContasPagar(string connectionString) : base(connectionString)
+        public RepositoryContasPagar(bool SaveChanges = true) : base(SaveChanges)
         {
+
         }
 
         public ContasPagar SelecionarPorIdCompra(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public override ContasPagar Incluir(ContasPagar objeto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override ContasPagar Alterar(ContasPagar objeto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Excluir(ContasPagar objeto)
-        {
-        }
-
-        public override void Excluir(params object[] variavel)
-        {
-        }
-
-        protected override ContasPagar MapToEntity(IDataRecord record)
-        {
-            throw new NotImplementedException();
+            return _Contexto.ContasPagar.FirstOrDefault(cp => cp.IdCompra == id);
         }
     }
 }

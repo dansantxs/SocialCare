@@ -1,18 +1,18 @@
 ﻿using SocialCare.DATA.Models;
 using SocialCare.DATA.Repositories;
 
-public class ProdutosControl
+public class ProdutosFacade
 {
-    private static readonly Lazy<ProdutosControl> instance = new Lazy<ProdutosControl>(() => new ProdutosControl());
+    private static readonly Lazy<ProdutosFacade> instance = new Lazy<ProdutosFacade>(() => new ProdutosFacade());
 
     private RepositoryProdutos oRepositoryProdutos { get; set; }
 
-    private ProdutosControl()
+    private ProdutosFacade()
     {
-        oRepositoryProdutos = new RepositoryProdutos("Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True");
+        oRepositoryProdutos = new RepositoryProdutos();
     }
 
-    public static ProdutosControl Instance => instance.Value;
+    public static ProdutosFacade Instance => instance.Value;
 
     public List<Produtos> ObterTodosProdutos()
     {

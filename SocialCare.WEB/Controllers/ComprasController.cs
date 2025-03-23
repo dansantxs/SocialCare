@@ -5,11 +5,11 @@ namespace SocialCare.WEB.Controllers
 {
     public class ComprasController : Controller
     {
-        private readonly ComprasControl oComprasFacade;
+        private readonly ComprasFacade oComprasFacade;
 
         public ComprasController()
         {
-            oComprasFacade = ComprasControl.Instance;
+            oComprasFacade = ComprasFacade.Instance;
         }
 
         public IActionResult Index()

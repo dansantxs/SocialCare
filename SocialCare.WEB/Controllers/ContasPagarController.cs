@@ -5,11 +5,11 @@ namespace SocialCare.WEB.Controllers
 {
     public class ContasPagarController : Controller
     {
-        private readonly ContasPagarControl oContasPagarFacade;
+        private readonly ContasPagarFacade oContasPagarFacade;
 
         public ContasPagarController()
         {
-            oContasPagarFacade = ContasPagarControl.Instance;
+            oContasPagarFacade = ContasPagarFacade.Instance;
         }
 
         public IActionResult Index()

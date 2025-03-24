@@ -1,20 +1,20 @@
 ﻿using SocialCare.DATA.Models;
 using SocialCare.WEB.Models;
 
-public class ContasPagarFacade
+public class ContasPagarControl
 {
-    private static readonly Lazy<ContasPagarFacade> instance = new Lazy<ContasPagarFacade>(() => new ContasPagarFacade());
+    private static readonly Lazy<ContasPagarControl> instance = new Lazy<ContasPagarControl>(() => new ContasPagarControl());
 
     private ContasPagarDAO oContasPagarDAO { get; set; }
     private PessoasDAO oPessoasDAO { get; set; }
 
-    private ContasPagarFacade()
+    private ContasPagarControl()
     {
         oContasPagarDAO = new ContasPagarDAO();
         oPessoasDAO = new PessoasDAO();
     }
 
-    public static ContasPagarFacade Instance => instance.Value;
+    public static ContasPagarControl Instance => instance.Value;
 
     public List<ContasPagarViewModel> ObterTodasContasPagar()
     {

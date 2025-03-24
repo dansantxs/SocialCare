@@ -33,7 +33,7 @@ public class PessoasFisicasDAO : IDisposable
         {
             Id = row.Field<int>("id"),
             Cpf = row.Field<string>("cpf"),
-            DataNascimento = row.Field<DateOnly>("data_nascimento")
+            DataNascimento = DateOnly.FromDateTime(row.Field<DateTime>("data_nascimento"))
         }).FirstOrDefault();
     }
 

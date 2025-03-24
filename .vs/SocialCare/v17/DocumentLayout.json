@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\pessoasjuridicasdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\pessoasjuridicasdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\produtosdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\produtosdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\facade\\comprasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\facade\\comprasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\models\\pessoasviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\models\\pessoasviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\facade\\pessoasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\facade\\pessoasfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\facade\\contaspagarfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\facade\\contaspagarfacade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\models\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\models\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,67 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PessoasViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\PessoasViewModel.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Models\\PessoasViewModel.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\PessoasViewModel.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Models\\PessoasViewModel.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBEAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "DBConnection.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Models\\DBConnection.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\Models\\DBConnection.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Models\\DBConnection.cs",
+              "RelativeToolTip": "SocialCare.DATA\\Models\\DBConnection.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAAwEwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T21:19:22.248Z",
+              "WhenOpened": "2025-03-24T07:44:44.824Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PessoasJuridicasDAO.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\PessoasJuridicasDAO.cs",
-              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\PessoasJuridicasDAO.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\PessoasJuridicasDAO.cs",
-              "RelativeToolTip": "SocialCare.DATA\\DAOs\\PessoasJuridicasDAO.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAwwBUAAAAmAAAAAAAAAA==",
+              "Title": "ProdutosDAO.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "RelativeToolTip": "SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAcwE0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T21:18:10.888Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PessoasFacade.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\PessoasFacade.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Facade\\PessoasFacade.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\PessoasFacade.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Facade\\PessoasFacade.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAswFsAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T21:17:28.737Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ContasPagarFacade.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Facade\\ContasPagarFacade.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAswDMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T21:17:16.126Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ComprasFacade.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Facade\\ComprasFacade.cs",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAswIEAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T21:16:53.092Z",
+              "WhenOpened": "2025-03-24T07:28:18.419Z",
               "EditorCaption": ""
             }
           ]

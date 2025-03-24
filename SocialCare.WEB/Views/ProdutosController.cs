@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.DATA.Models;
 
-namespace SocialCare.WEB.Controllers
+namespace SocialCare.WEB.Views
 {
     public class ProdutosController : Controller
     {
-        private readonly ProdutosFacade oProdutosFacade;
+        private readonly ProdutosControl oProdutosControl;
 
         public ProdutosController()
         {
-            oProdutosFacade = ProdutosFacade.Instance;
+            oProdutosControl = ProdutosControl.Instance;
         }
 
         public IActionResult Index()
         {
-            var oListProdutos = oProdutosFacade.ObterTodosProdutos();
+            var oListProdutos = oProdutosControl.ObterTodosProdutos();
             return View(oListProdutos);
         }
 
@@ -31,32 +31,32 @@ namespace SocialCare.WEB.Controllers
                 return View();
             }
 
-            oProdutosFacade.CriarProdutos(model);
+            oProdutosControl.CriarProdutos(model);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var oProduto = oProdutosFacade.ObterProdutosPorId(id);
+            var oProduto = oProdutosControl.ObterProdutosPorId(id);
             return View(oProduto);
         }
 
         public IActionResult Edit(int id)
         {
-            var oProduto = oProdutosFacade.ObterProdutosPorId(id);
+            var oProduto = oProdutosControl.ObterProdutosPorId(id);
             return View(oProduto);
         }
 
         [HttpPost]
         public IActionResult Edit(Produtos model)
         {
-            oProdutosFacade.EditarProdutos(model);
+            oProdutosControl.EditarProdutos(model);
             return RedirectToAction("Details", new { id = model.Id });
         }
 
         public IActionResult Delete(int id)
         {
-            oProdutosFacade.ExcluirProdutos(id);
+            oProdutosControl.ExcluirProdutos(id);
             return RedirectToAction("Index");
         }
     }

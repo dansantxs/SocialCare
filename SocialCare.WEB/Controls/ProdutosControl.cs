@@ -1,17 +1,17 @@
 ﻿using SocialCare.DATA.Models;
 
-public class ProdutosFacade
+public class ProdutosControl
 {
-    private static readonly Lazy<ProdutosFacade> instance = new Lazy<ProdutosFacade>(() => new ProdutosFacade());
+    private static readonly Lazy<ProdutosControl> instance = new Lazy<ProdutosControl>(() => new ProdutosControl());
 
     private ProdutosDAO oProdutosDAO { get; set; }
 
-    private ProdutosFacade()
+    private ProdutosControl()
     {
         oProdutosDAO = new ProdutosDAO();
     }
 
-    public static ProdutosFacade Instance => instance.Value;
+    public static ProdutosControl Instance => instance.Value;
 
     public List<Produtos> ObterTodosProdutos()
     {

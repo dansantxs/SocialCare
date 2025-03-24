@@ -1,21 +1,21 @@
 ﻿using SocialCare.DATA.Models;
 using SocialCare.WEB.Models;
 
-public class PessoasFacade
+public class PessoasControl
 {
-    private static readonly Lazy<PessoasFacade> instance = new Lazy<PessoasFacade>(() => new PessoasFacade());
+    private static readonly Lazy<PessoasControl> instance = new Lazy<PessoasControl>(() => new PessoasControl());
     private PessoasDAO oPessoasDAO { get; set; }
     private PessoasFisicasDAO oPessoasFisicasDAO { get; set; }
     private PessoasJuridicasDAO oPessoasJuridicasDAO { get; set; }
 
-    private PessoasFacade()
+    private PessoasControl()
     {
         oPessoasDAO = new PessoasDAO();
         oPessoasFisicasDAO = new PessoasFisicasDAO();
         oPessoasJuridicasDAO = new PessoasJuridicasDAO();
     }
 
-    public static PessoasFacade Instance => instance.Value;
+    public static PessoasControl Instance => instance.Value;
 
     public List<Pessoas> ObterTodasPessoas()
     {

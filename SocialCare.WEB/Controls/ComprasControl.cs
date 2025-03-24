@@ -1,9 +1,9 @@
 ﻿using SocialCare.DATA.Models;
 using SocialCare.WEB.Models;
 
-public class ComprasFacade
+public class ComprasControl
 {
-    private static readonly Lazy<ComprasFacade> instance = new Lazy<ComprasFacade>(() => new ComprasFacade());
+    private static readonly Lazy<ComprasControl> instance = new Lazy<ComprasControl>(() => new ComprasControl());
 
     private ComprasDAO oComprasDAO { get; set; }
     private ItensCompraDAO oItensCompraDAO { get; set; }
@@ -11,7 +11,7 @@ public class ComprasFacade
     private ProdutosDAO oProdutosDAO { get; set; }
     private ContasPagarDAO oContasPagarDAO { get; set; }
 
-    private ComprasFacade()
+    private ComprasControl()
     {
         oComprasDAO = new ComprasDAO();
         oItensCompraDAO = new ItensCompraDAO();
@@ -20,7 +20,7 @@ public class ComprasFacade
         oContasPagarDAO = new ContasPagarDAO();
     }
 
-    public static ComprasFacade Instance => instance.Value;
+    public static ComprasControl Instance => instance.Value;
 
     public List<ComprasViewModel> ObterTodasCompras()
     {

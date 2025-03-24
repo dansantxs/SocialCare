@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
 using System.Data;
-using Microsoft.Data.SqlClient;
 
 public class DBConnection : IDisposable
 {
     private SqlConnection _connection;
+    private SqlTransaction _transaction;
     private string _connectionString = "Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True";
 
-    public SqlConnection Connection { get; internal set; }
+    public SqlConnection Connection { get; set; }
 
     public DBConnection()
-    {        
+    {
         _connection = new SqlConnection(_connectionString);
     }
 
@@ -30,20 +30,36 @@ public class DBConnection : IDisposable
         }
     }
 
+    public void BeginTransaction()
+    {
+        Open();
+        _transaction = _connection.BeginTransaction();
+    }
+
+    public void Commit()
+    {
+        _transaction?.Commit();
+        _transaction = null;
+    }
+
+    public void Rollback()
+    {
+        _transaction?.Rollback();
+        _transaction = null;
+    }
+
     public int ExecuteCommand(string commandText)
     {
-        using (SqlCommand command = new SqlCommand(commandText, _connection))
+        using (SqlCommand command = new SqlCommand(commandText, _connection, _transaction))
         {
-            Open();
             return command.ExecuteNonQuery();
         }
     }
 
     public DataTable ExecuteQuery(string query)
     {
-        using (SqlCommand command = new SqlCommand(query, _connection))
+        using (SqlCommand command = new SqlCommand(query, _connection, _transaction))
         {
-            Open();
             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
             {
                 DataTable dataTable = new DataTable();
@@ -55,7 +71,7 @@ public class DBConnection : IDisposable
 
     public void Dispose()
     {
-        Close();
+        _transaction?.Dispose();
         _connection.Dispose();
     }
 }

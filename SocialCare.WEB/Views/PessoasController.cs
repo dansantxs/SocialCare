@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.WEB.Models;
 
-namespace SocialCare.WEB.Controllers
+namespace SocialCare.WEB.Views
 {
     public class PessoasController : Controller
     {
-        private readonly PessoasFacade _pessoasFacade;
+        private readonly PessoasControl oPessoasControl;
 
         public PessoasController()
         {
-            _pessoasFacade = PessoasFacade.Instance;
+            oPessoasControl = PessoasControl.Instance;
         }
 
         public IActionResult Index()
         {
-            var oListPessoas = _pessoasFacade.ObterTodasPessoas();
+            var oListPessoas = oPessoasControl.ObterTodasPessoas();
             return View(oListPessoas);
         }
 
@@ -29,7 +29,7 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                _pessoasFacade.CriarPessoa(model);
+                oPessoasControl.CriarPessoa(model);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -38,7 +38,7 @@ namespace SocialCare.WEB.Controllers
 
         public IActionResult Details(int id)
         {
-            var pessoa = _pessoasFacade.ObterPessoaPorId(id);
+            var pessoa = oPessoasControl.ObterPessoaPorId(id);
             if (pessoa == null)
             {
                 return NotFound();
@@ -66,7 +66,7 @@ namespace SocialCare.WEB.Controllers
 
         public IActionResult Edit(int id)
         {
-            var pessoa = _pessoasFacade.ObterPessoaPorId(id);
+            var pessoa = oPessoasControl.ObterPessoaPorId(id);
             if (pessoa == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                _pessoasFacade.EditarPessoa(model);
+                oPessoasControl.EditarPessoa(model);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -108,7 +108,7 @@ namespace SocialCare.WEB.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            _pessoasFacade.ExcluirPessoa(id);
+            oPessoasControl.ExcluirPessoa(id);
             return RedirectToAction("Index");
         }
     }

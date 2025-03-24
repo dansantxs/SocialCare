@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.WEB.Models;
 
-namespace SocialCare.WEB.Controllers
+namespace SocialCare.WEB.Views
 {
     public class ContasPagarController : Controller
     {
-        private readonly ContasPagarFacade oContasPagarFacade;
+        private readonly ContasPagarControl oContasPagarControl;
 
         public ContasPagarController()
         {
-            oContasPagarFacade = ContasPagarFacade.Instance;
+            oContasPagarControl = ContasPagarControl.Instance;
         }
 
         public IActionResult Index()
         {
-            var viewModel = oContasPagarFacade.ObterTodasContasPagar();
+            var viewModel = oContasPagarControl.ObterTodasContasPagar();
             return View(viewModel);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
+            ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
             return View();
         }
 
@@ -30,17 +30,17 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                oContasPagarFacade.CriarContaPagar(model);
+                oContasPagarControl.CriarContaPagar(model);
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
+            ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
             return View(model);
         }
 
         public IActionResult Details(int id)
         {
-            var viewModel = oContasPagarFacade.ObterContaPagarPorId(id);
+            var viewModel = oContasPagarControl.ObterContaPagarPorId(id);
             if (viewModel == null)
             {
                 return NotFound();
@@ -51,13 +51,13 @@ namespace SocialCare.WEB.Controllers
 
         public IActionResult Edit(int id)
         {
-            var viewModel = oContasPagarFacade.ObterContaPagarPorId(id);
+            var viewModel = oContasPagarControl.ObterContaPagarPorId(id);
             if (viewModel == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
+            ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
             return View(viewModel);
         }
 
@@ -67,18 +67,18 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                oContasPagarFacade.EditarContaPagar(model);
+                oContasPagarControl.EditarContaPagar(model);
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Pessoas = oContasPagarFacade.ObterPessoas();
+            ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            oContasPagarFacade.ExcluirContaPagar(id);
+            oContasPagarControl.ExcluirContaPagar(id);
             return RedirectToAction("Index");
         }
     }

@@ -1,30 +1,29 @@
 ﻿using SocialCare.DATA.Models;
-using SocialCare.DATA.Repositories;
 using SocialCare.WEB.Models;
 
-public class ContasPagarFacade
+public class ContasPagarControl
 {
-    private static readonly Lazy<ContasPagarFacade> instance = new Lazy<ContasPagarFacade>(() => new ContasPagarFacade());
+    private static readonly Lazy<ContasPagarControl> instance = new Lazy<ContasPagarControl>(() => new ContasPagarControl());
 
-    private RepositoryContasPagar oRepositoryContasPagar { get; set; }
-    private RepositoryPessoas oRepositoryPessoas { get; set; }
+    private ContasPagarDAO oContasPagarDAO { get; set; }
+    private PessoasDAO oPessoasDAO { get; set; }
 
-    private ContasPagarFacade()
+    private ContasPagarControl()
     {
-        oRepositoryContasPagar = new RepositoryContasPagar();
-        oRepositoryPessoas = new RepositoryPessoas();
+        oContasPagarDAO = new ContasPagarDAO();
+        oPessoasDAO = new PessoasDAO();
     }
 
-    public static ContasPagarFacade Instance => instance.Value;
+    public static ContasPagarControl Instance => instance.Value;
 
     public List<ContasPagarViewModel> ObterTodasContasPagar()
     {
-        var contasPagar = oRepositoryContasPagar.SelecionarTodos();
+        var contasPagar = oContasPagarDAO.SelecionarTodos();
         return contasPagar.Select(cp => new ContasPagarViewModel
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oRepositoryPessoas.SelecionarPorId(cp.IdPessoa).Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa).Nome,
             Data = cp.Data,
             Valor = cp.Valor,
             DataVencimento = cp.DataVencimento,
@@ -34,13 +33,13 @@ public class ContasPagarFacade
 
     public ContasPagarViewModel ObterContaPagarPorId(int id)
     {
-        var contaPagar = oRepositoryContasPagar.SelecionarPorId(id);
+        var contaPagar = oContasPagarDAO.SelecionarPorId(id);
 
         return new ContasPagarViewModel
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oRepositoryPessoas.SelecionarPorId(contaPagar.IdPessoa).Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa).Nome,
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -50,13 +49,13 @@ public class ContasPagarFacade
 
     public ContasPagarViewModel ObterContaPagarPorCompraId(int id)
     {
-        var contaPagar = oRepositoryContasPagar.SelecionarPorIdCompra(id);
+        var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(id);
 
         return new ContasPagarViewModel
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oRepositoryPessoas.SelecionarPorId(contaPagar.IdPessoa).Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa).Nome,
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -76,7 +75,7 @@ public class ContasPagarFacade
             DataPagamento = model.DataPagamento
         };
 
-        oRepositoryContasPagar.Incluir(contaPagar);
+        oContasPagarDAO.Incluir(contaPagar);
     }
 
     public void EditarContaPagar(ContasPagarViewModel model)
@@ -92,16 +91,16 @@ public class ContasPagarFacade
             DataPagamento = model.DataPagamento
         };
 
-        oRepositoryContasPagar.Alterar(contaPagar);
+        oContasPagarDAO.Alterar(contaPagar);
     }
 
     public void ExcluirContaPagar(int id)
     {
-        oRepositoryContasPagar.Excluir(id);
+        oContasPagarDAO.Excluir(id);
     }
 
     public List<Pessoas> ObterPessoas()
     {
-        return oRepositoryPessoas.SelecionarTodos();
+        return oPessoasDAO.SelecionarTodos();
     }
 }

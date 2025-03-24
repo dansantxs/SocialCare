@@ -1,36 +1,35 @@
 ﻿using SocialCare.DATA.Models;
-using SocialCare.DATA.Repositories;
 using SocialCare.WEB.Models;
 
-public class PessoasFacade
+public class PessoasControl
 {
-    private static readonly Lazy<PessoasFacade> instance = new Lazy<PessoasFacade>(() => new PessoasFacade());
-    private RepositoryPessoas oRepositoryPessoas { get; set; }
-    private RepositoryPessoasFisicas oRepositoryPessoasFisicas { get; set; }
-    private RepositoryPessoasJuridicas oRepositoryPessoasJuridicas { get; set; }
+    private static readonly Lazy<PessoasControl> instance = new Lazy<PessoasControl>(() => new PessoasControl());
+    private PessoasDAO oPessoasDAO { get; set; }
+    private PessoasFisicasDAO oPessoasFisicasDAO { get; set; }
+    private PessoasJuridicasDAO oPessoasJuridicasDAO { get; set; }
 
-    private PessoasFacade()
+    private PessoasControl()
     {
-        oRepositoryPessoas = new RepositoryPessoas();
-        oRepositoryPessoasFisicas = new RepositoryPessoasFisicas();
-        oRepositoryPessoasJuridicas = new RepositoryPessoasJuridicas();
+        oPessoasDAO = new PessoasDAO();
+        oPessoasFisicasDAO = new PessoasFisicasDAO();
+        oPessoasJuridicasDAO = new PessoasJuridicasDAO();
     }
 
-    public static PessoasFacade Instance => instance.Value;
+    public static PessoasControl Instance => instance.Value;
 
     public List<Pessoas> ObterTodasPessoas()
     {
-        var pessoas = oRepositoryPessoas.SelecionarTodos();
+        var pessoas = oPessoasDAO.SelecionarTodos();
 
         foreach (var pessoa in pessoas)
         {
             if (pessoa.Tipo == "F")
             {
-                pessoa.PessoasFisicas = oRepositoryPessoasFisicas.SelecionarPorId(pessoa.Id);
+                pessoa.PessoasFisicas = oPessoasFisicasDAO.SelecionarPorId(pessoa.Id);
             }
             else if (pessoa.Tipo == "J")
             {
-                pessoa.PessoasJuridicas = oRepositoryPessoasJuridicas.SelecionarPorId(pessoa.Id);
+                pessoa.PessoasJuridicas = oPessoasJuridicasDAO.SelecionarPorId(pessoa.Id);
             }
         }
 
@@ -39,14 +38,14 @@ public class PessoasFacade
 
     public Pessoas ObterPessoaPorId(int id)
     {
-        var pessoa = oRepositoryPessoas.SelecionarPorId(id);
+        var pessoa = oPessoasDAO.SelecionarPorId(id);
         if (pessoa.Tipo == "F")
         {
-            pessoa.PessoasFisicas = oRepositoryPessoasFisicas.SelecionarPorId(pessoa.Id);
+            pessoa.PessoasFisicas = oPessoasFisicasDAO.SelecionarPorId(pessoa.Id);
         }
         else if (pessoa.Tipo == "J")
         {
-            pessoa.PessoasJuridicas = oRepositoryPessoasJuridicas.SelecionarPorId(pessoa.Id);
+            pessoa.PessoasJuridicas = oPessoasJuridicasDAO.SelecionarPorId(pessoa.Id);
         }
 
         return pessoa;
@@ -74,7 +73,7 @@ public class PessoasFacade
                 DataNascimento = model.DataNascimento.Value,
                 IdNavigation = pessoa
             };
-            oRepositoryPessoasFisicas.Incluir(pessoaFisica);
+            oPessoasFisicasDAO.Incluir(pessoaFisica);
         }
         else if (model.Tipo == "J")
         {
@@ -84,13 +83,13 @@ public class PessoasFacade
                 RazaoSocial = model.RazaoSocial,
                 IdNavigation = pessoa
             };
-            oRepositoryPessoasJuridicas.Incluir(pessoaJuridica);
+            oPessoasJuridicasDAO.Incluir(pessoaJuridica);
         }
     }
 
     public void EditarPessoa(PessoasViewModel model)
     {
-        var pessoa = oRepositoryPessoas.SelecionarPorId(model.Id);
+        var pessoa = oPessoasDAO.SelecionarPorId(model.Id);
 
         pessoa.Nome = model.Nome;
         pessoa.Cidade = model.Cidade;
@@ -103,43 +102,43 @@ public class PessoasFacade
 
         if (model.Tipo == "F")
         {
-            var pessoaFisica = oRepositoryPessoasFisicas.SelecionarPorId(model.Id);
+            var pessoaFisica = oPessoasFisicasDAO.SelecionarPorId(model.Id);
             if (pessoaFisica != null)
             {
                 pessoaFisica.Cpf = model.Cpf;
                 pessoaFisica.DataNascimento = model.DataNascimento.Value;
-                oRepositoryPessoasFisicas.Alterar(pessoaFisica);
+                oPessoasFisicasDAO.Alterar(pessoaFisica);
             }
         }
         else if (model.Tipo == "J")
         {
-            var pessoaJuridica = oRepositoryPessoasJuridicas.SelecionarPorId(model.Id);
+            var pessoaJuridica = oPessoasJuridicasDAO.SelecionarPorId(model.Id);
             if (pessoaJuridica != null)
             {
                 pessoaJuridica.Cnpj = model.Cnpj;
                 pessoaJuridica.RazaoSocial = model.RazaoSocial;
-                oRepositoryPessoasJuridicas.Alterar(pessoaJuridica);
+                oPessoasJuridicasDAO.Alterar(pessoaJuridica);
             }
         }
 
-        oRepositoryPessoas.Alterar(pessoa);
+        oPessoasDAO.Alterar(pessoa);
     }
 
     public void ExcluirPessoa(int id)
     {
-        var pessoa = oRepositoryPessoas.SelecionarPorId(id);
+        var pessoa = oPessoasDAO.SelecionarPorId(id);
         if (pessoa != null)
         {
             if (pessoa.Tipo == "F")
             {
-                oRepositoryPessoasFisicas.Excluir(pessoa.Id);
+                oPessoasFisicasDAO.Excluir(pessoa.Id);
             }
             else if (pessoa.Tipo == "J")
             {
-                oRepositoryPessoasJuridicas.Excluir(pessoa.Id);
+                oPessoasJuridicasDAO.Excluir(pessoa.Id);
             }
 
-            oRepositoryPessoas.Excluir(id);
+            oPessoasDAO.Excluir(id);
         }
     }
 }

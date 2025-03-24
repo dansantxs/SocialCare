@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SocialCare.WEB.Models;
 
-namespace SocialCare.WEB.Controllers;
+namespace SocialCare.WEB.Views;
 
 public class HomeController : Controller
 {

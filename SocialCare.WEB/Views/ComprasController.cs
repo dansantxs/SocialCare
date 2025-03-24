@@ -1,27 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.WEB.Models;
 
-namespace SocialCare.WEB.Controllers
+namespace SocialCare.WEB.Views
 {
     public class ComprasController : Controller
     {
-        private readonly ComprasFacade oComprasFacade;
+        private readonly ComprasControl oComprasControl;
 
         public ComprasController()
         {
-            oComprasFacade = ComprasFacade.Instance;
+            oComprasControl = ComprasControl.Instance;
         }
 
         public IActionResult Index()
         {
-            var viewModel = oComprasFacade.ObterTodasCompras();
+            var viewModel = oComprasControl.ObterTodasCompras();
             return View(viewModel);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Pessoas = oComprasFacade.ObterPessoas();
-            ViewBag.Produtos = oComprasFacade.ObterProdutos();
+            ViewBag.Pessoas = oComprasControl.ObterPessoas();
+            ViewBag.Produtos = oComprasControl.ObterProdutos();
             return View();
         }
 
@@ -30,26 +30,26 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                oComprasFacade.CriarCompra(model);
+                oComprasControl.CriarCompra(model);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Pessoas = oComprasFacade.ObterPessoas();
-            ViewBag.Produtos = oComprasFacade.ObterProdutos();
+            ViewBag.Pessoas = oComprasControl.ObterPessoas();
+            ViewBag.Produtos = oComprasControl.ObterProdutos();
             return View(model);
         }
 
         public IActionResult Details(int id)
         {
-            var detalhesViewModel = oComprasFacade.ObterCompraPorId(id);
+            var detalhesViewModel = oComprasControl.ObterCompraPorId(id);
             return View(detalhesViewModel);
         }
 
         public IActionResult Edit(int id)
         {
-            var editViewModel = oComprasFacade.ObterCompraPorId(id);
-            ViewBag.Pessoas = oComprasFacade.ObterPessoas();
-            ViewBag.Produtos = oComprasFacade.ObterProdutos();
+            var editViewModel = oComprasControl.ObterCompraPorId(id);
+            ViewBag.Pessoas = oComprasControl.ObterPessoas();
+            ViewBag.Produtos = oComprasControl.ObterProdutos();
             return View(editViewModel);
         }
 
@@ -58,19 +58,19 @@ namespace SocialCare.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                oComprasFacade.EditarCompra(model);
+                oComprasControl.EditarCompra(model);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Pessoas = oComprasFacade.ObterPessoas();
-            ViewBag.Produtos = oComprasFacade.ObterProdutos();
+            ViewBag.Pessoas = oComprasControl.ObterPessoas();
+            ViewBag.Produtos = oComprasControl.ObterProdutos();
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            oComprasFacade.ExcluirCompra(id);
+            oComprasControl.ExcluirCompra(id);
             return RedirectToAction("Index");
         }
     }

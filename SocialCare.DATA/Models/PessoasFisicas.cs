@@ -8,7 +8,7 @@ namespace SocialCare.DATA.Models;
 
 [Table("Pessoas_Fisicas")]
 [Index("Cpf", Name = "UQ__Pessoas___D836E71F7887A65C", IsUnique = true)]
-public partial class PessoasFisicas
+public class PessoasFisicas
 {
     [Key]
     [Column("id")]

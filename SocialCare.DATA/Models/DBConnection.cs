@@ -52,7 +52,14 @@ public class DBConnection : IDisposable
     {
         using (SqlCommand command = new SqlCommand(commandText, _connection, _transaction))
         {
-            return command.ExecuteNonQuery();
+            if (commandText.TrimStart().StartsWith("SELECT", StringComparison.OrdinalIgnoreCase))
+            {
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+            else
+            {
+                return command.ExecuteNonQuery();
+            }
         }
     }
 

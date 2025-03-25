@@ -8,7 +8,7 @@ namespace SocialCare.DATA.Models;
 
 [Table("Pessoas_Juridicas")]
 [Index("Cnpj", Name = "UQ__Pessoas___35BD3E48DAFA6CC0", IsUnique = true)]
-public partial class PessoasJuridicas
+public class PessoasJuridicas
 {
     [Key]
     [Column("id")]

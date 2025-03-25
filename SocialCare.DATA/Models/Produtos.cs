@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SocialCare.DATA.Models;
 
-public partial class Produtos
+public class Produtos
 {
     [Key]
     [Column("id")]

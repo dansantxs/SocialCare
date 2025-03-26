@@ -23,7 +23,7 @@ public class ContasPagarControl
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa).Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome ?? "Desconhecido",
             Data = cp.Data,
             Valor = cp.Valor,
             DataVencimento = cp.DataVencimento,
@@ -34,12 +34,13 @@ public class ContasPagarControl
     public ContasPagarViewModel ObterContaPagarPorId(int id)
     {
         var contaPagar = oContasPagarDAO.SelecionarPorId(id);
+        if (contaPagar == null) return null;
 
         return new ContasPagarViewModel
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa).Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -50,12 +51,13 @@ public class ContasPagarControl
     public ContasPagarViewModel ObterContaPagarPorCompraId(int id)
     {
         var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(id);
+        if (contaPagar == null) return null;
 
         return new ContasPagarViewModel
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa).Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,

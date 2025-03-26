@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\contaspagardao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\contaspagardao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controls\\contaspagarcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controls\\contaspagarcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\contaspagar\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\contaspagar\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\models\\itenscompraviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\models\\itenscompraviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,14 +35,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ContasPagarDAO.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
+              "RelativeToolTip": "SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAIwD4AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T07:54:17.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ContasPagarControl.cs",
               "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ContasPagarControl.cs",
               "RelativeDocumentMoniker": "SocialCare.WEB\\Controls\\ContasPagarControl.cs",
               "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ContasPagarControl.cs",
               "RelativeToolTip": "SocialCare.WEB\\Controls\\ContasPagarControl.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T08:55:17.684Z",
+              "WhenOpened": "2025-03-26T07:53:58.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
+              "RelativeToolTip": "SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAD0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-26T07:51:59.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ItensCompraViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T07:51:32.911Z",
               "EditorCaption": ""
             }
           ]

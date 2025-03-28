@@ -1,12 +1,14 @@
 ﻿using SocialCare.DATA.Models;
 using SocialCare.WEB.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ComprasControl
 {
     private static readonly Lazy<ComprasControl> instance = new Lazy<ComprasControl>(() => new ComprasControl());
 
     private ComprasDAO oComprasDAO { get; set; }
-    private ItensCompraDAO oItensCompraDAO { get; set; }
     private PessoasDAO oPessoasDAO { get; set; }
     private ProdutosDAO oProdutosDAO { get; set; }
     private ContasPagarDAO oContasPagarDAO { get; set; }
@@ -14,7 +16,6 @@ public class ComprasControl
     private ComprasControl()
     {
         oComprasDAO = new ComprasDAO();
-        oItensCompraDAO = new ItensCompraDAO();
         oPessoasDAO = new PessoasDAO();
         oProdutosDAO = new ProdutosDAO();
         oContasPagarDAO = new ContasPagarDAO();
@@ -25,29 +26,28 @@ public class ComprasControl
     public List<ComprasViewModel> ObterTodasCompras()
     {
         var compras = oComprasDAO.SelecionarTodos();
-        return compras.Select(cp => new ComprasViewModel
+        return compras.Select(c => new ComprasViewModel
         {
-            Id = cp.Id,
-            IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome,
-            DataCompra = cp.DataCompra,
-            Total = cp.Total
+            Id = c.Id,
+            IdPessoa = c.IdPessoa,
+            NomePessoa = oPessoasDAO.SelecionarPorId(c.IdPessoa)?.Nome ?? "Desconhecido",
+            DataCompra = c.DataCompra,
+            Total = c.Total
         }).ToList();
     }
 
     public ComprasViewModel ObterCompraPorId(int id)
     {
         var compra = oComprasDAO.SelecionarPorId(id);
-        var pessoa = oPessoasDAO.SelecionarPorId(compra.IdPessoa);
-        var itensCompra = oItensCompraDAO.SelecionarTodos()
-            .Where(i => i.IdCompra == compra.Id)
-            .ToList();
+        if (compra == null) return null;
+
+        var itensCompra = oComprasDAO.SelecionarItensPorCompraId(compra.Id);
 
         return new ComprasViewModel
         {
             Id = compra.Id,
             IdPessoa = compra.IdPessoa,
-            NomePessoa = pessoa?.Nome,
+            NomePessoa = oPessoasDAO.SelecionarPorId(compra.IdPessoa)?.Nome ?? "Desconhecido",
             DataCompra = compra.DataCompra,
             Total = compra.Total,
             Itens = itensCompra.Select(i => new ItensCompraViewModel
@@ -55,7 +55,7 @@ public class ComprasControl
                 IdProduto = i.IdProduto,
                 Quantidade = i.Quantidade,
                 PrecoUnitario = i.PrecoUnitario,
-                NomeProduto = oProdutosDAO.SelecionarPorId(i.IdProduto)?.Nome
+                NomeProduto = oProdutosDAO.SelecionarPorId(i.IdProduto)?.Nome ?? "Desconhecido"
             }).ToList()
         };
     }
@@ -66,34 +66,17 @@ public class ComprasControl
         {
             IdPessoa = model.IdPessoa,
             DataCompra = model.DataCompra,
-            Total = 0
+            Total = model.Itens.Sum(i => i.PrecoUnitario * i.Quantidade),
+            ItensCompra = model.Itens.Select(i => new ItensCompra
+            {
+                IdProduto = i.IdProduto,
+                Quantidade = i.Quantidade,
+                PrecoUnitario = i.PrecoUnitario,
+                Subtotal = i.PrecoUnitario * i.Quantidade
+            }).ToList()
         };
 
-        var groupedItems = model.Itens
-            .GroupBy(i => i.IdProduto)
-            .Select(g => new ItensCompraViewModel
-            {
-                IdProduto = g.Key,
-                Quantidade = g.Sum(i => i.Quantidade),
-                PrecoUnitario = g.First().PrecoUnitario
-            }).ToList();
-
-        compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
         oComprasDAO.Incluir(compra);
-
-        foreach (var item in groupedItems)
-        {
-            var itensCompra = new ItensCompra
-            {
-                IdCompra = compra.Id,
-                IdProduto = item.IdProduto,
-                Quantidade = item.Quantidade,
-                PrecoUnitario = item.PrecoUnitario,
-                Subtotal = item.PrecoUnitario * item.Quantidade
-            };
-
-            oItensCompraDAO.Incluir(itensCompra);
-        }
 
         var contaPagar = new ContasPagar
         {
@@ -110,43 +93,20 @@ public class ComprasControl
     public void EditarCompra(ComprasViewModel model)
     {
         var compra = oComprasDAO.SelecionarPorId(model.Id);
+        if (compra == null) throw new Exception("Compra não encontrada.");
+
         compra.IdPessoa = model.IdPessoa;
         compra.DataCompra = model.DataCompra;
+        compra.Total = model.Itens.Sum(i => i.PrecoUnitario * i.Quantidade);
+        compra.ItensCompra = model.Itens.Select(i => new ItensCompra
+        {
+            IdProduto = i.IdProduto,
+            Quantidade = i.Quantidade,
+            PrecoUnitario = i.PrecoUnitario,
+            Subtotal = i.PrecoUnitario * i.Quantidade
+        }).ToList();
 
-        var groupedItems = model.Itens
-            .GroupBy(i => i.IdProduto)
-            .Select(g => new ItensCompraViewModel
-            {
-                IdProduto = g.Key,
-                Quantidade = g.Sum(i => i.Quantidade),
-                PrecoUnitario = g.First().PrecoUnitario
-            }).ToList();
-
-        compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
         oComprasDAO.Alterar(compra);
-
-        var itensAntigos = oItensCompraDAO.SelecionarTodos()
-            .Where(i => i.IdCompra == compra.Id)
-            .ToList();
-
-        foreach (var item in itensAntigos)
-        {
-            oItensCompraDAO.Excluir(item.Id);
-        }
-
-        foreach (var item in groupedItems)
-        {
-            var itensCompra = new ItensCompra
-            {
-                IdCompra = compra.Id,
-                IdProduto = item.IdProduto,
-                Quantidade = item.Quantidade,
-                PrecoUnitario = item.PrecoUnitario,
-                Subtotal = item.PrecoUnitario * item.Quantidade
-            };
-
-            oItensCompraDAO.Incluir(itensCompra);
-        }
 
         var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(compra.Id);
         if (contaPagar != null)
@@ -159,14 +119,7 @@ public class ComprasControl
     public void ExcluirCompra(int id)
     {
         var compra = oComprasDAO.SelecionarPorId(id);
-        var itensCompra = oItensCompraDAO.SelecionarTodos()
-            .Where(i => i.IdCompra == compra.Id)
-            .ToList();
-
-        foreach (var item in itensCompra)
-        {
-            oItensCompraDAO.Excluir(item.Id);
-        }
+        if (compra == null) throw new Exception("Compra não encontrada.");
 
         var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(compra.Id);
         if (contaPagar != null)

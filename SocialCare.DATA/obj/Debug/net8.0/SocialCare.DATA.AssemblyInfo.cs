@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SocialCare.DATA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ebe20e562151fda4a586de59f888e44ee1e4756")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44cc5cb5a83cc56f0733c7e0d7b01bcab569901c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SocialCare.DATA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SocialCare.DATA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

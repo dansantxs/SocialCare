@@ -1,40 +1,83 @@
 ﻿using SocialCare.DATA.Models;
+using System;
+using System.Collections.Generic;
 
-public class ProdutosControl
+public class ProdutosControl : IDisposable
 {
     private static readonly Lazy<ProdutosControl> instance = new Lazy<ProdutosControl>(() => new ProdutosControl());
 
-    private ProdutosDAO oProdutosDAO { get; set; }
+    private DBConnection _dbConnection;
 
     private ProdutosControl()
     {
-        oProdutosDAO = new ProdutosDAO();
+        _dbConnection = new DBConnection();
     }
 
     public static ProdutosControl Instance => instance.Value;
 
     public List<Produtos> ObterTodosProdutos()
     {
-        return oProdutosDAO.SelecionarTodos();
+        Produtos produtos = new Produtos();
+        return produtos.SelecionarTodos(_dbConnection);
     }
 
     public Produtos ObterProdutosPorId(int id)
     {
-        return oProdutosDAO.SelecionarPorId(id);
+        Produtos produtos = new Produtos();
+        return produtos.SelecionarPorId(id, _dbConnection);
     }
 
-    public void CriarProdutos(Produtos model)
+    public void CriarProdutos(Produtos produto)
     {
-        oProdutosDAO.Incluir(model);
+        try
+        {
+            _dbConnection.BeginTransaction();
+            produto.Incluir(_dbConnection);
+            _dbConnection.Commit();
+        }
+        catch
+        {
+            _dbConnection.Rollback();
+            throw;
+        }
     }
 
-    public void EditarProdutos(Produtos model)
+    public void EditarProdutos(Produtos produto)
     {
-        oProdutosDAO.Alterar(model);
+        try
+        {
+            _dbConnection.BeginTransaction();
+            produto.Alterar(_dbConnection);
+            _dbConnection.Commit();
+        }
+        catch
+        {
+            _dbConnection.Rollback();
+            throw;
+        }
     }
 
     public void ExcluirProdutos(int id)
     {
-        oProdutosDAO.Excluir(id);
+        try
+        {
+            _dbConnection.BeginTransaction();
+            Produtos produto = ObterProdutosPorId(id);
+            if (produto != null)
+            {
+                produto.Excluir(_dbConnection);
+            }
+            _dbConnection.Commit();
+        }
+        catch
+        {
+            _dbConnection.Rollback();
+            throw;
+        }
+    }
+
+    public void Dispose()
+    {
+        _dbConnection.Dispose();
     }
 }

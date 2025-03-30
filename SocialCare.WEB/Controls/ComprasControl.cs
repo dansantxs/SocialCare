@@ -16,7 +16,7 @@ public class ComprasControl
         oComprasDAO = new ComprasDAO();
         oItensCompraDAO = new ItensCompraDAO();
         oPessoasDAO = new PessoasDAO();
-        oProdutosDAO = new ProdutosDAO();
+        //oProdutosDAO = new ProdutosDAO();
         oContasPagarDAO = new ContasPagarDAO();
     }
 
@@ -55,7 +55,7 @@ public class ComprasControl
                 IdProduto = i.IdProduto,
                 Quantidade = i.Quantidade,
                 PrecoUnitario = i.PrecoUnitario,
-                NomeProduto = oProdutosDAO.SelecionarPorId(i.IdProduto)?.Nome
+                NomeProduto = ""//oProdutosDAO.SelecionarPorId(i.IdProduto)?.Nome
             }).ToList()
         };
     }
@@ -184,6 +184,7 @@ public class ComprasControl
 
     public List<Produtos> ObterProdutos()
     {
-        return oProdutosDAO.SelecionarTodos();
+        throw new NotImplementedException();
+        //return oProdutosDAO.SelecionarTodos();
     }
 }

@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\SocialCare\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\contaspagardao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\contaspagardao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\models\\produtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\models\\produtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controls\\contaspagarcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controls\\contaspagarcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\produtosdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\produtosdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\views\\contaspagar\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\views\\contaspagar\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controls\\comprascontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controls\\comprascontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\models\\itenscompraviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\models\\itenscompraviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\pessoasdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\pessoasdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.data\\daos\\itenscompradao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC4A4AE2-4D71-43D9-9B4D-8C1E31213969}|SocialCare.DATA\\SocialCare.DATA.csproj|solutionrelative:socialcare.data\\daos\\itenscompradao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|c:\\users\\danie\\source\\repos\\socialcare\\socialcare.web\\controls\\produtoscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D0979D8-173E-443B-9E4D-FA0E0AFECC5F}|SocialCare.WEB\\SocialCare.WEB.csproj|solutionrelative:socialcare.web\\controls\\produtoscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,54 +42,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ContasPagarDAO.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
-              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
-              "RelativeToolTip": "SocialCare.DATA\\DAOs\\ContasPagarDAO.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAIwEIAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T07:54:17.289Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ContasPagarControl.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ContasPagarControl.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Controls\\ContasPagarControl.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ContasPagarControl.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Controls\\ContasPagarControl.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T07:53:58.754Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
-              "RelativeToolTip": "SocialCare.WEB\\Views\\ContasPagar\\Create.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAD0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T07:51:59.665Z",
+              "Title": "ComprasControl.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ComprasControl.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Controls\\ComprasControl.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ComprasControl.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Controls\\ComprasControl.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wDAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T14:05:29.418Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ItensCompraDAO.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ItensCompraDAO.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\ItensCompraDAO.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ItensCompraDAO.cs",
+              "RelativeToolTip": "SocialCare.DATA\\DAOs\\ItensCompraDAO.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T14:01:51.182Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ItensCompraViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
-              "RelativeDocumentMoniker": "SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
-              "RelativeToolTip": "SocialCare.WEB\\Models\\ItensCompraViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Title": "PessoasDAO.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\PessoasDAO.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\PessoasDAO.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\PessoasDAO.cs",
+              "RelativeToolTip": "SocialCare.DATA\\DAOs\\PessoasDAO.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAmwGwAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T07:51:32.911Z",
+              "WhenOpened": "2025-03-30T13:40:44.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProdutosControl.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ProdutosControl.cs",
+              "RelativeDocumentMoniker": "SocialCare.WEB\\Controls\\ProdutosControl.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.WEB\\Controls\\ProdutosControl.cs",
+              "RelativeToolTip": "SocialCare.WEB\\Controls\\ProdutosControl.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T13:10:46.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Produtos.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Models\\Produtos.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\Models\\Produtos.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\Models\\Produtos.cs",
+              "RelativeToolTip": "SocialCare.DATA\\Models\\Produtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T13:09:51.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProdutosDAO.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "RelativeDocumentMoniker": "SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\SocialCare\\SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "RelativeToolTip": "SocialCare.DATA\\DAOs\\ProdutosDAO.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwC8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T13:10:27.89Z",
               "EditorCaption": ""
             }
           ]

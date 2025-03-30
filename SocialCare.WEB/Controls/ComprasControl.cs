@@ -29,7 +29,7 @@ public class ComprasControl
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome,
+            //NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome,
             DataCompra = cp.DataCompra,
             Total = cp.Total
         }).ToList();
@@ -38,7 +38,7 @@ public class ComprasControl
     public ComprasViewModel ObterCompraPorId(int id)
     {
         var compra = oComprasDAO.SelecionarPorId(id);
-        var pessoa = oPessoasDAO.SelecionarPorId(compra.IdPessoa);
+        //var pessoa = oPessoasDAO.SelecionarPorId(compra.IdPessoa);
         var itensCompra = oItensCompraDAO.SelecionarTodos()
             .Where(i => i.IdCompra == compra.Id)
             .ToList();
@@ -47,7 +47,7 @@ public class ComprasControl
         {
             Id = compra.Id,
             IdPessoa = compra.IdPessoa,
-            NomePessoa = pessoa?.Nome,
+            //NomePessoa = pessoa?.Nome,
             DataCompra = compra.DataCompra,
             Total = compra.Total,
             Itens = itensCompra.Select(i => new ItensCompraViewModel
@@ -179,7 +179,8 @@ public class ComprasControl
 
     public List<Pessoas> ObterPessoas()
     {
-        return oPessoasDAO.SelecionarTodos();
+        throw new NotImplementedException();
+        //return oPessoasDAO.SelecionarTodos();
     }
 
     public List<Produtos> ObterProdutos()

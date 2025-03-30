@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace SocialCare.DATA.Models;
 
@@ -29,4 +30,28 @@ public class PessoasJuridicas
     [ForeignKey("Id")]
     [InverseProperty("PessoasJuridicas")]
     public virtual Pessoas IdNavigation { get; set; }
+
+    public PessoasJuridicas SelecionarPorId(int id, DBConnection _dbConnection)
+    {
+        PessoasJuridicasDAO dao = new PessoasJuridicasDAO();
+        return dao.SelecionarPorId(id, _dbConnection);
+    }
+
+    public void Incluir(DBConnection _dbConnection)
+    {
+        PessoasJuridicasDAO dao = new PessoasJuridicasDAO();
+        dao.Incluir(this, _dbConnection);
+    }
+
+    public void Alterar(DBConnection _dbConnection)
+    {
+        PessoasJuridicasDAO dao = new PessoasJuridicasDAO();
+        dao.Alterar(this, _dbConnection);
+    }
+
+    public void Excluir(DBConnection _dbConnection)
+    {
+        PessoasJuridicasDAO dao = new PessoasJuridicasDAO();
+        dao.Excluir(this.Id, _dbConnection);
+    }
 }

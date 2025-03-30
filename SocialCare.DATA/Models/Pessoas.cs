@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.Linq;
 
 namespace SocialCare.DATA.Models;
 
@@ -69,4 +71,34 @@ public class Pessoas
 
     [InverseProperty("IdNavigation")]
     public virtual PessoasJuridicas PessoasJuridicas { get; set; }
+
+    public List<Pessoas> SelecionarTodos(DBConnection _dbConnection)
+    {
+        PessoasDAO dao = new PessoasDAO();
+        return dao.SelecionarTodos(_dbConnection);
+    }
+
+    public Pessoas SelecionarPorId(int id, DBConnection _dbConnection)
+    {
+        PessoasDAO dao = new PessoasDAO();
+        return dao.SelecionarPorId(id, _dbConnection);
+    }
+
+    public void Incluir(DBConnection _dbConnection)
+    {
+        PessoasDAO dao = new PessoasDAO();
+        dao.Incluir(this, _dbConnection);
+    }
+
+    public void Alterar(DBConnection _dbConnection)
+    {
+        PessoasDAO dao = new PessoasDAO();
+        dao.Alterar(this, _dbConnection);
+    }
+
+    public void Excluir(DBConnection _dbConnection)
+    {
+        PessoasDAO dao = new PessoasDAO();
+        dao.Excluir(this.Id, _dbConnection);
+    }
 }

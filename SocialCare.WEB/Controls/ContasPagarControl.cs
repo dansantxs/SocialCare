@@ -23,7 +23,7 @@ public class ContasPagarControl
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome ?? "Desconhecido",
+            //NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome ?? "Desconhecido",
             Data = cp.Data,
             Valor = cp.Valor,
             DataVencimento = cp.DataVencimento,
@@ -40,7 +40,7 @@ public class ContasPagarControl
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
+            //NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -57,7 +57,7 @@ public class ContasPagarControl
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
+            //NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -103,6 +103,7 @@ public class ContasPagarControl
 
     public List<Pessoas> ObterPessoas()
     {
-        return oPessoasDAO.SelecionarTodos();
+        throw new NotImplementedException();
+        //return oPessoasDAO.SelecionarTodos();
     }
 }

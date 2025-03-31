@@ -23,18 +23,12 @@ public class PessoasControl : IDisposable
             if (pessoa.Tipo == "F")
             {
                 var pessoaFisica = new PessoasFisicas().SelecionarPorId(pessoa.Id, _dbConnection);
-                if (pessoaFisica != null)
-                {
-                    pessoa.PessoasFisicas = pessoaFisica;
-                }
+                pessoa.PessoasFisicas = pessoaFisica;
             }
             else if (pessoa.Tipo == "J")
             {
                 var pessoaJuridica = new PessoasJuridicas().SelecionarPorId(pessoa.Id, _dbConnection);
-                if (pessoaJuridica != null)
-                {
-                    pessoa.PessoasJuridicas = pessoaJuridica;
-                }
+                pessoa.PessoasJuridicas = pessoaJuridica;
             }
         }
 
@@ -48,18 +42,12 @@ public class PessoasControl : IDisposable
         if (pessoa.Tipo == "F")
         {
             var pessoaFisica = new PessoasFisicas().SelecionarPorId(pessoa.Id, _dbConnection);
-            if (pessoaFisica != null)
-            {
-                pessoa.PessoasFisicas = pessoaFisica;
-            }
+            pessoa.PessoasFisicas = pessoaFisica;
         }
         else if (pessoa.Tipo == "J")
         {
             var pessoaJuridica = new PessoasJuridicas().SelecionarPorId(pessoa.Id, _dbConnection);
-            if (pessoaJuridica != null)
-            {
-                pessoa.PessoasJuridicas = pessoaJuridica;
-            }
+            pessoa.PessoasJuridicas = pessoaJuridica;
         }
 
         return pessoa;

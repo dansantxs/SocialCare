@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using SocialCare.DATA.Models;
 
 public class ItensCompraDAO
@@ -32,7 +29,8 @@ public class ItensCompraDAO
             IdProduto = row.Field<int>("idProduto"),
             Quantidade = row.Field<int>("quantidade"),
             PrecoUnitario = row.Field<decimal>("precoUnitario"),
-            Subtotal = row.Field<decimal?>("subtotal")
+            Subtotal = row.Field<decimal?>("subtotal"),
+            Produto = new Produtos().SelecionarPorId(row.Field<int>("idProduto"), _dbConnection)
         }).ToList();
     }
 

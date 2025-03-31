@@ -21,10 +21,7 @@ public class ContasPagarControl : IDisposable
         foreach (var contaPagar in listaContasPagar)
         {
             var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
-            if (pessoa != null)
-            {
-                contaPagar.Pessoa = pessoa;
-            }
+            contaPagar.Pessoa = pessoa;
         }
 
         return listaContasPagar;
@@ -35,10 +32,7 @@ public class ContasPagarControl : IDisposable
         ContasPagar contaPagar = new ContasPagar().SelecionarPorId(id, _dbConnection);
 
         var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
-        if (pessoa != null)
-        {
-            contaPagar.Pessoa = pessoa;
-        }
+        contaPagar.Pessoa = pessoa;
 
         return contaPagar;
     }
@@ -46,8 +40,6 @@ public class ContasPagarControl : IDisposable
     public ContasPagar ObterContaPagarPorCompraId(int id)
     {
         ContasPagar contaPagar = new ContasPagar().SelecionarPorIdCompra(id, _dbConnection);
-        if (contaPagar == null) return null;
-
         return contaPagar;
     }
 

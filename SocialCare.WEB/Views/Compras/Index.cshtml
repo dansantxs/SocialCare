@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SocialCare.WEB.Models.ComprasViewModel>
+﻿@model IEnumerable<SocialCare.DATA.Models.Compras>
 
 @{
     ViewData["Title"] = "Compras";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.First().Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().NomePessoa)
+                @Html.DisplayNameFor(model => model.First().Pessoa.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().DataCompra)
@@ -35,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomePessoa)
+                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataCompra)
@@ -63,7 +63,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Deseja realmente excluir a compra de @item.NomePessoa?
+                                    Deseja realmente excluir a compra de @item.Pessoa.Nome?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>

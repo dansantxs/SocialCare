@@ -53,11 +53,11 @@ public partial class SocialCareContext : DbContext
         {
             entity.Property(e => e.Subtotal).HasComputedColumnSql("([quantidade]*[precoUnitario])", false);
 
-            entity.HasOne(d => d.IdCompraNavigation).WithMany(p => p.ItensCompra)
+            entity.HasOne(d => d.Compra).WithMany(p => p.ItensCompra)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ItensCompra_Compras");
 
-            entity.HasOne(d => d.IdProdutoNavigation).WithMany(p => p.ItensCompra)
+            entity.HasOne(d => d.Produto).WithMany(p => p.ItensCompra)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ItensCompra_Produtos");
         });

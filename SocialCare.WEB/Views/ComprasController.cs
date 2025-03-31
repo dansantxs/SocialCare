@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialCare.WEB.Models;
+using SocialCare.DATA.Models;
 
 namespace SocialCare.WEB.Views
 {
@@ -26,7 +26,7 @@ namespace SocialCare.WEB.Views
         }
 
         [HttpPost]
-        public IActionResult Create(ComprasViewModel compra)
+        public IActionResult Create(Compras compra)
         {
             oComprasControl.CriarCompra(compra);
             return RedirectToAction("Index");
@@ -47,7 +47,7 @@ namespace SocialCare.WEB.Views
         }
 
         [HttpPost]
-        public IActionResult Edit(ComprasViewModel compra)
+        public IActionResult Edit(Compras compra)
         {
             oComprasControl.EditarCompra(compra);
             return RedirectToAction("Details", new { id = compra.Id });

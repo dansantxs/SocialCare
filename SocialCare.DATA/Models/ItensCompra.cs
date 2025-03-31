@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace SocialCare.DATA.Models;
 
@@ -29,11 +26,11 @@ public partial class ItensCompra
 
     [ForeignKey("IdCompra")]
     [InverseProperty("ItensCompra")]
-    public virtual Compras IdCompraNavigation { get; set; }
+    public virtual Compras Compra { get; set; }
 
     [ForeignKey("IdProduto")]
     [InverseProperty("ItensCompra")]
-    public virtual Produtos IdProdutoNavigation { get; set; }
+    public virtual Produtos Produto { get; set; }
 
     public List<ItensCompra> SelecionarTodos(DBConnection _dbConnection)
     {

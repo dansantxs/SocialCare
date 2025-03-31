@@ -17,72 +17,56 @@ public class ComprasControl : IDisposable
 
     public static ComprasControl Instance => instance.Value;
 
-    public List<ComprasViewModel> ObterTodasCompras()
+    public List<Compras> ObterTodasCompras()
     {
         Compras compras = new Compras();
         List<Compras> listaCompras = compras.SelecionarTodos(_dbConnection);
 
-        return listaCompras.Select(cp => new ComprasViewModel
+        foreach (var compra in listaCompras)
         {
-            Id = cp.Id,
-            IdPessoa = cp.IdPessoa,
-            DataCompra = cp.DataCompra,
-            Total = cp.Total,
-            NomePessoa = new Pessoas().SelecionarPorId(cp.IdPessoa, _dbConnection)?.Nome
-        }).ToList();
+            Pessoas pessoa = new Pessoas().SelecionarPorId(compra.IdPessoa, _dbConnection);
+            compra.Pessoa = pessoa;
+
+            ItensCompra itensCompra = new ItensCompra();
+            List<ItensCompra> listaItensCompra = itensCompra.SelecionarPorIdCompra(compra.Id, _dbConnection);
+            compra.ItensCompra = listaItensCompra;
+        }
+
+        return listaCompras;
     }
 
-    public ComprasViewModel ObterCompraPorId(int id)
+    public Compras ObterCompraPorId(int id)
     {
         Compras compra = new Compras().SelecionarPorId(id, _dbConnection);
         Pessoas pessoa = new Pessoas().SelecionarPorId(compra.IdPessoa, _dbConnection);
+        compra.Pessoa = pessoa;
 
-        ItensCompra itensCompraObj = new ItensCompra();
-        List<ItensCompra> itensCompra = itensCompraObj.SelecionarPorIdCompra(compra.Id, _dbConnection);
+        ItensCompra itensCompra = new ItensCompra();
+        List<ItensCompra> listaItensCompra = itensCompra.SelecionarPorIdCompra(compra.Id, _dbConnection);
+        compra.ItensCompra = listaItensCompra;
 
-        return new ComprasViewModel
-        {
-            Id = compra.Id,
-            IdPessoa = compra.IdPessoa,
-            NomePessoa = pessoa?.Nome,
-            DataCompra = compra.DataCompra,
-            Total = compra.Total,
-            Itens = itensCompra.Select(i => new ItensCompraViewModel
-            {
-                IdProduto = i.IdProduto,
-                Quantidade = i.Quantidade,
-                PrecoUnitario = i.PrecoUnitario,
-                NomeProduto = new Produtos().SelecionarPorId(i.IdProduto, _dbConnection)?.Nome
-            }).ToList()
-        };
+        return compra;
     }
 
-    public void CriarCompra(ComprasViewModel model)
+    public void CriarCompra(Compras compra)
     {
         try
         {
             _dbConnection.BeginTransaction();
 
-            var compra = new Compras
-            {
-                IdPessoa = model.IdPessoa,
-                DataCompra = model.DataCompra,
-                Total = 0
-            };
-
-            var groupedItems = model.Itens
+            var itensAgrupados = compra.ItensCompra
                 .GroupBy(i => i.IdProduto)
-                .Select(g => new ItensCompraViewModel
+                .Select(g => new ItensCompra
                 {
                     IdProduto = g.Key,
                     Quantidade = g.Sum(i => i.Quantidade),
                     PrecoUnitario = g.First().PrecoUnitario
                 }).ToList();
 
-            compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
+            compra.Total = itensAgrupados.Sum(i => i.PrecoUnitario * i.Quantidade);
             compra.Incluir(_dbConnection);
 
-            foreach (var item in groupedItems)
+            foreach (var item in itensAgrupados)
             {
                 var itemCompra = new ItensCompra
                 {
@@ -116,26 +100,25 @@ public class ComprasControl : IDisposable
         }
     }
 
-    public void EditarCompra(ComprasViewModel model)
+    public void EditarCompra(Compras compra)
     {
         try
         {
             _dbConnection.BeginTransaction();
 
-            Compras compra = new Compras().SelecionarPorId(model.Id, _dbConnection);
-            compra.IdPessoa = model.IdPessoa;
-            compra.DataCompra = model.DataCompra;
+            compra.IdPessoa = compra.IdPessoa;
+            compra.DataCompra = compra.DataCompra;
 
-            var groupedItems = model.Itens
+            var itensAgrupados = compra.ItensCompra
                 .GroupBy(i => i.IdProduto)
-                .Select(g => new ItensCompraViewModel
+                .Select(g => new ItensCompra
                 {
                     IdProduto = g.Key,
                     Quantidade = g.Sum(i => i.Quantidade),
                     PrecoUnitario = g.First().PrecoUnitario
                 }).ToList();
 
-            compra.Total = groupedItems.Sum(i => i.PrecoUnitario * i.Quantidade);
+            compra.Total = itensAgrupados.Sum(i => i.PrecoUnitario * i.Quantidade);
             compra.Alterar(_dbConnection);
 
             ItensCompra itensCompraObj = new ItensCompra();
@@ -146,7 +129,7 @@ public class ComprasControl : IDisposable
                 item.Excluir(_dbConnection);
             }
 
-            foreach (var item in groupedItems)
+            foreach (var item in itensAgrupados)
             {
                 var itemCompra = new ItensCompra
                 {

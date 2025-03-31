@@ -1,4 +1,4 @@
-﻿@model SocialCare.WEB.Models.ComprasViewModel
+﻿@model SocialCare.DATA.Models.Compras
 
 @{
     ViewData["Title"] = "Detalhes da Compra";
@@ -9,7 +9,7 @@
 <div>
     <h4>Compra ID: @Model.Id</h4>
     <p><strong>Data da Compra:</strong> @Model.DataCompra.ToString("dd/MM/yyyy")</p>
-    <p><strong>Pessoa:</strong> @Model.NomePessoa</p>
+    <p><strong>Pessoa:</strong> @Model.Pessoa.Nome</p>
     <p><strong>Total:</strong> @Model.Total</p>
 
     <h3>Itens da Compra</h3>
@@ -23,10 +23,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Itens)
+            @foreach (var item in Model.ItensCompra)
             {
                 <tr>
-                    <td>@item.NomeProduto</td>
+                    <td>@item.Produto.Nome</td>
                     <td>@item.Quantidade</td>
                     <td>@item.PrecoUnitario</td>
                     <td>@(item.PrecoUnitario * item.Quantidade)</td>

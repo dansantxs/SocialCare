@@ -1,29 +1,30 @@
 ﻿using SocialCare.DATA.Models;
 using SocialCare.WEB.Models;
 
-public class ContasPagarControl
+public class ContasPagarControl : IDisposable
 {
     private static readonly Lazy<ContasPagarControl> instance = new Lazy<ContasPagarControl>(() => new ContasPagarControl());
 
-    private ContasPagarDAO oContasPagarDAO { get; set; }
-    private PessoasDAO oPessoasDAO { get; set; }
+    private DBConnection _dbConnection;
 
     private ContasPagarControl()
     {
-        oContasPagarDAO = new ContasPagarDAO();
-        oPessoasDAO = new PessoasDAO();
+        _dbConnection = new DBConnection();
     }
 
     public static ContasPagarControl Instance => instance.Value;
 
     public List<ContasPagarViewModel> ObterTodasContasPagar()
     {
-        var contasPagar = oContasPagarDAO.SelecionarTodos();
-        return contasPagar.Select(cp => new ContasPagarViewModel
+        ContasPagar contasPagar = new ContasPagar();
+        List<ContasPagar> listaContasPagar = contasPagar.SelecionarTodos(_dbConnection);
+
+        return listaContasPagar.Select(cp => new ContasPagarViewModel
         {
             Id = cp.Id,
             IdPessoa = cp.IdPessoa,
-            //NomePessoa = oPessoasDAO.SelecionarPorId(cp.IdPessoa)?.Nome ?? "Desconhecido",
+            IdCompra = cp.IdCompra,
+            NomePessoa = PessoasControl.Instance.ObterPessoaPorId(cp.IdPessoa)?.Nome,
             Data = cp.Data,
             Valor = cp.Valor,
             DataVencimento = cp.DataVencimento,
@@ -33,14 +34,15 @@ public class ContasPagarControl
 
     public ContasPagarViewModel ObterContaPagarPorId(int id)
     {
-        var contaPagar = oContasPagarDAO.SelecionarPorId(id);
+        ContasPagar contaPagar = new ContasPagar().SelecionarPorId(id, _dbConnection);
         if (contaPagar == null) return null;
 
         return new ContasPagarViewModel
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            //NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
+            IdCompra = contaPagar.IdCompra,
+            NomePessoa = PessoasControl.Instance.ObterPessoaPorId(contaPagar.IdPessoa)?.Nome,
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -50,14 +52,15 @@ public class ContasPagarControl
 
     public ContasPagarViewModel ObterContaPagarPorCompraId(int id)
     {
-        var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(id);
+        ContasPagar contaPagar = new ContasPagar().SelecionarPorIdCompra(id, _dbConnection);
         if (contaPagar == null) return null;
 
         return new ContasPagarViewModel
         {
             Id = contaPagar.Id,
             IdPessoa = contaPagar.IdPessoa,
-            //NomePessoa = oPessoasDAO.SelecionarPorId(contaPagar.IdPessoa)?.Nome ?? "Desconhecido",
+            IdCompra = contaPagar.IdCompra,
+            NomePessoa = PessoasControl.Instance.ObterPessoaPorId(contaPagar.IdPessoa)?.Nome,
             Data = contaPagar.Data,
             Valor = contaPagar.Valor,
             DataVencimento = contaPagar.DataVencimento,
@@ -67,43 +70,85 @@ public class ContasPagarControl
 
     public void CriarContaPagar(ContasPagarViewModel model)
     {
-        var contaPagar = new ContasPagar
+        try
         {
-            IdPessoa = model.IdPessoa,
-            IdCompra = model.IdCompra,
-            Data = model.Data,
-            Valor = model.Valor,
-            DataVencimento = model.DataVencimento,
-            DataPagamento = model.DataPagamento
-        };
+            _dbConnection.BeginTransaction();
 
-        oContasPagarDAO.Incluir(contaPagar);
+            var contaPagar = new ContasPagar
+            {
+                IdPessoa = model.IdPessoa,
+                IdCompra = model.IdCompra,
+                Data = model.Data,
+                Valor = model.Valor,
+                DataVencimento = model.DataVencimento,
+                DataPagamento = model.DataPagamento
+            };
+
+            contaPagar.Incluir(_dbConnection);
+
+            _dbConnection.Commit();
+        }
+        catch
+        {
+            _dbConnection.Rollback();
+            throw;
+        }
     }
 
     public void EditarContaPagar(ContasPagarViewModel model)
     {
-        var contaPagar = new ContasPagar
+        try
         {
-            Id = model.Id,
-            IdPessoa = model.IdPessoa,
-            IdCompra = model.IdCompra,
-            Data = model.Data,
-            Valor = model.Valor,
-            DataVencimento = model.DataVencimento,
-            DataPagamento = model.DataPagamento
-        };
+            _dbConnection.BeginTransaction();
 
-        oContasPagarDAO.Alterar(contaPagar);
+            var contaPagar = new ContasPagar
+            {
+                Id = model.Id,
+                IdPessoa = model.IdPessoa,
+                IdCompra = model.IdCompra,
+                Data = model.Data,
+                Valor = model.Valor,
+                DataVencimento = model.DataVencimento,
+                DataPagamento = model.DataPagamento
+            };
+
+            contaPagar.Alterar(_dbConnection);
+
+            _dbConnection.Commit();
+        }
+        catch
+        {
+            _dbConnection.Rollback();
+            throw;
+        }
     }
 
     public void ExcluirContaPagar(int id)
     {
-        oContasPagarDAO.Excluir(id);
+        try
+        {
+            _dbConnection.BeginTransaction();
+
+            var contaPagar = new ContasPagar { Id = id };
+            contaPagar.Excluir(_dbConnection);
+
+            _dbConnection.Commit();
+        }
+        catch
+        {
+            _dbConnection.Rollback();
+            throw;
+        }
     }
 
     public List<Pessoas> ObterPessoas()
     {
-        throw new NotImplementedException();
-        //return oPessoasDAO.SelecionarTodos();
+        Pessoas pessoas = new Pessoas();
+        return pessoas.SelecionarTodos(_dbConnection);
+    }
+
+    public void Dispose()
+    {
+        _dbConnection.Dispose();
     }
 }

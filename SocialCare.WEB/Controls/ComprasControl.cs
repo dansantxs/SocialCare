@@ -104,7 +104,7 @@ public class ComprasControl
             DataVencimento = DateTime.Now.AddDays(30)
         };
 
-        oContasPagarDAO.Incluir(contaPagar);
+        //oContasPagarDAO.Incluir(contaPagar);
     }
 
     public void EditarCompra(ComprasViewModel model)
@@ -148,11 +148,11 @@ public class ComprasControl
             oItensCompraDAO.Incluir(itensCompra);
         }
 
-        var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(compra.Id);
+        var contaPagar = ""; //oContasPagarDAO.SelecionarPorIdCompra(compra.Id);
         if (contaPagar != null)
         {
-            contaPagar.Valor = compra.Total;
-            oContasPagarDAO.Alterar(contaPagar);
+            //contaPagar.Valor = compra.Total;
+            //oContasPagarDAO.Alterar(contaPagar);
         }
     }
 
@@ -168,10 +168,10 @@ public class ComprasControl
             oItensCompraDAO.Excluir(item.Id);
         }
 
-        var contaPagar = oContasPagarDAO.SelecionarPorIdCompra(compra.Id);
+        var contaPagar = ""; //oContasPagarDAO.SelecionarPorIdCompra(compra.Id);
         if (contaPagar != null)
         {
-            oContasPagarDAO.Excluir(contaPagar.Id);
+            //oContasPagarDAO.Excluir(contaPagar.Id);
         }
 
         oComprasDAO.Excluir(compra.Id);

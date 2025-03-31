@@ -1,7 +1,4 @@
 ﻿using SocialCare.DATA.Models;
-using SocialCare.WEB.Models;
-using System;
-using System.Collections.Generic;
 
 public class PessoasControl : IDisposable
 {

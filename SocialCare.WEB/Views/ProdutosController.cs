@@ -14,8 +14,8 @@ namespace SocialCare.WEB.Views
 
         public IActionResult Index()
         {
-            var oListProdutos = oProdutosControl.ObterTodosProdutos();
-            return View(oListProdutos);
+            var listaProdutos = oProdutosControl.ObterTodosProdutos();
+            return View(listaProdutos);
         }
 
         public IActionResult Create()

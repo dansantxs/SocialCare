@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,4 +31,40 @@ public partial class ContasPagar
     [ForeignKey("IdPessoa")]
     [InverseProperty("ContasPagar")]
     public virtual Pessoas IdPessoaNavigation { get; set; }
+
+    public List<ContasPagar> SelecionarTodos(DBConnection _dbConnection)
+    {
+        ContasPagarDAO dao = new ContasPagarDAO();
+        return dao.SelecionarTodos(_dbConnection);
+    }
+
+    public ContasPagar SelecionarPorId(int id, DBConnection _dbConnection)
+    {
+        ContasPagarDAO dao = new ContasPagarDAO();
+        return dao.SelecionarPorId(id, _dbConnection);
+    }
+
+    public ContasPagar SelecionarPorIdCompra(int id, DBConnection _dbConnection)
+    {
+        ContasPagarDAO dao = new ContasPagarDAO();
+        return dao.SelecionarPorIdCompra(id, _dbConnection);
+    }
+
+    public void Incluir(DBConnection _dbConnection)
+    {
+        ContasPagarDAO dao = new ContasPagarDAO();
+        dao.Incluir(this, _dbConnection);
+    }
+
+    public void Alterar(DBConnection _dbConnection)
+    {
+        ContasPagarDAO dao = new ContasPagarDAO();
+        dao.Alterar(this, _dbConnection);
+    }
+
+    public void Excluir(DBConnection _dbConnection)
+    {
+        ContasPagarDAO dao = new ContasPagarDAO();
+        dao.Excluir(this.Id, _dbConnection);
+    }
 }

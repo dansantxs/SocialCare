@@ -1,16 +1,9 @@
 ﻿using SocialCare.DATA.Models;
 using System.Data;
 
-public class ContasPagarDAO : IDisposable
+public class ContasPagarDAO
 {
-    private DBConnection _dbConnection;
-
-    public ContasPagarDAO()
-    {
-        _dbConnection = new DBConnection();
-    }
-
-    public List<ContasPagar> SelecionarTodos()
+    public List<ContasPagar> SelecionarTodos(DBConnection _dbConnection)
     {
         string query = "SELECT * FROM ContasPagar";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
@@ -26,7 +19,7 @@ public class ContasPagarDAO : IDisposable
         }).ToList();
     }
 
-    public ContasPagar SelecionarPorId(int id)
+    public ContasPagar SelecionarPorId(int id, DBConnection _dbConnection)
     {
         string query = $"SELECT * FROM ContasPagar WHERE id = {id}";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
@@ -42,7 +35,7 @@ public class ContasPagarDAO : IDisposable
         }).FirstOrDefault();
     }
 
-    public ContasPagar SelecionarPorIdCompra(int id)
+    public ContasPagar SelecionarPorIdCompra(int id, DBConnection _dbConnection)
     {
         string query = $"SELECT * FROM ContasPagar WHERE idCompra = {id}";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
@@ -58,56 +51,33 @@ public class ContasPagarDAO : IDisposable
         }).FirstOrDefault();
     }
 
-    public void Incluir(ContasPagar conta)
+    public void Incluir(ContasPagar conta, DBConnection _dbConnection)
     {
-        try
-        {
-            _dbConnection.BeginTransaction();
-            string commandText = $"INSERT INTO ContasPagar (idPessoa, idCompra, data, valor, dataVencimento, dataPagamento) VALUES ({conta.IdPessoa}, {(conta.IdCompra.HasValue ? conta.IdCompra.ToString() : "NULL")}, '{conta.Data}', {conta.Valor}, '{conta.DataVencimento}', {(conta.DataPagamento.HasValue ? $"'{conta.DataPagamento}'" : "NULL")})";
-            _dbConnection.ExecuteCommand(commandText);
-            _dbConnection.Commit();
-        }
-        catch
-        {
-            _dbConnection.Rollback();
-            throw;
-        }
+        string commandText = $"INSERT INTO ContasPagar (idPessoa, idCompra, data, valor, dataVencimento, dataPagamento) VALUES " +
+                           $"({conta.IdPessoa}, {(conta.IdCompra.HasValue ? conta.IdCompra.ToString() : "NULL")}, " +
+                           $"'{conta.Data}', {conta.Valor}, '{conta.DataVencimento}', " +
+                           $"{(conta.DataPagamento.HasValue ? $"'{conta.DataPagamento}'" : "NULL")}); SELECT SCOPE_IDENTITY();";
+
+        conta.Id = Convert.ToInt32(_dbConnection.ExecuteScalar(commandText));
     }
 
-    public void Alterar(ContasPagar conta)
+    public void Alterar(ContasPagar conta, DBConnection _dbConnection)
     {
-        try
-        {
-            _dbConnection.BeginTransaction();
-            string commandText = $"UPDATE ContasPagar SET idPessoa = {conta.IdPessoa}, idCompra = {(conta.IdCompra.HasValue ? conta.IdCompra.ToString() : "NULL")}, data = '{conta.Data}', valor = {conta.Valor}, dataVencimento = '{conta.DataVencimento}', dataPagamento = {(conta.DataPagamento.HasValue ? $"'{conta.DataPagamento}'" : "NULL")} WHERE id = {conta.Id}";
-            _dbConnection.ExecuteCommand(commandText);
-            _dbConnection.Commit();
-        }
-        catch
-        {
-            _dbConnection.Rollback();
-            throw;
-        }
+        string commandText = $"UPDATE ContasPagar SET " +
+                           $"idPessoa = {conta.IdPessoa}, " +
+                           $"idCompra = {(conta.IdCompra.HasValue ? conta.IdCompra.ToString() : "NULL")}, " +
+                           $"data = '{conta.Data}', " +
+                           $"valor = {conta.Valor}, " +
+                           $"dataVencimento = '{conta.DataVencimento}', " +
+                           $"dataPagamento = {(conta.DataPagamento.HasValue ? $"'{conta.DataPagamento}'" : "NULL")} " +
+                           $"WHERE id = {conta.Id}";
+
+        _dbConnection.ExecuteCommand(commandText);
     }
 
-    public void Excluir(int id)
+    public void Excluir(int id, DBConnection _dbConnection)
     {
-        try
-        {
-            _dbConnection.BeginTransaction();
-            string commandText = $"DELETE FROM ContasPagar WHERE id = {id}";
-            _dbConnection.ExecuteCommand(commandText);
-            _dbConnection.Commit();
-        }
-        catch
-        {
-            _dbConnection.Rollback();
-            throw;
-        }
-    }
-
-    public void Dispose()
-    {
-        _dbConnection.Dispose();
+        string commandText = $"DELETE FROM ContasPagar WHERE id = {id}";
+        _dbConnection.ExecuteCommand(commandText);
     }
 }

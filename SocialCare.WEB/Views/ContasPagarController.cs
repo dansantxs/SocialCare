@@ -14,8 +14,8 @@ namespace SocialCare.WEB.Views
 
         public IActionResult Index()
         {
-            var viewModel = oContasPagarControl.ObterTodasContasPagar();
-            return View(viewModel);
+            var listaContaPagar = oContasPagarControl.ObterTodasContasPagar();
+            return View(listaContaPagar);
         }
 
         public IActionResult Create()
@@ -28,51 +28,29 @@ namespace SocialCare.WEB.Views
         [ValidateAntiForgeryToken]
         public IActionResult Create(ContasPagarViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                oContasPagarControl.CriarContaPagar(model);
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
-            return View(model);
+            oContasPagarControl.CriarContaPagar(model);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var viewModel = oContasPagarControl.ObterContaPagarPorId(id);
-            if (viewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(viewModel);
+            var contaPagar = oContasPagarControl.ObterContaPagarPorId(id);
+            return View(contaPagar);
         }
 
         public IActionResult Edit(int id)
         {
-            var viewModel = oContasPagarControl.ObterContaPagarPorId(id);
-            if (viewModel == null)
-            {
-                return NotFound();
-            }
-
+            var contaPagar = oContasPagarControl.ObterContaPagarPorId(id);
             ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
-            return View(viewModel);
+            return View(contaPagar);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ContasPagarViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                oContasPagarControl.EditarContaPagar(model);
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
-            return View(model);
+            oContasPagarControl.EditarContaPagar(model);
+            return RedirectToAction("Details", new { id = model.Id });
         }
 
         [HttpPost]

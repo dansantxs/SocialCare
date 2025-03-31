@@ -1,6 +1,4 @@
 ﻿using SocialCare.DATA.Models;
-using System;
-using System.Collections.Generic;
 
 public class ProdutosControl : IDisposable
 {

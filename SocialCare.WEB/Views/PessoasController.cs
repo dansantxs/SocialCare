@@ -14,8 +14,8 @@ namespace SocialCare.WEB.Views
 
         public IActionResult Index()
         {
-            var oListPessoas = oPessoasControl.ObterTodasPessoas();
-            return View(oListPessoas);
+            var listaPessoas = oPessoasControl.ObterTodasPessoas();
+            return View(listaPessoas);
         }
 
         public IActionResult Create()
@@ -25,9 +25,9 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pessoas model)
+        public IActionResult Create(Pessoas pessoa)
         {
-            oPessoasControl.CriarPessoa(model);
+            oPessoasControl.CriarPessoa(pessoa);
             return RedirectToAction("Index");
         }
 
@@ -45,10 +45,10 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Pessoas model)
+        public IActionResult Edit(Pessoas pessoa)
         {
-            oPessoasControl.EditarPessoa(model);
-            return RedirectToAction("Details", new { id = model.Id });
+            oPessoasControl.EditarPessoa(pessoa);
+            return RedirectToAction("Details", new { id = pessoa.Id });
         }
 
         [HttpPost]

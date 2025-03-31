@@ -4,16 +4,9 @@ using System.Data;
 using System.Linq;
 using SocialCare.DATA.Models;
 
-public class ComprasDAO : IDisposable
+public class ComprasDAO
 {
-    private DBConnection _dbConnection;
-
-    public ComprasDAO()
-    {
-        _dbConnection = new DBConnection();
-    }
-
-    public List<Compras> SelecionarTodos()
+    public List<Compras> SelecionarTodos(DBConnection _dbConnection)
     {
         string query = "SELECT * FROM Compras";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
@@ -26,7 +19,7 @@ public class ComprasDAO : IDisposable
         }).ToList();
     }
 
-    public Compras SelecionarPorId(int id)
+    public Compras SelecionarPorId(int id, DBConnection _dbConnection)
     {
         string query = $"SELECT * FROM Compras WHERE id = {id}";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
@@ -39,26 +32,21 @@ public class ComprasDAO : IDisposable
         }).FirstOrDefault();
     }
 
-    public void Incluir(Compras compra)
+    public void Incluir(Compras compra, DBConnection _dbConnection)
     {
-        string commandText = $"INSERT INTO Compras (idPessoa, dataCompra, total) VALUES ({compra.IdPessoa}, '{compra.DataCompra}', {compra.Total})";
-        _dbConnection.ExecuteCommand(commandText);
+        string commandText = $"INSERT INTO Compras (idPessoa, dataCompra, total) VALUES ({compra.IdPessoa}, '{compra.DataCompra}', {compra.Total}); SELECT SCOPE_IDENTITY();";
+        compra.Id = Convert.ToInt32(_dbConnection.ExecuteScalar(commandText));
     }
 
-    public void Alterar(Compras compra)
+    public void Alterar(Compras compra, DBConnection _dbConnection)
     {
         string commandText = $"UPDATE Compras SET idPessoa = {compra.IdPessoa}, dataCompra = '{compra.DataCompra}', total = {compra.Total} WHERE id = {compra.Id}";
         _dbConnection.ExecuteCommand(commandText);
     }
 
-    public void Excluir(int id)
+    public void Excluir(int id, DBConnection _dbConnection)
     {
         string commandText = $"DELETE FROM Compras WHERE id = {id}";
         _dbConnection.ExecuteCommand(commandText);
-    }
-
-    public void Dispose()
-    {
-        _dbConnection.Dispose();
     }
 }

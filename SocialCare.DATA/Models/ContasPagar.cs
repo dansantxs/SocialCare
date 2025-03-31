@@ -30,7 +30,7 @@ public partial class ContasPagar
 
     [ForeignKey("IdPessoa")]
     [InverseProperty("ContasPagar")]
-    public virtual Pessoas Pessoas { get; set; }
+    public virtual Pessoas Pessoa { get; set; }
 
     public List<ContasPagar> SelecionarTodos(DBConnection _dbConnection)
     {

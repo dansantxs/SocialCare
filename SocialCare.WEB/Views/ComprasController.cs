@@ -26,45 +26,31 @@ namespace SocialCare.WEB.Views
         }
 
         [HttpPost]
-        public IActionResult Create(ComprasViewModel model)
+        public IActionResult Create(ComprasViewModel compra)
         {
-            if (ModelState.IsValid)
-            {
-                oComprasControl.CriarCompra(model);
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Pessoas = oComprasControl.ObterPessoas();
-            ViewBag.Produtos = oComprasControl.ObterProdutos();
-            return View(model);
+            oComprasControl.CriarCompra(compra);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var detalhesViewModel = oComprasControl.ObterCompraPorId(id);
-            return View(detalhesViewModel);
+            var compra = oComprasControl.ObterCompraPorId(id);
+            return View(compra);
         }
 
         public IActionResult Edit(int id)
         {
-            var editViewModel = oComprasControl.ObterCompraPorId(id);
+            var compra = oComprasControl.ObterCompraPorId(id);
             ViewBag.Pessoas = oComprasControl.ObterPessoas();
             ViewBag.Produtos = oComprasControl.ObterProdutos();
-            return View(editViewModel);
+            return View(compra);
         }
 
         [HttpPost]
-        public IActionResult Edit(ComprasViewModel model)
+        public IActionResult Edit(ComprasViewModel compra)
         {
-            if (ModelState.IsValid)
-            {
-                oComprasControl.EditarCompra(model);
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Pessoas = oComprasControl.ObterPessoas();
-            ViewBag.Produtos = oComprasControl.ObterProdutos();
-            return View(model);
+            oComprasControl.EditarCompra(compra);
+            return RedirectToAction("Details", new { id = compra.Id });
         }
 
         [HttpPost]

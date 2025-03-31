@@ -26,9 +26,9 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ContasPagar model)
+        public IActionResult Create(ContasPagar contaPagar)
         {
-            oContasPagarControl.CriarContaPagar(model);
+            oContasPagarControl.CriarContaPagar(contaPagar);
             return RedirectToAction("Index");
         }
 
@@ -47,10 +47,10 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ContasPagar model)
+        public IActionResult Edit(ContasPagar contaPagar)
         {
-            oContasPagarControl.EditarContaPagar(model);
-            return RedirectToAction("Details", new { id = model.Id });
+            oContasPagarControl.EditarContaPagar(contaPagar);
+            return RedirectToAction("Details", new { id = contaPagar.Id });
         }
 
         [HttpPost]

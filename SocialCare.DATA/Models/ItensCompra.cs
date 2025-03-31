@@ -24,7 +24,7 @@ public partial class ItensCompra
     [Column("precoUnitario", TypeName = "decimal(10, 2)")]
     public decimal PrecoUnitario { get; set; }
 
-    [Column("subtotal", TypeName = "decimal(21, 2)")]
+    [Column("subtotal", TypeName = "decimal(10, 2)")]
     public decimal? Subtotal { get; set; }
 
     [ForeignKey("IdCompra")]
@@ -34,4 +34,40 @@ public partial class ItensCompra
     [ForeignKey("IdProduto")]
     [InverseProperty("ItensCompra")]
     public virtual Produtos IdProdutoNavigation { get; set; }
+
+    public List<ItensCompra> SelecionarTodos(DBConnection _dbConnection)
+    {
+        ItensCompraDAO dao = new ItensCompraDAO();
+        return dao.SelecionarTodos(_dbConnection);
+    }
+
+    public List<ItensCompra> SelecionarPorIdCompra(int idCompra, DBConnection _dbConnection)
+    {
+        ItensCompraDAO dao = new ItensCompraDAO();
+        return dao.SelecionarPorIdCompra(idCompra, _dbConnection);
+    }
+
+    public ItensCompra SelecionarPorId(int id, DBConnection _dbConnection)
+    {
+        ItensCompraDAO dao = new ItensCompraDAO();
+        return dao.SelecionarPorId(id, _dbConnection);
+    }
+
+    public void Incluir(DBConnection _dbConnection)
+    {
+        ItensCompraDAO dao = new ItensCompraDAO();
+        dao.Incluir(this, _dbConnection);
+    }
+
+    public void Alterar(DBConnection _dbConnection)
+    {
+        ItensCompraDAO dao = new ItensCompraDAO();
+        dao.Alterar(this, _dbConnection);
+    }
+
+    public void Excluir(DBConnection _dbConnection)
+    {
+        ItensCompraDAO dao = new ItensCompraDAO();
+        dao.Excluir(this.Id, _dbConnection);
+    }
 }

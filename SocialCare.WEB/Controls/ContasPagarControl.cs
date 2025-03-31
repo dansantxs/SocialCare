@@ -23,7 +23,7 @@ public class ContasPagarControl : IDisposable
             var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
             if (pessoa != null)
             {
-                contaPagar.Pessoas = pessoa;
+                contaPagar.Pessoa = pessoa;
             }
         }
 
@@ -37,7 +37,7 @@ public class ContasPagarControl : IDisposable
         var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
         if (pessoa != null)
         {
-            contaPagar.Pessoas = pessoa;
+            contaPagar.Pessoa = pessoa;
         }
 
         return contaPagar;

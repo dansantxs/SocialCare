@@ -37,14 +37,14 @@ public partial class SocialCareContext : DbContext
     {
         modelBuilder.Entity<Compras>(entity =>
         {
-            entity.HasOne(d => d.IdPessoaNavigation).WithMany(p => p.Compras)
+            entity.HasOne(d => d.Pessoa).WithMany(p => p.Compras)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Compras_Pessoas");
         });
 
         modelBuilder.Entity<ContasPagar>(entity =>
         {
-            entity.HasOne(d => d.Pessoas).WithMany(p => p.ContasPagar)
+            entity.HasOne(d => d.Pessoa).WithMany(p => p.ContasPagar)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ContasPagar_Pessoas");
         });

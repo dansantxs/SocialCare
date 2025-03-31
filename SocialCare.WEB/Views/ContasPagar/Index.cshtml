@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SocialCare.WEB.Models.ContasPagarViewModel>
+﻿@model IEnumerable<SocialCare.DATA.Models.ContasPagar>
 
 @{
     ViewData["Title"] = "Contas a Pagar";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.First().Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().NomePessoa)
+                @Html.DisplayNameFor(model => model.First().Pessoas.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().Valor)
@@ -38,7 +38,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomePessoa)
+                    @Html.DisplayFor(modelItem => item.Pessoas.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Valor)
@@ -69,7 +69,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Deseja realmente excluir a conta a pagar de @item.NomePessoa?
+                                    Deseja realmente excluir a conta a pagar de @item.Pessoas.Nome?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>

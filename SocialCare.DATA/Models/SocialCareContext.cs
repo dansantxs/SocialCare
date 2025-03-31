@@ -44,7 +44,7 @@ public partial class SocialCareContext : DbContext
 
         modelBuilder.Entity<ContasPagar>(entity =>
         {
-            entity.HasOne(d => d.IdPessoaNavigation).WithMany(p => p.ContasPagar)
+            entity.HasOne(d => d.Pessoas).WithMany(p => p.ContasPagar)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ContasPagar_Pessoas");
         });

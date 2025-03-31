@@ -1,4 +1,4 @@
-﻿@model SocialCare.WEB.Models.ContasPagarViewModel
+﻿@model SocialCare.DATA.Models.ContasPagar
 
 @{
     ViewData["Title"] = "Detalhes da Conta a Pagar";
@@ -16,8 +16,8 @@
     <br />
     <dl class="row">
         <div class="form-group">
-            <label>@Html.DisplayNameFor(model => model.NomePessoa)</label>
-            <input disabled class="form-control" value="@Html.DisplayFor(model => model.NomePessoa)" />
+            <label>@Html.DisplayNameFor(model => model.Pessoas.Nome)</label>
+            <input disabled class="form-control" value="@Html.DisplayFor(model => model.Pessoas.Nome)" />
         </div>
         <div class="form-group">
             <label>@Html.DisplayNameFor(model => model.Data)</label>

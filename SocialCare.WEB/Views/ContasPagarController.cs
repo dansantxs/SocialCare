@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialCare.WEB.Models;
+using SocialCare.DATA.Models;
 
 namespace SocialCare.WEB.Views
 {
@@ -26,7 +26,7 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ContasPagarViewModel model)
+        public IActionResult Create(ContasPagar model)
         {
             oContasPagarControl.CriarContaPagar(model);
             return RedirectToAction("Index");
@@ -47,7 +47,7 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ContasPagarViewModel model)
+        public IActionResult Edit(ContasPagar model)
         {
             oContasPagarControl.EditarContaPagar(model);
             return RedirectToAction("Details", new { id = model.Id });

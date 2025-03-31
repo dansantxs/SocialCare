@@ -1,5 +1,4 @@
 ﻿using SocialCare.DATA.Models;
-using SocialCare.WEB.Models;
 
 public class ContasPagarControl : IDisposable
 {
@@ -14,78 +13,50 @@ public class ContasPagarControl : IDisposable
 
     public static ContasPagarControl Instance => instance.Value;
 
-    public List<ContasPagarViewModel> ObterTodasContasPagar()
+    public List<ContasPagar> ObterTodasContasPagar()
     {
         ContasPagar contasPagar = new ContasPagar();
         List<ContasPagar> listaContasPagar = contasPagar.SelecionarTodos(_dbConnection);
 
-        return listaContasPagar.Select(cp => new ContasPagarViewModel
+        foreach (var contaPagar in listaContasPagar)
         {
-            Id = cp.Id,
-            IdPessoa = cp.IdPessoa,
-            IdCompra = cp.IdCompra,
-            NomePessoa = PessoasControl.Instance.ObterPessoaPorId(cp.IdPessoa)?.Nome,
-            Data = cp.Data,
-            Valor = cp.Valor,
-            DataVencimento = cp.DataVencimento,
-            DataPagamento = cp.DataPagamento
-        }).ToList();
+            var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
+            if (pessoa != null)
+            {
+                contaPagar.Pessoas = pessoa;
+            }
+        }
+
+        return listaContasPagar;
     }
 
-    public ContasPagarViewModel ObterContaPagarPorId(int id)
+    public ContasPagar ObterContaPagarPorId(int id)
     {
         ContasPagar contaPagar = new ContasPagar().SelecionarPorId(id, _dbConnection);
-        if (contaPagar == null) return null;
 
-        return new ContasPagarViewModel
+        var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
+        if (pessoa != null)
         {
-            Id = contaPagar.Id,
-            IdPessoa = contaPagar.IdPessoa,
-            IdCompra = contaPagar.IdCompra,
-            NomePessoa = PessoasControl.Instance.ObterPessoaPorId(contaPagar.IdPessoa)?.Nome,
-            Data = contaPagar.Data,
-            Valor = contaPagar.Valor,
-            DataVencimento = contaPagar.DataVencimento,
-            DataPagamento = contaPagar.DataPagamento
-        };
+            contaPagar.Pessoas = pessoa;
+        }
+
+        return contaPagar;
     }
 
-    public ContasPagarViewModel ObterContaPagarPorCompraId(int id)
+    public ContasPagar ObterContaPagarPorCompraId(int id)
     {
         ContasPagar contaPagar = new ContasPagar().SelecionarPorIdCompra(id, _dbConnection);
         if (contaPagar == null) return null;
 
-        return new ContasPagarViewModel
-        {
-            Id = contaPagar.Id,
-            IdPessoa = contaPagar.IdPessoa,
-            IdCompra = contaPagar.IdCompra,
-            NomePessoa = PessoasControl.Instance.ObterPessoaPorId(contaPagar.IdPessoa)?.Nome,
-            Data = contaPagar.Data,
-            Valor = contaPagar.Valor,
-            DataVencimento = contaPagar.DataVencimento,
-            DataPagamento = contaPagar.DataPagamento
-        };
+        return contaPagar;
     }
 
-    public void CriarContaPagar(ContasPagarViewModel model)
+    public void CriarContaPagar(ContasPagar contaPagar)
     {
         try
         {
             _dbConnection.BeginTransaction();
-
-            var contaPagar = new ContasPagar
-            {
-                IdPessoa = model.IdPessoa,
-                IdCompra = model.IdCompra,
-                Data = model.Data,
-                Valor = model.Valor,
-                DataVencimento = model.DataVencimento,
-                DataPagamento = model.DataPagamento
-            };
-
             contaPagar.Incluir(_dbConnection);
-
             _dbConnection.Commit();
         }
         catch
@@ -95,25 +66,12 @@ public class ContasPagarControl : IDisposable
         }
     }
 
-    public void EditarContaPagar(ContasPagarViewModel model)
+    public void EditarContaPagar(ContasPagar contaPagar)
     {
         try
         {
             _dbConnection.BeginTransaction();
-
-            var contaPagar = new ContasPagar
-            {
-                Id = model.Id,
-                IdPessoa = model.IdPessoa,
-                IdCompra = model.IdCompra,
-                Data = model.Data,
-                Valor = model.Valor,
-                DataVencimento = model.DataVencimento,
-                DataPagamento = model.DataPagamento
-            };
-
             contaPagar.Alterar(_dbConnection);
-
             _dbConnection.Commit();
         }
         catch

@@ -44,6 +44,7 @@ public class PessoasControl : IDisposable
     public Pessoas ObterPessoaPorId(int id)
     {
         Pessoas pessoa = new Pessoas().SelecionarPorId(id, _dbConnection);
+
         if (pessoa.Tipo == "F")
         {
             var pessoaFisica = new PessoasFisicas().SelecionarPorId(pessoa.Id, _dbConnection);
@@ -60,6 +61,7 @@ public class PessoasControl : IDisposable
                 pessoa.PessoasJuridicas = pessoaJuridica;
             }
         }
+
         return pessoa;
     }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SocialCare.DATA.Models;
-using SocialCare.WEB.Models;
+﻿using SocialCare.DATA.Models;
 
 public class ComprasControl : IDisposable
 {

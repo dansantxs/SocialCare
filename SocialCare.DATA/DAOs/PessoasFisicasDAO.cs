@@ -1,5 +1,5 @@
-﻿using SocialCare.DATA.Models;
-using System.Data;
+﻿using System.Data;
+using SocialCare.DATA.Models;
 
 public class PessoasFisicasDAO
 {

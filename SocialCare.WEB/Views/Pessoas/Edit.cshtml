@@ -1,4 +1,4 @@
-﻿@model PessoasViewModel
+﻿@model SocialCare.DATA.Models.Pessoas
 
 @{
     ViewData["Title"] = "Editar Pessoa";
@@ -65,27 +65,27 @@
 
             <div id="pessoaFisicaFields" style="display:@(Model.Tipo == "F" ? "block" : "none")">
                 <div class="form-group">
-                    <label asp-for="Cpf" class="control-label"></label>
-                    <input asp-for="Cpf" class="form-control" />
-                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                    <label asp-for="PessoasFisicas.Cpf" class="control-label"></label>
+                    <input asp-for="PessoasFisicas.Cpf" class="form-control" />
+                    <span asp-validation-for="PessoasFisicas.Cpf" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="DataNascimento" class="control-label"></label>
-                    <input asp-for="DataNascimento" type="date" class="form-control" />
-                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                    <label asp-for="PessoasFisicas.DataNascimento" class="control-label"></label>
+                    <input asp-for="PessoasFisicas.DataNascimento" type="date" class="form-control" />
+                    <span asp-validation-for="PessoasFisicas.DataNascimento" class="text-danger"></span>
                 </div>
             </div>
 
             <div id="pessoaJuridicaFields" style="display:@(Model.Tipo == "J" ? "block" : "none")">
                 <div class="form-group">
-                    <label asp-for="Cnpj" class="control-label"></label>
-                    <input asp-for="Cnpj" class="form-control" />
-                    <span asp-validation-for="Cnpj" class="text-danger"></span>
+                    <label asp-for="PessoasJuridicas.Cnpj" class="control-label"></label>
+                    <input asp-for="PessoasJuridicas.Cnpj" class="form-control" />
+                    <span asp-validation-for="PessoasJuridicas.Cnpj" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="RazaoSocial" class="control-label"></label>
-                    <input asp-for="RazaoSocial" class="form-control" />
-                    <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+                    <label asp-for="PessoasJuridicas.RazaoSocial" class="control-label"></label>
+                    <input asp-for="PessoasJuridicas.RazaoSocial" class="form-control" />
+                    <span asp-validation-for="PessoasJuridicas.RazaoSocial" class="text-danger"></span>
                 </div>
             </div>
 

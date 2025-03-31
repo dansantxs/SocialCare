@@ -24,36 +24,32 @@ namespace SocialCare.WEB.Views
         }
 
         [HttpPost]
-        public IActionResult Create(Produtos model)
+        public IActionResult Create(Produtos produto)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            oProdutosControl.CriarProdutos(model);
+            oProdutosControl.CriarProdutos(produto);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var oProduto = oProdutosControl.ObterProdutosPorId(id);
-            return View(oProduto);
+            var produto = oProdutosControl.ObterProdutosPorId(id);
+            return View(produto);
         }
 
         public IActionResult Edit(int id)
         {
-            var oProduto = oProdutosControl.ObterProdutosPorId(id);
-            return View(oProduto);
+            var produto = oProdutosControl.ObterProdutosPorId(id);
+            return View(produto);
         }
 
         [HttpPost]
-        public IActionResult Edit(Produtos model)
+        public IActionResult Edit(Produtos produto)
         {
-            oProdutosControl.EditarProdutos(model);
-            return RedirectToAction("Details", new { id = model.Id });
+            oProdutosControl.EditarProdutos(produto);
+            return RedirectToAction("Details", new { id = produto.Id });
         }
-
+        
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             oProdutosControl.ExcluirProdutos(id);

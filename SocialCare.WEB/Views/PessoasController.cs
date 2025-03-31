@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialCare.WEB.Models;
+using SocialCare.DATA.Models;
 
 namespace SocialCare.WEB.Views
 {
@@ -25,84 +25,30 @@ namespace SocialCare.WEB.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PessoasViewModel model)
+        public IActionResult Create(Pessoas model)
         {
-            if (ModelState.IsValid)
-            {
-                oPessoasControl.CriarPessoa(model);
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(model);
+            oPessoasControl.CriarPessoa(model);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
             var pessoa = oPessoasControl.ObterPessoaPorId(id);
-            if (pessoa == null)
-            {
-                return NotFound();
-            }
-
-            var model = new PessoasViewModel
-            {
-                Id = pessoa.Id,
-                Nome = pessoa.Nome,
-                Cidade = pessoa.Cidade,
-                Bairro = pessoa.Bairro,
-                Endereco = pessoa.Endereco,
-                Numero = pessoa.Numero,
-                Email = pessoa.Email,
-                Telefone = pessoa.Telefone,
-                Tipo = pessoa.Tipo,
-                Cpf = pessoa.PessoasFisicas?.Cpf,
-                DataNascimento = pessoa.PessoasFisicas?.DataNascimento,
-                Cnpj = pessoa.PessoasJuridicas?.Cnpj,
-                RazaoSocial = pessoa.PessoasJuridicas?.RazaoSocial
-            };
-
-            return View(model);
+            return View(pessoa);
         }
 
         public IActionResult Edit(int id)
         {
             var pessoa = oPessoasControl.ObterPessoaPorId(id);
-            if (pessoa == null)
-            {
-                return NotFound();
-            }
-
-            var model = new PessoasViewModel
-            {
-                Id = pessoa.Id,
-                Nome = pessoa.Nome,
-                Cidade = pessoa.Cidade,
-                Bairro = pessoa.Bairro,
-                Endereco = pessoa.Endereco,
-                Numero = pessoa.Numero,
-                Email = pessoa.Email,
-                Telefone = pessoa.Telefone,
-                Tipo = pessoa.Tipo,
-                Cpf = pessoa.PessoasFisicas?.Cpf,
-                DataNascimento = pessoa.PessoasFisicas?.DataNascimento,
-                Cnpj = pessoa.PessoasJuridicas?.Cnpj,
-                RazaoSocial = pessoa.PessoasJuridicas?.RazaoSocial
-            };
-
-            return View(model);
+            return View(pessoa);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(PessoasViewModel model)
+        public IActionResult Edit(Pessoas model)
         {
-            if (ModelState.IsValid)
-            {
-                oPessoasControl.EditarPessoa(model);
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(model);
+            oPessoasControl.EditarPessoa(model);
+            return RedirectToAction("Details", new { id = model.Id });
         }
 
         [HttpPost]

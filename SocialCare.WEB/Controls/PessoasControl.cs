@@ -66,43 +66,31 @@ public class PessoasControl : IDisposable
         return pessoa;
     }
 
-    public void CriarPessoa(PessoasViewModel model)
+    public void CriarPessoa(Pessoas pessoa)
     {
         try
         {
             _dbConnection.BeginTransaction();
 
-            var pessoa = new Pessoas
-            {
-                Nome = model.Nome,
-                Cidade = model.Cidade,
-                Bairro = model.Bairro,
-                Endereco = model.Endereco,
-                Numero = model.Numero,
-                Email = model.Email,
-                Telefone = model.Telefone,
-                Tipo = model.Tipo
-            };
-
             pessoa.Incluir(_dbConnection);
 
-            if (model.Tipo == "F")
+            if (pessoa.Tipo == "F")
             {
                 var pessoaFisica = new PessoasFisicas
                 {
                     Id = pessoa.Id,
-                    Cpf = model.Cpf,
-                    DataNascimento = model.DataNascimento.Value
+                    Cpf = pessoa.PessoasFisicas.Cpf,
+                    DataNascimento = pessoa.PessoasFisicas.DataNascimento
                 };
                 pessoaFisica.Incluir(_dbConnection);
             }
-            else if (model.Tipo == "J")
+            else if (pessoa.Tipo == "J")
             {
                 var pessoaJuridica = new PessoasJuridicas
                 {
                     Id = pessoa.Id,
-                    Cnpj = model.Cnpj,
-                    RazaoSocial = model.RazaoSocial
+                    Cnpj = pessoa.PessoasJuridicas.Cnpj,
+                    RazaoSocial = pessoa.PessoasJuridicas.RazaoSocial
                 };
                 pessoaJuridica.Incluir(_dbConnection);
             }
@@ -116,40 +104,29 @@ public class PessoasControl : IDisposable
         }
     }
 
-    public void EditarPessoa(PessoasViewModel model)
+    public void EditarPessoa(Pessoas pessoa)
     {
         try
         {
             _dbConnection.BeginTransaction();
 
-            var pessoa = ObterPessoaPorId(model.Id);
-
-            pessoa.Nome = model.Nome;
-            pessoa.Cidade = model.Cidade;
-            pessoa.Bairro = model.Bairro;
-            pessoa.Endereco = model.Endereco;
-            pessoa.Numero = model.Numero;
-            pessoa.Email = model.Email;
-            pessoa.Telefone = model.Telefone;
-            pessoa.Tipo = model.Tipo;
-
             pessoa.Alterar(_dbConnection);
 
-            if (model.Tipo == "F")
+            if (pessoa.Tipo == "F")
             {
-                var pessoaFisica = new PessoasFisicas().SelecionarPorId(model.Id, _dbConnection);
+                var pessoaFisica = new PessoasFisicas().SelecionarPorId(pessoa.Id, _dbConnection);
                 if (pessoaFisica == null)
                 {
                     pessoaFisica = new PessoasFisicas();
-                    pessoaFisica.Id = model.Id;
+                    pessoaFisica.Id = pessoa.Id;
                 }
 
-                pessoaFisica.Cpf = model.Cpf;
-                pessoaFisica.DataNascimento = model.DataNascimento.Value;
+                pessoaFisica.Cpf = pessoa.PessoasFisicas.Cpf;
+                pessoaFisica.DataNascimento = pessoa.PessoasFisicas.DataNascimento;
 
                 if (pessoaFisica.Id == 0)
                 {
-                    pessoaFisica.Id = model.Id;
+                    pessoaFisica.Id = pessoa.Id;
                     pessoaFisica.Incluir(_dbConnection);
                 }
                 else
@@ -157,27 +134,27 @@ public class PessoasControl : IDisposable
                     pessoaFisica.Alterar(_dbConnection);
                 }
 
-                var pessoaJuridica = new PessoasJuridicas().SelecionarPorId(model.Id, _dbConnection);
+                var pessoaJuridica = new PessoasJuridicas().SelecionarPorId(pessoa.Id, _dbConnection);
                 if (pessoaJuridica != null)
                 {
                     pessoaJuridica.Excluir(_dbConnection);
                 }
             }
-            else if (model.Tipo == "J")
+            else if (pessoa.Tipo == "J")
             {
-                var pessoaJuridica = new PessoasJuridicas().SelecionarPorId(model.Id, _dbConnection);
+                var pessoaJuridica = new PessoasJuridicas().SelecionarPorId(pessoa.Id, _dbConnection);
                 if (pessoaJuridica == null)
                 {
                     pessoaJuridica = new PessoasJuridicas();
-                    pessoaJuridica.Id = model.Id;
+                    pessoaJuridica.Id = pessoa.Id;
                 }
 
-                pessoaJuridica.Cnpj = model.Cnpj;
-                pessoaJuridica.RazaoSocial = model.RazaoSocial;
+                pessoaJuridica.Cnpj = pessoa.PessoasJuridicas.Cnpj;
+                pessoaJuridica.RazaoSocial = pessoa.PessoasJuridicas.RazaoSocial;
 
                 if (pessoaJuridica.Id == 0)
                 {
-                    pessoaJuridica.Id = model.Id;
+                    pessoaJuridica.Id = pessoa.Id;
                     pessoaJuridica.Incluir(_dbConnection);
                 }
                 else
@@ -185,7 +162,7 @@ public class PessoasControl : IDisposable
                     pessoaJuridica.Alterar(_dbConnection);
                 }
 
-                var pessoaFisica = new PessoasFisicas().SelecionarPorId(model.Id, _dbConnection);
+                var pessoaFisica = new PessoasFisicas().SelecionarPorId(pessoa.Id, _dbConnection);
                 if (pessoaFisica != null)
                 {
                     pessoaFisica.Excluir(_dbConnection);

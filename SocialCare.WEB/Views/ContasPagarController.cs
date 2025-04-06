@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.DATA.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialCare.WEB.Views
 {
@@ -28,8 +29,17 @@ namespace SocialCare.WEB.Views
         [ValidateAntiForgeryToken]
         public IActionResult Create(ContasPagar contaPagar)
         {
-            oContasPagarControl.CriarContaPagar(contaPagar);
-            return RedirectToAction("Index");
+            try
+            {
+                oContasPagarControl.CriarContaPagar(contaPagar);
+                return RedirectToAction("Index");
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                ViewBag.Pessoas = oContasPagarControl.ObterPessoas();
+                return View(contaPagar);
+            }
         }
 
         public IActionResult Details(int id)
@@ -49,8 +59,16 @@ namespace SocialCare.WEB.Views
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ContasPagar contaPagar)
         {
-            oContasPagarControl.EditarContaPagar(contaPagar);
-            return RedirectToAction("Details", new { id = contaPagar.Id });
+            try
+            {
+                oContasPagarControl.EditarContaPagar(contaPagar);
+                return RedirectToAction("Details", new { id = contaPagar.Id });
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(contaPagar);
+            }
         }
 
         [HttpPost]

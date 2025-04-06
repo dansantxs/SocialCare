@@ -51,12 +51,22 @@ public partial class ContasPagar
 
     public void Incluir(DBConnection _dbConnection)
     {
+        if (!ValidarValor(Valor))
+        {
+            throw new ValidationException("Valor inválido.");
+        }
+
         ContasPagarDAO dao = new ContasPagarDAO();
         dao.Incluir(this, _dbConnection);
     }
 
     public void Alterar(DBConnection _dbConnection)
     {
+        if (!ValidarValor(Valor))
+        {
+            throw new ValidationException("Valor inválido.");
+        }
+        
         ContasPagarDAO dao = new ContasPagarDAO();
         dao.Alterar(this, _dbConnection);
     }
@@ -65,5 +75,10 @@ public partial class ContasPagar
     {
         ContasPagarDAO dao = new ContasPagarDAO();
         dao.Excluir(this.Id, _dbConnection);
+    }
+
+    private bool ValidarValor(decimal Valor)
+    {
+        return Valor > 0;
     }
 }

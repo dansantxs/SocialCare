@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.DATA.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialCare.WEB.Views
 {
@@ -28,8 +29,17 @@ namespace SocialCare.WEB.Views
         [HttpPost]
         public IActionResult Create(Compras compra)
         {
-            oComprasControl.CriarCompra(compra);
-            return RedirectToAction("Index");
+            try
+            {
+                oComprasControl.CriarCompra(compra);
+                return RedirectToAction("Index");
+            }
+            catch (ValidationException ex)
+            {
+                ViewBag.Pessoas = oComprasControl.ObterPessoas();
+                ViewBag.Produtos = oComprasControl.ObterProdutos();
+                return View(compra);
+            }
         }
 
         public IActionResult Details(int id)
@@ -49,8 +59,17 @@ namespace SocialCare.WEB.Views
         [HttpPost]
         public IActionResult Edit(Compras compra)
         {
-            oComprasControl.EditarCompra(compra);
-            return RedirectToAction("Details", new { id = compra.Id });
+            try
+            {
+                oComprasControl.EditarCompra(compra);
+                return RedirectToAction("Details", new { id = compra.Id });
+            }
+            catch (ValidationException ex)
+            {
+                ViewBag.Pessoas = oComprasControl.ObterPessoas();
+                ViewBag.Produtos = oComprasControl.ObterProdutos();
+                return View(compra);
+            }
         }
 
         [HttpPost]

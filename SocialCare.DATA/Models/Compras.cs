@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
 namespace SocialCare.DATA.Models;
 
@@ -39,12 +40,22 @@ public partial class Compras
 
     public void Incluir(DBConnection _dbConnection)
     {
+        if (!ValidarTotal(Total))
+        {
+            throw new ValidationException("Valor total inválido.");
+        }
+
         ComprasDAO dao = new ComprasDAO();
         dao.Incluir(this, _dbConnection);
     }
 
     public void Alterar(DBConnection _dbConnection)
     {
+        if (!ValidarTotal(Total))
+        {
+            throw new ValidationException("Valor total inválido.");
+        }
+
         ComprasDAO dao = new ComprasDAO();
         dao.Alterar(this, _dbConnection);
     }
@@ -53,5 +64,10 @@ public partial class Compras
     {
         ComprasDAO dao = new ComprasDAO();
         dao.Excluir(this.Id, _dbConnection);
+    }
+
+    private bool ValidarTotal(decimal Total)
+    {
+        return Total > 0;
     }
 }

@@ -39,12 +39,30 @@ public class Produtos
 
     public void Incluir(DBConnection _dbConnection)
     {
+        if (!ValidarPreco(Preco))
+        {
+            throw new ValidationException("Preço inválido.");
+        }
+        if (!ValidarEstoque(Estoque))
+        {
+            throw new ValidationException("Quantidade em estoque inválida.");
+        }
+
         ProdutosDAO dao = new ProdutosDAO();
         dao.Incluir(this, _dbConnection);
     }
 
     public void Alterar(DBConnection _dbConnection)
     {
+        if (!ValidarPreco(Preco))
+        {
+            throw new ValidationException("Preço inválido.");
+        }
+        if (!ValidarEstoque(Estoque))
+        {
+            throw new ValidationException("Quantidade em estoque inválido.");
+        }
+
         ProdutosDAO dao = new ProdutosDAO();
         dao.Alterar(this, _dbConnection);
     }
@@ -53,5 +71,15 @@ public class Produtos
     {
         ProdutosDAO dao = new ProdutosDAO();
         dao.Excluir(this.Id, _dbConnection);
+    }
+
+    private bool ValidarPreco(decimal Preco)
+    {
+        return Preco > 0;
+    }
+
+    private bool ValidarEstoque(int Estoque)
+    {
+        return Estoque >= 0;
     }
 }

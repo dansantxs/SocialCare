@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialCare.DATA.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialCare.WEB.Views
 {
@@ -27,8 +28,16 @@ namespace SocialCare.WEB.Views
         [ValidateAntiForgeryToken]
         public IActionResult Create(Pessoas pessoa)
         {
-            oPessoasControl.CriarPessoa(pessoa);
-            return RedirectToAction("Index");
+            try
+            {
+                oPessoasControl.CriarPessoa(pessoa);
+                return RedirectToAction("Index");
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(pessoa);
+            }
         }
 
         public IActionResult Details(int id)
@@ -47,8 +56,16 @@ namespace SocialCare.WEB.Views
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Pessoas pessoa)
         {
-            oPessoasControl.EditarPessoa(pessoa);
-            return RedirectToAction("Details", new { id = pessoa.Id });
+            try
+            {
+                oPessoasControl.EditarPessoa(pessoa);
+                return RedirectToAction("Details", new { id = pessoa.Id });
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(pessoa);
+            }
         }
 
         [HttpPost]

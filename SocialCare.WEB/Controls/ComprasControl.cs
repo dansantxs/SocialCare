@@ -76,16 +76,16 @@ public class ComprasControl : IDisposable
                 itemCompra.Incluir(_dbConnection);
             }
 
-            var contaPagar = new ContasPagar
-            {
-                IdPessoa = compra.IdPessoa,
-                IdCompra = compra.Id,
-                Data = DateTime.Now,
-                Valor = compra.Total,
-                DataVencimento = DateTime.Now.AddDays(30)
-            };
+                var contaPagar = new ContasPagar
+                {
+                    IdPessoa = compra.IdPessoa,
+                    IdCompra = compra.Id,
+                    Data = DateTime.Now,
+                    Valor = compra.Total,
+                    DataVencimento = DateTime.Now.AddDays(30)
+                };
 
-            contaPagar.Incluir(_dbConnection);
+                contaPagar.Incluir(_dbConnection);
 
             _dbConnection.Commit();
         }
@@ -142,9 +142,9 @@ public class ComprasControl : IDisposable
             ContasPagar contaPagar = new ContasPagar().SelecionarPorIdCompra(compra.Id, _dbConnection);
             if (contaPagar != null)
             {
-                contaPagar.Valor = compra.Total;
-                contaPagar.Alterar(_dbConnection);
-            }
+                    contaPagar.Valor = compra.Total;
+                    contaPagar.Alterar(_dbConnection);
+                }
 
             _dbConnection.Commit();
         }

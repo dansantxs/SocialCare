@@ -1,14 +1,19 @@
 ﻿using SocialCare.DATA.Models;
+using SocialCare.DATA.Observer;
 
 public class ComprasControl : IDisposable
 {
     private static readonly Lazy<ComprasControl> instance = new Lazy<ComprasControl>(() => new ComprasControl());
 
     private DBConnection _dbConnection;
+    private ComprasSujeito _comprasSujeito;
 
     private ComprasControl()
     {
         _dbConnection = new DBConnection();
+        _comprasSujeito = new ComprasSujeito();
+
+        _comprasSujeito.AdicionarObservador(new EstoqueObservador());
     }
 
     public static ComprasControl Instance => instance.Value;
@@ -74,18 +79,20 @@ public class ComprasControl : IDisposable
                 };
 
                 itemCompra.Incluir(_dbConnection);
+
+                _comprasSujeito.NotificarObservadores(itemCompra, _dbConnection);
             }
 
-                var contaPagar = new ContasPagar
-                {
-                    IdPessoa = compra.IdPessoa,
-                    IdCompra = compra.Id,
-                    Data = DateTime.Now,
-                    Valor = compra.Total,
-                    DataVencimento = DateTime.Now.AddDays(30)
-                };
+            var contaPagar = new ContasPagar
+            {
+                IdPessoa = compra.IdPessoa,
+                IdCompra = compra.Id,
+                Data = DateTime.Now,
+                Valor = compra.Total,
+                DataVencimento = DateTime.Now.AddDays(30)
+            };
 
-                contaPagar.Incluir(_dbConnection);
+            contaPagar.Incluir(_dbConnection);
 
             _dbConnection.Commit();
         }
@@ -102,6 +109,16 @@ public class ComprasControl : IDisposable
         {
             _dbConnection.BeginTransaction();
 
+            ItensCompra itensCompraObj = new ItensCompra();
+            List<ItensCompra> itensAntigos = itensCompraObj.SelecionarPorIdCompra(compra.Id, _dbConnection);
+
+            foreach (var itemAntigo in itensAntigos)
+            {
+                var produto = new Produtos().SelecionarPorId(itemAntigo.IdProduto, _dbConnection);
+                produto.Estoque -= itemAntigo.Quantidade;
+                produto.Alterar(_dbConnection);
+            }
+
             compra.IdPessoa = compra.IdPessoa;
             compra.DataCompra = compra.DataCompra;
 
@@ -116,9 +133,6 @@ public class ComprasControl : IDisposable
 
             compra.Total = itensAgrupados.Sum(i => i.PrecoUnitario * i.Quantidade);
             compra.Alterar(_dbConnection);
-
-            ItensCompra itensCompraObj = new ItensCompra();
-            List<ItensCompra> itensAntigos = itensCompraObj.SelecionarPorIdCompra(compra.Id, _dbConnection);
 
             foreach (var item in itensAntigos)
             {
@@ -137,14 +151,16 @@ public class ComprasControl : IDisposable
                 };
 
                 itemCompra.Incluir(_dbConnection);
+
+                _comprasSujeito.NotificarObservadores(itemCompra, _dbConnection);
             }
 
             ContasPagar contaPagar = new ContasPagar().SelecionarPorIdCompra(compra.Id, _dbConnection);
             if (contaPagar != null)
             {
-                    contaPagar.Valor = compra.Total;
-                    contaPagar.Alterar(_dbConnection);
-                }
+                contaPagar.Valor = compra.Total;
+                contaPagar.Alterar(_dbConnection);
+            }
 
             _dbConnection.Commit();
         }
@@ -168,6 +184,10 @@ public class ComprasControl : IDisposable
 
             foreach (var item in itensCompra)
             {
+                var produto = new Produtos().SelecionarPorId(item.IdProduto, _dbConnection);
+                produto.Estoque -= item.Quantidade;
+                produto.Alterar(_dbConnection);
+
                 item.Excluir(_dbConnection);
             }
 

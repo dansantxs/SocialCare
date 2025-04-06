@@ -13,6 +13,11 @@ public class DBConnection : IDisposable
         set { _connection = value; }
     }
 
+    public SqlTransaction Transaction
+    {
+        get { return _transaction; }
+    }
+
     public DBConnection()
     {
         _connection = new SqlConnection(_connectionString);

@@ -37,11 +37,11 @@
                         <option value="">Selecione um produto</option>
                         @foreach (var produto in ViewBag.Produtos)
                         {
-                            <option value="@produto.Id">@produto.Nome</option>
+                            <option value="@produto.Id" data-preco="@produto.Preco.ToString().Replace(",", ".")">@produto.Nome</option>
                         }
                     </select>
-                    <input type="number" name="ItensCompra[0].Quantidade" class="form-control" placeholder="Quantidade" required />
-                    <input type="number" name="ItensCompra[0].PrecoUnitario" class="form-control" placeholder="Preço Unitário" required />
+                    <input type="number" name="ItensCompra[0].Quantidade" class="form-control quantidade-input" placeholder="Quantidade" required min="1" />
+                    <input type="text" name="ItensCompra[0].PrecoUnitario" class="form-control preco-input" placeholder="Preço Unitário" required step="0.01" />
                     <button type="button" class="remove-product btn btn-danger">Remover</button>
                 </div>
             </div>
@@ -59,27 +59,54 @@
     <script>
         let productIndex = 1;
 
-        document.getElementById('addProduct').addEventListener('click', function () {
+        function formataValor(value) {
+            return parseFloat(value).toFixed(2).replace('.', ',');
+        }
+
+        function formataParaGravar(value) {
+            return value.replace(',', '.');
+        }
+
+        document.getElementById('produtosContainer').addEventListener('change', function(e) {
+            if (e.target.classList.contains('produto-select')) {
+                const selectedOption = e.target.options[e.target.selectedIndex];
+                if (selectedOption.value) {
+                    const preco = selectedOption.getAttribute('data-preco');
+                    const precoInput = e.target.parentElement.querySelector('.preco-input');
+                    if (precoInput) {
+                        precoInput.value = formataValor(preco);
+                    }
+                }
+            }
+        });
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            document.querySelectorAll('.preco-input').forEach(input => {
+                input.value = formataParaGravar(input.value);
+            });
+        });
+
+        document.getElementById('addProduct').addEventListener('click', function() {
             const container = document.getElementById('produtosContainer');
             const newProductItem = document.createElement('div');
             newProductItem.classList.add('produto-item', 'form-group');
             newProductItem.innerHTML = `
                 <select class="produto-select form-control" name="ItensCompra[${productIndex}].IdProduto" required>
                     <option value="">Selecione um produto</option>
-                @foreach (var produto in ViewBag.Produtos)
-                {
-                    <option value="@produto.Id">@produto.Nome</option>
-                }
+                    @foreach (var produto in ViewBag.Produtos)
+                    {
+                        <option value="@produto.Id" data-preco="@produto.Preco.ToString().Replace(",", ".")">@produto.Nome</option>
+                    }
                 </select>
-                <input type="number" name="ItensCompra[${productIndex}].Quantidade" class="form-control" placeholder="Quantidade" required />
-                <input type="number" name="ItensCompra[${productIndex}].PrecoUnitario" class="form-control" placeholder="Preço Unitário" required />
+                <input type="number" name="ItensCompra[${productIndex}].Quantidade" class="form-control quantidade-input" placeholder="Quantidade" required min="1" />
+                <input type="text" name="ItensCompra[${productIndex}].PrecoUnitario" class="form-control preco-input" placeholder="Preço Unitário" required step="0.01" />
                 <button type="button" class="remove-product btn btn-danger">Remover</button>
             `;
             container.appendChild(newProductItem);
             productIndex++;
         });
 
-        document.getElementById('produtosContainer').addEventListener('click', function (e) {
+        document.getElementById('produtosContainer').addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-product')) {
                 e.target.parentElement.remove();
             }

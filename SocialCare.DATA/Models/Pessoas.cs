@@ -43,12 +43,12 @@ public class Pessoas
     [Column("email")]
     [StringLength(255)]
     [Unicode(false)]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     [Column("telefone")]
     [StringLength(20)]
     [Unicode(false)]
-    public string Telefone { get; set; }
+    public string? Telefone { get; set; }
 
     [Required]
     [Column("tipo")]
@@ -82,12 +82,16 @@ public class Pessoas
 
     public void Incluir(DBConnection _dbConnection)
     {
+        ValidarDados();
+
         PessoasDAO dao = new PessoasDAO();
         dao.Incluir(this, _dbConnection);
     }
 
     public void Alterar(DBConnection _dbConnection)
     {
+        ValidarDados();
+
         PessoasDAO dao = new PessoasDAO();
         dao.Alterar(this, _dbConnection);
     }
@@ -96,5 +100,71 @@ public class Pessoas
     {
         PessoasDAO dao = new PessoasDAO();
         dao.Excluir(this.Id, _dbConnection);
+    }
+
+    private void ValidarDados()
+    {
+        if (string.IsNullOrEmpty(Nome))
+        {
+            throw new ValidationException("Nome não informado.");
+        }
+
+        if (string.IsNullOrEmpty(Cidade))
+        {
+            throw new ValidationException("Cidade não informada.");
+        }
+
+        if (string.IsNullOrEmpty(Bairro))
+        {
+            throw new ValidationException("Bairro não informado.");
+        }
+
+        if (string.IsNullOrEmpty(Endereco))
+        {
+            throw new ValidationException("Endereço não informado.");
+        }
+
+        if (string.IsNullOrEmpty(Numero))
+        {
+            throw new ValidationException("Número não informado.");
+        }
+
+        if (string.IsNullOrEmpty(Tipo))
+        {
+            throw new ValidationException("Tipo não informado.");
+        }
+
+        if (Tipo != "F" && Tipo != "J")
+        {
+            throw new ValidationException("Tipo deve ser 'F' para pessoa física ou 'J' para pessoa jurídica.");
+        }
+
+        if (!string.IsNullOrEmpty(Email) && !ValidarEmail(Email))
+        {
+            throw new ValidationException("Email inválido.");
+        }
+
+        if (!string.IsNullOrEmpty(Telefone) && !ValidarTelefone(Telefone))
+        {
+            throw new ValidationException("Telefone inválido.");
+        }
+    }
+
+    private bool ValidarEmail(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private bool ValidarTelefone(string telefone)
+    {
+        return System.Text.RegularExpressions.Regex.IsMatch(telefone, @"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$");
     }
 }

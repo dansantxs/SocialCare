@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SocialCare.DATA.Models;
 
-public partial class ContasPagar
+public class ContasPagar
 {
     [Key]
     [Column("id")]
@@ -51,10 +51,7 @@ public partial class ContasPagar
 
     public void Incluir(DBConnection _dbConnection)
     {
-        if (!ValidarValor(Valor))
-        {
-            throw new ValidationException("Valor inválido.");
-        }
+        ValidarDados();
 
         ContasPagarDAO dao = new ContasPagarDAO();
         dao.Incluir(this, _dbConnection);
@@ -62,11 +59,8 @@ public partial class ContasPagar
 
     public void Alterar(DBConnection _dbConnection)
     {
-        if (!ValidarValor(Valor))
-        {
-            throw new ValidationException("Valor inválido.");
-        }
-        
+        ValidarDados();
+
         ContasPagarDAO dao = new ContasPagarDAO();
         dao.Alterar(this, _dbConnection);
     }
@@ -77,8 +71,26 @@ public partial class ContasPagar
         dao.Excluir(this.Id, _dbConnection);
     }
 
-    private bool ValidarValor(decimal Valor)
+    private void ValidarDados()
     {
-        return Valor > 0;
+        if (IdPessoa <= 0)
+        {
+            throw new ValidationException("Pessoa não informada.");
+        }
+
+        if (Data == default)
+        {
+            throw new ValidationException("Data não informada.");
+        }
+
+        if (DataVencimento == default)
+        {
+            throw new ValidationException("Data de vencimento não informada.");
+        }
+
+        if (Valor <= 0)
+        {
+            throw new ValidationException("Valor inválido.");
+        }
     }
 }

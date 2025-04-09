@@ -37,10 +37,7 @@ public class PessoasJuridicas
 
     public void Incluir(DBConnection _dbConnection)
     {
-        if (!ValidarCnpj(Cnpj))
-        {
-            throw new ValidationException("CNPJ inválido.");
-        }
+        ValidarDados();
 
         PessoasJuridicasDAO dao = new PessoasJuridicasDAO();
         dao.Incluir(this, _dbConnection);
@@ -48,10 +45,7 @@ public class PessoasJuridicas
 
     public void Alterar(DBConnection _dbConnection)
     {
-        if (!ValidarCnpj(Cnpj))
-        {
-            throw new ValidationException("CNPJ inválido.");
-        }
+        ValidarDados();
 
         PessoasJuridicasDAO dao = new PessoasJuridicasDAO();
         dao.Alterar(this, _dbConnection);
@@ -113,5 +107,23 @@ public class PessoasJuridicas
         digito = digito + resto.ToString();
 
         return cnpj.EndsWith(digito);
+    }
+
+    private void ValidarDados()
+    {
+        if (string.IsNullOrEmpty(Cnpj))
+        {
+            throw new ValidationException("CNPJ não informado.");
+        }
+
+        if (!ValidarCnpj(Cnpj))
+        {
+            throw new ValidationException("CNPJ inválido.");
+        }
+
+        if (string.IsNullOrEmpty(RazaoSocial))
+        {
+            throw new ValidationException("Razão Social não informada.");
+        }
     }
 }

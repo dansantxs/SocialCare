@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SocialCare.DATA.Models;
 
-public partial class ItensCompra
+public class ItensCompra
 {
     [Key]
     [Column("id")]
@@ -52,12 +52,16 @@ public partial class ItensCompra
 
     public void Incluir(DBConnection _dbConnection)
     {
+        ValidarDados();
+
         ItensCompraDAO dao = new ItensCompraDAO();
         dao.Incluir(this, _dbConnection);
     }
 
     public void Alterar(DBConnection _dbConnection)
     {
+        ValidarDados();
+
         ItensCompraDAO dao = new ItensCompraDAO();
         dao.Alterar(this, _dbConnection);
     }
@@ -66,5 +70,28 @@ public partial class ItensCompra
     {
         ItensCompraDAO dao = new ItensCompraDAO();
         dao.Excluir(this.Id, _dbConnection);
+    }
+
+    private void ValidarDados()
+    {
+        if (IdCompra <= 0)
+        {
+            throw new ValidationException("Compra não informada.");
+        }
+
+        if (IdProduto <= 0)
+        {
+            throw new ValidationException("Produto não informado.");
+        }
+
+        if (Quantidade <= 0)
+        {
+            throw new ValidationException("Quantidade inválida.");
+        }
+
+        if (PrecoUnitario <= 0)
+        {
+            throw new ValidationException("Preço unitário inválido.");
+        }
     }
 }

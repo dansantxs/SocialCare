@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
-
 namespace SocialCare.DATA.Models;
 
-public partial class Compras
+public class Compras
 {
     [Key]
     [Column("id")]
@@ -40,10 +38,7 @@ public partial class Compras
 
     public void Incluir(DBConnection _dbConnection)
     {
-        if (!ValidarTotal(Total))
-        {
-            throw new ValidationException("Valor total inválido.");
-        }
+        ValidarDados();
 
         ComprasDAO dao = new ComprasDAO();
         dao.Incluir(this, _dbConnection);
@@ -51,10 +46,7 @@ public partial class Compras
 
     public void Alterar(DBConnection _dbConnection)
     {
-        if (!ValidarTotal(Total))
-        {
-            throw new ValidationException("Valor total inválido.");
-        }
+        ValidarDados();
 
         ComprasDAO dao = new ComprasDAO();
         dao.Alterar(this, _dbConnection);
@@ -66,8 +58,21 @@ public partial class Compras
         dao.Excluir(this.Id, _dbConnection);
     }
 
-    private bool ValidarTotal(decimal Total)
+    private void ValidarDados()
     {
-        return Total > 0;
+        if (IdPessoa <= 0)
+        {
+            throw new ValidationException("Pessoa não informada.");
+        }
+
+        if (DataCompra == default)
+        {
+            throw new ValidationException("Data da compra não informada.");
+        }
+
+        if (Total <= 0)
+        {
+            throw new ValidationException("Valor total inválido.");
+        }
     }
 }

@@ -39,14 +39,7 @@ public class Produtos
 
     public void Incluir(DBConnection _dbConnection)
     {
-        if (!ValidarPreco(Preco))
-        {
-            throw new ValidationException("Preço inválido.");
-        }
-        if (!ValidarEstoque(Estoque))
-        {
-            throw new ValidationException("Quantidade em estoque inválida.");
-        }
+        ValidarDados();
 
         ProdutosDAO dao = new ProdutosDAO();
         dao.Incluir(this, _dbConnection);
@@ -54,14 +47,7 @@ public class Produtos
 
     public void Alterar(DBConnection _dbConnection)
     {
-        if (!ValidarPreco(Preco))
-        {
-            throw new ValidationException("Preço inválido.");
-        }
-        if (!ValidarEstoque(Estoque))
-        {
-            throw new ValidationException("Quantidade em estoque inválido.");
-        }
+        ValidarDados();
 
         ProdutosDAO dao = new ProdutosDAO();
         dao.Alterar(this, _dbConnection);
@@ -73,13 +59,20 @@ public class Produtos
         dao.Excluir(this.Id, _dbConnection);
     }
 
-    private bool ValidarPreco(decimal Preco)
+    private void ValidarDados()
     {
-        return Preco > 0;
-    }
+        if (string.IsNullOrEmpty(Nome))
+        {
+            throw new ValidationException("Nome do produto não informado.");
+        }
 
-    private bool ValidarEstoque(int Estoque)
-    {
-        return Estoque >= 0;
+        if (Preco <= 0)
+        {
+            throw new ValidationException("Preço inválido.");
+        }
+        if (Estoque < 0)
+        {
+            throw new ValidationException("Quantidade em estoque inválida.");
+        }
     }
 }

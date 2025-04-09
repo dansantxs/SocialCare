@@ -60,8 +60,8 @@ public class PessoasDAO
             command.Parameters.AddWithValue("@bairro", pessoa.Bairro);
             command.Parameters.AddWithValue("@endereco", pessoa.Endereco);
             command.Parameters.AddWithValue("@numero", pessoa.Numero);
-            command.Parameters.AddWithValue("@email", pessoa.Email);
-            command.Parameters.AddWithValue("@telefone", pessoa.Telefone);
+            command.Parameters.AddWithValue("@email", pessoa.Email ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@telefone", pessoa.Telefone ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@tipo", pessoa.Tipo);
 
             pessoa.Id = Convert.ToInt32(command.ExecuteScalar());
@@ -81,8 +81,8 @@ public class PessoasDAO
             command.Parameters.AddWithValue("@bairro", pessoa.Bairro);
             command.Parameters.AddWithValue("@endereco", pessoa.Endereco);
             command.Parameters.AddWithValue("@numero", pessoa.Numero);
-            command.Parameters.AddWithValue("@email", pessoa.Email);
-            command.Parameters.AddWithValue("@telefone", pessoa.Telefone);
+            command.Parameters.AddWithValue("@email", pessoa.Email ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@telefone", pessoa.Telefone ?? (object)DBNull.Value);  
             command.Parameters.AddWithValue("@tipo", pessoa.Tipo);
             command.Parameters.AddWithValue("@id", pessoa.Id);
 

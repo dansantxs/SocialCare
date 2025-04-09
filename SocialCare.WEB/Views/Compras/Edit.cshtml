@@ -38,12 +38,21 @@
                 {
                     var item = Model.ItensCompra.ElementAt(i);
                     <div class="produto-item form-group">
-                        <select class="produto-select form-control" name="ItensCompra[@i].IdProduto" asp-for="@item.IdProduto" asp-items="@(new SelectList(ViewBag.Produtos, "Id", "Nome", item.IdProduto))" required>
-                            <option value="">Selecione um produto</option>
-                        </select>
-                        <input type="number" name="ItensCompra[@i].Quantidade" class="form-control" placeholder="Quantidade" value="@item.Quantidade" required />
-                        <input type="number" name="ItensCompra[@i].PrecoUnitario" class="form-control" placeholder="Preço Unitário" value="@item.PrecoUnitario" step="0.01" required />
-                        <button type="button" class="remove-product btn btn-danger">Remover</button>
+                       <select class="produto-select form-control" name="ItensCompra[@i].IdProduto" required>
+                           <option value="">Selecione um produto</option>
+                           @foreach (var produto in ViewBag.Produtos)
+                           {
+                               <option value="@produto.Id" data-preco="@produto.Preco.ToString().Replace(',', '.')"
+                                       selected="@(produto.Id == item.IdProduto ? "selected" : null)">
+                                   @produto.Nome
+                               </option>
+                           }
+                       </select>
+                       <input type="number" name="ItensCompra[@i].Quantidade" class="form-control quantidade-input" 
+                              placeholder="Quantidade" value="@item.Quantidade" required min="1" />
+                       <input type="text" name="ItensCompra[@i].PrecoUnitario" class="form-control preco-input" 
+                              placeholder="Preço Unitário" value="@item.PrecoUnitario.ToString().Replace('.', ',')" required />
+                       <button type="button" class="remove-product btn btn-danger">Remover</button>
                     </div>
                 }
             </div>
@@ -51,7 +60,7 @@
 
             <br /><br />
             <div class="form-group">
-                <input type="submit" value="Salvar Venda" class="btn btn-success" />
+                <input type="submit" value="Salvar Alterações" class="btn btn-success" />
             </div>
         </form>
     </div>
@@ -61,7 +70,34 @@
     <script>
         let productIndex = @Model.ItensCompra.Count;
 
-        document.getElementById('addProduct').addEventListener('click', function () {
+        function formataValor(value) {
+            return parseFloat(value).toFixed(2).replace('.', ',');
+        }
+
+        function formataParaGravar(value) {
+            return value.replace(',', '.');
+        }
+
+        document.getElementById('produtosContainer').addEventListener('change', function(e) {
+            if (e.target.classList.contains('produto-select')) {
+                const selectedOption = e.target.options[e.target.selectedIndex];
+                if (selectedOption.value) {
+                    const preco = selectedOption.getAttribute('data-preco');
+                    const precoInput = e.target.parentElement.querySelector('.preco-input');
+                    if (precoInput) {
+                        precoInput.value = formataValor(preco);
+                    }
+                }
+            }
+        });
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            document.querySelectorAll('.preco-input').forEach(input => {
+                input.value = formataParaGravar(input.value);
+            });
+        });
+
+        document.getElementById('addProduct').addEventListener('click', function() {
             const container = document.getElementById('produtosContainer');
             const newProductItem = document.createElement('div');
             newProductItem.classList.add('produto-item', 'form-group');
@@ -70,18 +106,18 @@
                     <option value="">Selecione um produto</option>
                     @foreach (var produto in ViewBag.Produtos)
                     {
-                        <option value="@produto.Id">@produto.Nome</option>
+                        <option value="@produto.Id" data-preco="@produto.Preco.ToString().Replace(",", ".")">@produto.Nome</option>
                     }
                 </select>
-                <input type="number" name="ItensCompra[${productIndex}].Quantidade" class="form-control" placeholder="Quantidade" required />
-                <input type="number" name="ItensCompra[${productIndex}].PrecoUnitario" class="form-control" placeholder="Preço Unitário" step="0.01" required />
+                <input type="number" name="ItensCompra[${productIndex}].Quantidade" class="form-control quantidade-input" placeholder="Quantidade" required min="1" />
+                <input type="text" name="ItensCompra[${productIndex}].PrecoUnitario" class="form-control preco-input" placeholder="Preço Unitário" required />
                 <button type="button" class="remove-product btn btn-danger">Remover</button>
             `;
             container.appendChild(newProductItem);
             productIndex++;
         });
 
-        document.getElementById('produtosContainer').addEventListener('click', function (e) {
+        document.getElementById('produtosContainer').addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-product')) {
                 e.target.parentElement.remove();
             }

@@ -19,25 +19,25 @@
 
             <div class="form-group">
                 <label asp-for="IdPessoa" class="control-label"></label>
-                <select asp-for="IdPessoa" class="form-control" asp-items="@(new SelectList(ViewBag.Pessoas, "Id", "Nome"))"></select>
+                <select asp-for="IdPessoa" class="form-control" asp-items="@(new SelectList(ViewBag.Pessoas, "Id", "Nome"))" required></select>
                 <span asp-validation-for="IdPessoa" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Data" class="control-label"></label>
-                <input asp-for="Data" class="form-control" type="date" />
+                <input asp-for="Data" class="form-control" type="date" required />
                 <span asp-validation-for="Data" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
+                <input asp-for="Valor" class="form-control" required />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="DataVencimento" class="control-label"></label>
-                <input asp-for="DataVencimento" class="form-control" type="date" />
+                <input asp-for="DataVencimento" class="form-control" type="date" required />
                 <span asp-validation-for="DataVencimento" class="text-danger"></span>
             </div>
 
@@ -54,9 +54,3 @@
         </form>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

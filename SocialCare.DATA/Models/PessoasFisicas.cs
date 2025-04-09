@@ -34,10 +34,7 @@ public class PessoasFisicas
 
     public void Incluir(DBConnection _dbConnection)
     {
-        if (!ValidarCpf(Cpf))
-        {
-            throw new ValidationException("CPF inválido.");
-        }
+        ValidarDados();
 
         PessoasFisicasDAO dao = new PessoasFisicasDAO();
         dao.Incluir(this, _dbConnection);
@@ -45,10 +42,7 @@ public class PessoasFisicas
 
     public void Alterar(DBConnection _dbConnection)
     {
-        if (!ValidarCpf(Cpf))
-        {
-            throw new ValidationException("CPF inválido.");
-        }
+        ValidarDados();
 
         PessoasFisicasDAO dao = new PessoasFisicasDAO();
         dao.Alterar(this, _dbConnection);
@@ -110,5 +104,33 @@ public class PessoasFisicas
         digito = digito + resto.ToString();
 
         return cpf.EndsWith(digito);
+    }
+
+    private void ValidarDados()
+    {
+        if (string.IsNullOrEmpty(Cpf))
+        {
+            throw new ValidationException("CPF não informado.");
+        }
+
+        if (!ValidarCpf(Cpf))
+        {
+            throw new ValidationException("CPF inválido.");
+        }
+
+        if (DataNascimento == default)
+        {
+            throw new ValidationException("Data de nascimento não informada.");
+        }
+
+        var hoje = DateOnly.FromDateTime(DateTime.Today);
+        var idadeMinima = 18;
+        if (hoje.Year - DataNascimento.Year < idadeMinima ||
+            (hoje.Year - DataNascimento.Year == idadeMinima &&
+             (hoje.Month < DataNascimento.Month ||
+              (hoje.Month == DataNascimento.Month && hoje.Day < DataNascimento.Day))))
+        {
+            throw new ValidationException("A pessoa deve ter pelo menos 18 anos.");
+        }
     }
 }

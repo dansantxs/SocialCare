@@ -16,30 +16,23 @@ public class ContasPagarControl : IDisposable
     public List<ContasPagar> ObterTodasContasPagar()
     {
         ContasPagar contasPagar = new ContasPagar();
-        List<ContasPagar> listaContasPagar = contasPagar.SelecionarTodos(_dbConnection);
+        List<ContasPagar> listaContas = contasPagar.SelecionarTodos(_dbConnection);
 
-        foreach (var contaPagar in listaContasPagar)
+        foreach (var conta in listaContas)
         {
-            var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
-            contaPagar.Pessoa = pessoa;
+            Pessoas pessoa = new Pessoas().SelecionarPorId(conta.IdPessoa, _dbConnection);
+            conta.Pessoa = pessoa;
         }
 
-        return listaContasPagar;
+        return listaContas;
     }
 
     public ContasPagar ObterContaPagarPorId(int id)
     {
         ContasPagar contaPagar = new ContasPagar().SelecionarPorId(id, _dbConnection);
-
-        var pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
+        Pessoas pessoa = new Pessoas().SelecionarPorId(contaPagar.IdPessoa, _dbConnection);
         contaPagar.Pessoa = pessoa;
 
-        return contaPagar;
-    }
-
-    public ContasPagar ObterContaPagarPorCompraId(int id)
-    {
-        ContasPagar contaPagar = new ContasPagar().SelecionarPorIdCompra(id, _dbConnection);
         return contaPagar;
     }
 
@@ -48,6 +41,7 @@ public class ContasPagarControl : IDisposable
         try
         {
             _dbConnection.BeginTransaction();
+            contaPagar.Data = DateTime.Now;
             contaPagar.Incluir(_dbConnection);
             _dbConnection.Commit();
         }
@@ -78,10 +72,8 @@ public class ContasPagarControl : IDisposable
         try
         {
             _dbConnection.BeginTransaction();
-
-            var contaPagar = new ContasPagar { Id = id };
+            ContasPagar contaPagar = new ContasPagar { Id = id };
             contaPagar.Excluir(_dbConnection);
-
             _dbConnection.Commit();
         }
         catch

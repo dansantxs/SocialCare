@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SocialCare.DATA.Models.ContasPagar>
+@using SocialCare.DATA.State
 
 @{
     ViewData["Title"] = "Contas a Pagar";
@@ -9,6 +10,13 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Nova Conta a Pagar</a>
 </p>
+
+<div class="mb-3">
+    <small class="mr-3"><span class="badge badge-success">&#x2022;</span> Paga</small>
+    <small class="mr-3"><span class="badge badge-primary">&#x2022;</span> Em Aberto</small>
+    <small class="mr-3"><span class="badge badge-danger">&#x2022;</span> Vencida</small>
+</div>
+
 <table id="myTable" class="table">
     <thead>
         <tr>
@@ -27,13 +35,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.First().DataVencimento)
             </th>
+            <th>
+                Status
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            var estado = item.ObterEstado();
+            <tr class="@estado.ObterCorLinha()">
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
@@ -48,6 +60,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataVencimento)
+                </td>
+                <td>
+                    @estado.ObterDescricaoEstado()
                 </td>
                 <td>
                     <a asp-action="Edit" class="btn btn-success mr-1" asp-route-id="@item.Id">Alterar</a>

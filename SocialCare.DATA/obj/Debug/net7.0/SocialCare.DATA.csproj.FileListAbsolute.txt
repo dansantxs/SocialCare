@@ -1,0 +1,13 @@
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\bin\Debug\net7.0\SocialCare.DATA.deps.json
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\bin\Debug\net7.0\SocialCare.DATA.dll
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\bin\Debug\net7.0\SocialCare.DATA.pdb
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.csproj.AssemblyReference.cache
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.AssemblyInfoInputs.cache
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.AssemblyInfo.cs
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.csproj.CoreCompileInputs.cache
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.sourcelink.json
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.dll
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\refint\SocialCare.DATA.dll
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\SocialCare.DATA.pdb
+C:\Users\danie\source\repos\SocialCare\SocialCare.DATA\obj\Debug\net7.0\ref\SocialCare.DATA.dll

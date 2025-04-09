@@ -1,12 +1,12 @@
 ﻿using System.Data;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using SocialCare.DATA.Models;
 
 public class ComprasDAO
 {
     public List<Compras> SelecionarTodos(DBConnection _dbConnection)
     {
-        string query = "SELECT * FROM Compras";
+        string query = "SELECT * FROM \"Compras\"";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
         return dataTable.AsEnumerable().Select(row => new Compras
         {
@@ -19,12 +19,12 @@ public class ComprasDAO
 
     public Compras SelecionarPorId(int id, DBConnection _dbConnection)
     {
-        string query = "SELECT * FROM Compras WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(query, _dbConnection.Connection, _dbConnection.Transaction))
+        string query = "SELECT * FROM \"Compras\" WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(query, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", id);
             DataTable dataTable = new DataTable();
-            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
             {
                 adapter.Fill(dataTable);
             }
@@ -41,10 +41,10 @@ public class ComprasDAO
 
     public void Incluir(Compras compra, DBConnection _dbConnection)
     {
-        string commandText = "INSERT INTO Compras (idPessoa, dataCompra, total) " +
-                           "VALUES (@idPessoa, @dataCompra, @total); SELECT SCOPE_IDENTITY();";
+        string commandText = "INSERT INTO \"Compras\" (\"idPessoa\", \"dataCompra\", \"total\") " +
+                           "VALUES (@idPessoa, @dataCompra, @total) RETURNING \"id\";";
 
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@idPessoa", compra.IdPessoa);
             command.Parameters.AddWithValue("@dataCompra", compra.DataCompra);
@@ -56,9 +56,9 @@ public class ComprasDAO
 
     public void Alterar(Compras compra, DBConnection _dbConnection)
     {
-        string commandText = "UPDATE Compras SET idPessoa = @idPessoa, dataCompra = @dataCompra, total = @total WHERE id = @id";
+        string commandText = "UPDATE \"Compras\" SET \"idPessoa\" = @idPessoa, \"dataCompra\" = @dataCompra, \"total\" = @total WHERE \"id\" = @id";
 
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@idPessoa", compra.IdPessoa);
             command.Parameters.AddWithValue("@dataCompra", compra.DataCompra);
@@ -71,8 +71,8 @@ public class ComprasDAO
 
     public void Excluir(int id, DBConnection _dbConnection)
     {
-        string commandText = "DELETE FROM Compras WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        string commandText = "DELETE FROM \"Compras\" WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", id);
             command.ExecuteNonQuery();

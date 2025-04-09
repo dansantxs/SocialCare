@@ -9,7 +9,6 @@ C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\SocialCar
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\SocialCare.WEB.pdb
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\Azure.Identity.dll
-C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\ErikEJ.EntityFrameworkCore.6.DgmlBuilder.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\Humanizer.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\Microsoft.Build.Locator.dll
@@ -282,3 +281,4 @@ C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\tr\Micros
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\obj\Debug\net8.0\SocialCare.WEB.sourcelink.json
+C:\Users\danie\source\repos\SocialCare\SocialCare.WEB\bin\Debug\net8.0\Npgsql.dll

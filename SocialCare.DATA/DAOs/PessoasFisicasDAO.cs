@@ -1,17 +1,17 @@
 ﻿using System.Data;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using SocialCare.DATA.Models;
 
 public class PessoasFisicasDAO
 {
     public PessoasFisicas SelecionarPorId(int id, DBConnection _dbConnection)
     {
-        string query = "SELECT * FROM Pessoas_Fisicas WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(query, _dbConnection.Connection, _dbConnection.Transaction))
+        string query = "SELECT * FROM \"Pessoas_Fisicas\" WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(query, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", id);
             DataTable dataTable = new DataTable();
-            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
             {
                 adapter.Fill(dataTable);
             }
@@ -26,8 +26,8 @@ public class PessoasFisicasDAO
 
     public void Incluir(PessoasFisicas pessoaFisica, DBConnection _dbConnection)
     {
-        string commandText = "INSERT INTO Pessoas_Fisicas (id, cpf, data_nascimento) VALUES (@id, @cpf, @dataNascimento)";
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        string commandText = "INSERT INTO \"Pessoas_Fisicas\" (\"id\", \"cpf\", \"data_nascimento\") VALUES (@id, @cpf, @dataNascimento)";
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", pessoaFisica.Id);
             command.Parameters.AddWithValue("@cpf", pessoaFisica.Cpf);
@@ -38,8 +38,8 @@ public class PessoasFisicasDAO
 
     public void Alterar(PessoasFisicas pessoaFisica, DBConnection _dbConnection)
     {
-        string commandText = "UPDATE Pessoas_Fisicas SET cpf = @cpf, data_nascimento = @dataNascimento WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        string commandText = "UPDATE \"Pessoas_Fisicas\" SET \"cpf\" = @cpf, \"data_nascimento\" = @dataNascimento WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@cpf", pessoaFisica.Cpf);
             command.Parameters.AddWithValue("@dataNascimento", pessoaFisica.DataNascimento.ToDateTime(TimeOnly.MinValue));
@@ -50,8 +50,8 @@ public class PessoasFisicasDAO
 
     public void Excluir(int id, DBConnection _dbConnection)
     {
-        string commandText = "DELETE FROM Pessoas_Fisicas WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        string commandText = "DELETE FROM \"Pessoas_Fisicas\" WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", id);
             command.ExecuteNonQuery();

@@ -1,12 +1,12 @@
 ﻿using System.Data;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using SocialCare.DATA.Models;
 
 public class PessoasDAO
 {
     public List<Pessoas> SelecionarTodos(DBConnection _dbConnection)
     {
-        string query = "SELECT * FROM Pessoas";
+        string query = "SELECT * FROM \"Pessoas\"";
         DataTable dataTable = _dbConnection.ExecuteQuery(query);
         return dataTable.AsEnumerable().Select(row => new Pessoas
         {
@@ -16,20 +16,20 @@ public class PessoasDAO
             Bairro = row.Field<string>("bairro"),
             Endereco = row.Field<string>("endereco"),
             Numero = row.Field<string>("numero"),
-            Email = row.Field<string>("email"),
-            Telefone = row.Field<string>("telefone"),
+            Email = row.IsNull("email") ? null : row.Field<string>("email"),
+            Telefone = row.IsNull("telefone") ? null : row.Field<string>("telefone"),
             Tipo = row.Field<string>("tipo")
         }).ToList();
     }
 
     public Pessoas SelecionarPorId(int id, DBConnection _dbConnection)
     {
-        string query = "SELECT * FROM Pessoas WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(query, _dbConnection.Connection, _dbConnection.Transaction))
+        string query = "SELECT * FROM \"Pessoas\" WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(query, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", id);
             DataTable dataTable = new DataTable();
-            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
             {
                 adapter.Fill(dataTable);
             }
@@ -41,8 +41,8 @@ public class PessoasDAO
                 Bairro = row.Field<string>("bairro"),
                 Endereco = row.Field<string>("endereco"),
                 Numero = row.Field<string>("numero"),
-                Email = row.Field<string>("email"),
-                Telefone = row.Field<string>("telefone"),
+                Email = row.IsNull("email") ? null : row.Field<string>("email"),
+                Telefone = row.IsNull("telefone") ? null : row.Field<string>("telefone"),
                 Tipo = row.Field<string>("tipo")
             }).FirstOrDefault();
         }
@@ -50,10 +50,10 @@ public class PessoasDAO
 
     public void Incluir(Pessoas pessoa, DBConnection _dbConnection)
     {
-        string commandText = "INSERT INTO Pessoas (nome, cidade, bairro, endereco, numero, email, telefone, tipo) " +
-                           "VALUES (@nome, @cidade, @bairro, @endereco, @numero, @email, @telefone, @tipo); SELECT SCOPE_IDENTITY();";
+        string commandText = "INSERT INTO \"Pessoas\" (\"nome\", \"cidade\", \"bairro\", \"endereco\", \"numero\", \"email\", \"telefone\", \"tipo\") " +
+                           "VALUES (@nome, @cidade, @bairro, @endereco, @numero, @email, @telefone, @tipo) RETURNING \"id\";";
 
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@nome", pessoa.Nome);
             command.Parameters.AddWithValue("@cidade", pessoa.Cidade);
@@ -70,11 +70,11 @@ public class PessoasDAO
 
     public void Alterar(Pessoas pessoa, DBConnection _dbConnection)
     {
-        string commandText = "UPDATE Pessoas SET nome = @nome, cidade = @cidade, bairro = @bairro, " +
-                           "endereco = @endereco, numero = @numero, email = @email, telefone = @telefone, tipo = @tipo " +
-                           "WHERE id = @id";
+        string commandText = "UPDATE \"Pessoas\" SET \"nome\" = @nome, \"cidade\" = @cidade, \"bairro\" = @bairro, " +
+                           "\"endereco\" = @endereco, \"numero\" = @numero, \"email\" = @email, \"telefone\" = @telefone, \"tipo\" = @tipo " +
+                           "WHERE \"id\" = @id";
 
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@nome", pessoa.Nome);
             command.Parameters.AddWithValue("@cidade", pessoa.Cidade);
@@ -82,7 +82,7 @@ public class PessoasDAO
             command.Parameters.AddWithValue("@endereco", pessoa.Endereco);
             command.Parameters.AddWithValue("@numero", pessoa.Numero);
             command.Parameters.AddWithValue("@email", pessoa.Email ?? (object)DBNull.Value);
-            command.Parameters.AddWithValue("@telefone", pessoa.Telefone ?? (object)DBNull.Value);  
+            command.Parameters.AddWithValue("@telefone", pessoa.Telefone ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@tipo", pessoa.Tipo);
             command.Parameters.AddWithValue("@id", pessoa.Id);
 
@@ -92,8 +92,8 @@ public class PessoasDAO
 
     public void Excluir(int id, DBConnection _dbConnection)
     {
-        string commandText = "DELETE FROM Pessoas WHERE id = @id";
-        using (SqlCommand command = new SqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
+        string commandText = "DELETE FROM \"Pessoas\" WHERE \"id\" = @id";
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _dbConnection.Connection, _dbConnection.Transaction))
         {
             command.Parameters.AddWithValue("@id", id);
             command.ExecuteNonQuery();

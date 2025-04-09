@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace SocialCare.DATA.Models;
 
@@ -13,7 +12,6 @@ public class Produtos
     [Required]
     [Column("nome")]
     [StringLength(50)]
-    [Unicode(false)]
     public string Nome { get; set; }
 
     [Column("preco", TypeName = "decimal(10, 2)")]

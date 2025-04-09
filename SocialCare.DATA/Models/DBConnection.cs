@@ -1,26 +1,26 @@
 ﻿using System.Data;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 
 public class DBConnection : IDisposable
 {
-    private SqlConnection _connection;
-    private SqlTransaction _transaction;
-    private string _connectionString = "Data Source=DANIEL;Initial Catalog=SocialCare;Persist Security Info=True;User ID=sa;Password=1928;Encrypt=True;TrustServerCertificate=True";
+    private NpgsqlConnection _connection;
+    private NpgsqlTransaction _transaction;
+    private string _connectionString = "Host=localhost;Database=SocialCare;Username=postgres;Password=postgres123;";
 
-    public SqlConnection Connection
+    public NpgsqlConnection Connection
     {
         get { return _connection; }
         set { _connection = value; }
     }
 
-    public SqlTransaction Transaction
+    public NpgsqlTransaction Transaction
     {
         get { return _transaction; }
     }
 
     public DBConnection()
     {
-        _connection = new SqlConnection(_connectionString);
+        _connection = new NpgsqlConnection(_connectionString);
     }
 
     public void Open()
@@ -60,7 +60,7 @@ public class DBConnection : IDisposable
     public int ExecuteCommand(string commandText)
     {
         Open();
-        using (SqlCommand command = new SqlCommand(commandText, _connection, _transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _connection, _transaction))
         {
             return command.ExecuteNonQuery();
         }
@@ -69,7 +69,7 @@ public class DBConnection : IDisposable
     public object ExecuteScalar(string commandText)
     {
         Open();
-        using (SqlCommand command = new SqlCommand(commandText, _connection, _transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(commandText, _connection, _transaction))
         {
             return command.ExecuteScalar();
         }
@@ -78,9 +78,9 @@ public class DBConnection : IDisposable
     public DataTable ExecuteQuery(string query)
     {
         Open();
-        using (SqlCommand command = new SqlCommand(query, _connection, _transaction))
+        using (NpgsqlCommand command = new NpgsqlCommand(query, _connection, _transaction))
         {
-            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
             {
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);

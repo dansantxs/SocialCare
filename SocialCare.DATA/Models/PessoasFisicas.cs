@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
 namespace SocialCare.DATA.Models;
 
 [Table("Pessoas_Fisicas")]
-[Index("Cpf", Name = "UQ__Pessoas___D836E71F7887A65C", IsUnique = true)]
 public class PessoasFisicas
 {
     [Key]
@@ -16,7 +14,6 @@ public class PessoasFisicas
     [Required]
     [Column("cpf")]
     [StringLength(11)]
-    [Unicode(false)]
     public string Cpf { get; set; }
 
     [Column("data_nascimento")]
